@@ -1,0 +1,114 @@
+import times from 'lodash/times';
+import { addDecimals } from './utils/decimals';
+import LoadProfileFilter, {LoadProfileFilterArgs} from './LoadProfileFilter';
+import expandedDates, { ExpandedDate } from './utils/expandedDates';
+import LoadProfileScaler from './LoadProfileScaler';
+
+export interface DetailedLoadProfileHour extends ExpandedDate {
+  load: number;
+}
+
+interface Options {
+  year: number;
+}
+
+class LoadProfile {
+  private _loadProfile?: Array<number>;
+  private _expanded?: Array<DetailedLoadProfileHour>;
+  private _year: number;
+
+  constructor(loadProfile: Array<number>, options: Options);
+  constructor(existingLoadProfile: LoadProfile | Array<number>, options: Options);
+  constructor(expandedLoadProfile: Array<DetailedLoadProfileHour>, options: Options);
+  constructor(loadProfileOrExpandedOrExisting: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile, options: Options) {
+    if (typeof loadProfileOrExpandedOrExisting['expanded'] === 'function') {
+      this._expanded = (loadProfileOrExpandedOrExisting as LoadProfile).expanded();
+    } else if (typeof loadProfileOrExpandedOrExisting[0] === 'number') {
+      this._loadProfile = loadProfileOrExpandedOrExisting as Array<number>;
+    } else {
+      this._expanded = loadProfileOrExpandedOrExisting as Array<DetailedLoadProfileHour>;
+    }
+
+    this._year = options.year;
+  }
+
+  expanded(): Array<DetailedLoadProfileHour> {
+    if (this._expanded) {
+      return this._expanded;
+    }
+
+    const dates = expandedDates(this._year);
+
+    if (dates.length !== this._loadProfile.length) {
+      throw new Error('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
+    }
+
+    return (this._expanded = this._loadProfile.map((load, i) => ({
+      load,
+      ...dates[i],
+    })));
+  }
+
+  filterBy(filters: LoadProfileFilterArgs) {
+    const filter = new LoadProfileFilter(filters);
+
+    const filteredLoadProfile = this.expanded().filter((detailedLoadProfileHour) => filter.matches(detailedLoadProfileHour));
+
+    return new LoadProfile(filteredLoadProfile, {year: this._year});
+  }
+
+  sumByMonth(): Array<number> {
+    let sums = times(12, () => 0);
+
+    this.expanded().forEach(({ load, month }) => {
+      sums[month] = addDecimals(sums[month], load);
+    });
+
+    return sums;
+  }
+
+  byMonth(): Array<Array<number>> {
+    let months = times(12, () => []);
+
+    this.expanded().forEach(({ load, month }) => {
+      months[month].push(load)
+    });
+
+    return months;
+  }
+
+  sum(): number {
+    return this.expanded().reduce((sum, {load}) => addDecimals(sum, load), 0);
+  }
+
+  count(): number {
+    return this.expanded().length;
+  }
+
+  get length(): number {
+    return this.count();
+  }
+
+  get year(): number {
+    return this._year;
+  }
+
+  average(): number {
+    return this.sum() / this.count();
+  }
+
+  scale(): LoadProfileScaler {
+    return new LoadProfileScaler(this);
+  }
+
+  aggregate(otherLoadProfile: LoadProfile): LoadProfile {
+    return new LoadProfile(
+      this._loadProfile.map((loadHour, idx) => {
+        return addDecimals(loadHour, otherLoadProfile.expanded()[idx].load);
+      }),
+      {year: this._year}
+    );
+  }
+}
+
+export default LoadProfile;
