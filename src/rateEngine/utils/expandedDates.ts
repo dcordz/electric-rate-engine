@@ -8,6 +8,7 @@ export interface ExpandedDate {
   hourStart: number;
   dayOfWeek: number;
   date: string;
+  hourOfYear: number;
 };
 
 const dates = {};
@@ -15,12 +16,13 @@ const dates = {};
 const generateDates = (year: number): Array<ExpandedDate> => {
   const profileTime = moment(year, 'Y');
 
-  return times(profileTime.isLeapYear() ? 8784 : 8760, () => {
+  return times(profileTime.isLeapYear() ? 8784 : 8760, (hourOfYear) => {
     const val = {
       month: profileTime.month(),
       dayOfWeek: profileTime.day(),
       hourStart: profileTime.hour(),
       date: profileTime.format('YYYY-MM-DD'),
+      hourOfYear,
     };
 
     profileTime.add(1, 'hour');

@@ -53,8 +53,12 @@ class EnergyTimeOfUse extends BillingDeterminants {
     this._loadProfile = loadProfile;
   }
 
+  filteredLoadProfile(): LoadProfile {
+    return this._loadProfile.filterBy(this._filters);
+  }
+
   calculate(): Array<number> {
-    return this._loadProfile.filterBy(this._filters).sumByMonth();
+    return this.filteredLoadProfile().sumByMonth();
   }
 }
 

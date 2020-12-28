@@ -18,6 +18,7 @@ class RateCalculator {
   applicability: string | undefined;
   minimumBillAmount: number | undefined;
   static shouldValidate: Boolean = true;
+  static shouldLogValidationErrors: Boolean = true;
 
   constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface) {
     this.utilityName = utilityName;
