@@ -1,19 +1,9 @@
 # Bellawatt Electric Rate Engine
 
 ## Installation
-
-The Rate Engine is hosted by Github packages. In order to install via NPM or Yarn, a `.npmrc` file must be created in the project root.
-
-The file should contain the following 
-
-```
-@bellawatt:registry=https://npm.pkg.github.com/bellawatt
-```
-After that, you can simply run 
 ```
 npm install @bellawatt/electric-rate-engine --save
 ```
-as usual.
 
 ## Usage
 
