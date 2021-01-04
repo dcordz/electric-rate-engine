@@ -16,11 +16,11 @@ class LoadProfileFilter {
   exceptForDays?: Array<string>;
 
   constructor(filters: LoadProfileFilterArgs) {
-    this.months = filters.months;
-    this.daysOfWeek = filters.daysOfWeek;
-    this.hourStarts = filters.hourStarts;
-    this.onlyOnDays = filters.onlyOnDays;
-    this.exceptForDays = filters.exceptForDays;
+    this.months = this.sanitize(filters.months);
+    this.daysOfWeek = this.sanitize(filters.daysOfWeek);
+    this.hourStarts = this.sanitize(filters.hourStarts);
+    this.onlyOnDays = this.sanitize(filters.onlyOnDays);
+    this.exceptForDays = this.sanitize(filters.exceptForDays);
   }
 
   matches({ month, date, dayOfWeek, hourStart }: ExpandedDate): boolean {
@@ -31,6 +31,14 @@ class LoadProfileFilter {
       (this.daysOfWeek ? this.daysOfWeek.includes(dayOfWeek) : true) &&
       (this.hourStarts ? this.hourStarts.includes(hourStart) : true)
     );
+  }
+
+  private sanitize(arg) {
+    if (arg && arg.length === 0) {
+      return undefined;
+    }
+
+    return arg;
   }
 }
 

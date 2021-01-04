@@ -8,6 +8,7 @@ import sum from 'lodash/sum';
 import LoadProfile from './LoadProfile';
 import ValidatorFactory from './ValidatorFactory';
 import { RateComponentInterface } from './RateComponent';
+import { Error } from './validators/_Validator';
 
 export interface RateElementInterface {
   rateElementType: RateElementType;
@@ -20,6 +21,7 @@ class RateElement {
   name: string;
   type: RateElementType;
   classification?: string;
+  errors: Array<Error> = [];
 
   constructor({ rateElementType, name, rateComponents }: RateElementInterface, loadProfile: LoadProfile) {
     this.name = name;
@@ -34,7 +36,9 @@ class RateElement {
     });
 
     if (RateCalculator.shouldValidate) {
-      ValidatorFactory.make(rateElementType, rateComponents, loadProfile).validate().reportErrors();
+      const validator = ValidatorFactory.make(rateElementType, rateComponents, loadProfile).validate();
+      RateCalculator.shouldLogValidationErrors && validator.reportErrors();
+      this.errors = validator.allErrors();
     }
   }
 

@@ -6,6 +6,7 @@ import { EnergyTimeOfUseArgs } from './billingDeterminants/EnergyTimeOfUse';
 import BlockedTiersValidator from './validators/BlockedTiersValidator';
 import { BlockedTiersArgs } from './billingDeterminants/BlockedTiersInDays';
 import LoadProfile from './LoadProfile';
+import { RateComponentInterface } from './RateComponent';
 
 class ValidatorFactory {
   static make(
@@ -15,7 +16,7 @@ class ValidatorFactory {
   ): Validator {
     switch(type) {
       case 'EnergyTimeOfUse': 
-        return new EnergyTimeOfUseValidator(args as Array<EnergyTimeOfUseArgs>, loadProfile);
+        return new EnergyTimeOfUseValidator(args as Array<RateComponentInterface & EnergyTimeOfUseArgs>, loadProfile);
       case 'BlockedTiersInDays':
       case 'BlockedTiersInMonths':
         return new BlockedTiersValidator(args as Array<BlockedTiersArgs>);
