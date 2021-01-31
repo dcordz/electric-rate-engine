@@ -1,5 +1,9 @@
 # Bellawatt Electric Rate Engine
 
+Electric rate calculations shouldn't be so complicated. There may be a lot of line items and rules, but the calculations are arithmetical. This repo does the math for you, is quick and fully tested, and written for the front-end so that it can be layered on top of any web application.
+
+Support for both Rates and Load Profiles are included.
+
 ## Installation
 ```
 npm install @bellawatt/electric-rate-engine --save
@@ -8,6 +12,13 @@ npm install @bellawatt/electric-rate-engine --save
 ## Usage
 
 ### RateCalculator
+
+The Rate Calculator is composed of three levels of abstraction:
+- a `rate`: the encompassing file that defines the rate including the name, written in JSON.
+- a `rate element`: an individual line item on a `rate` , such as the "Fixed Monthly Charge".
+- a `rate component`: the charges and names of each `rate element`, such as $10/month. The distinction between `rate elements` and `rate components` is created in order to support rate elements that have multiple components, such as a time-of-use energy rate element that has multiple time period components.
+
+In addition to the rate, a load profile must be provided in order to calculate the rate.
 
 ```js
 import { RateCalculator } from '@bellawatt/electric-rate-engine';
@@ -48,7 +59,7 @@ const rateCalculator = new RateCalculator({...rate, loadProfile});
 
 #### Supported Rate Element Types
 
-**FixedPerDay**
+**FixedPerDay**: A fixed cost per day.
 ```js
 const exampleFixedPerDayData = {
   rateElementType: 'FixedPerDay',
@@ -63,7 +74,7 @@ const exampleFixedPerDayData = {
 
 ```
 
-**FixedPerMonth**
+**FixedPerMonth**: A fixed cost per month.
 ```js
 const exampleFixedPerMonthData = {
   name: 'California Clean Climate Credit',
@@ -76,7 +87,7 @@ const exampleFixedPerMonthData = {
   ],
 }
 ```
-**EnergyTimeOfUse**
+**EnergyTimeOfUse**: A time-of-use energy charge. See the **Load Profile Filters** section below for available parameters for each `rate component`.
 ```js
 const HOLIDAYS = ['2018-01-01','2018-02-19','2018-05-28','2018-07-04','2018-09-03','2018-11-12','2018-11-22','2018-12-25'];
 
@@ -105,7 +116,7 @@ const exampleEnergyTimeOfUseData = {
 }
 ```
 
-**BlockedTiersInDays**
+**BlockedTiersInDays**: An inclining or declining block rate structure, where blocks are measured on a per-day basis.
 ```js
 const exampleBlockedTiersInDaysData = {
   rateElementType: 'BlockedTiersInDays',
@@ -214,6 +225,6 @@ loadProfile.expanded() // array of DetailedLoadProfileHour objects
 YYYY-MM-DD string
 
 
-&copy; Bellawatt 2020
+&copy; [Bellawatt](https://www.bellawatt.com/) 2021
 
 
