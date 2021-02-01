@@ -169,6 +169,78 @@ firstRateComponent.billingDeterminantsForMonth(11) // billing determinant for th
 firstRateComponent.annualCosts() // sum of costs (number)
 ```
 
+#### RateCalculator Errors
+The RateCalculator will also automatically check your rates for duplicate or missing charges. By default, this feature is enabled and sends errors to the console. 
+
+To disable any part of validation, use the following syntax somewhere early in your application.
+
+```js
+RateCalculator.shouldValidate = false // turn off all validation
+RateCalculator.shouldLogValidationErrors = false // leave validation on, but don't send the errors to the console
+```
+
+With errors enabled, each `RateElement` object will contain a `.errors` property which is an array of errors.
+
+```js
+firstRateElement.errors // array of any errors found (an empty array if no errors are found)
+
+const error = firstRateElement.errors[0]
+
+// Base Error Interface
+{
+  english: 'The logged, plain english message of what caused the error',
+  type: 'The type of error found, based on the type of rate',
+  data: {}, // based on the type of rate
+}
+```
+**Blocked Tiers Examples**
+```js
+{
+  english: 'Lowest block tier min for month 3 is 10, expected 0.',
+  data: {month: 3, min: 10},
+  type: 'min',
+}
+{
+  english: 'Gap in blocked tier min/maxes found in month 3 between max: 100 and min: 90',
+  data: {month: 3, max: 100, min: 90},
+  type: 'gap',
+}
+{
+  english: `Highest blocked tier for month 3 is less than Infinity.`,
+  data: {month: 3},
+  type: 'max',
+}
+{
+  english: `Overlap in blocked tier min/maxes found in month 3 between max: 100 and min: 110`,
+  data: {month: 3, max: 100, min: 110},
+  type: 'overlap',
+}
+{
+  english: `Incorrect amound of arguments found in blocked tier: found 12 min and 11 max`,
+  data: {},
+  type: 'argument-length',
+}
+```
+**EnergyTimeOfUse Examples**
+```js
+{
+  english: `No filter set found that matches ${JSON.stringify(expandedDate)}`,
+  data: date, // expandedDate
+  type: 'none',
+}
+{
+  english: `2 filter sets found that match ${JSON.stringify(date)}`,
+  data: {
+    date: date, //expandedDate
+    rateComponents: [], // array of rateComponents found to be duplicated
+  },
+  type: 'duplicate',
+}
+
+```
+
+
+
 ### LoadProfile
 
 ```js
@@ -180,7 +252,7 @@ const loadProfile = new LoadProfile(loadProfileData);
 ```
 #### Methods
 **Load Profile**
-```jsx
+```js
 loadProfile.filterBy(loadProfileFilter) // new filtered LoadProfile object
 loadProfile.sumByMonth() // 12 length array of load sums by month
 loadProfile.sum() // load sum (number)
@@ -194,7 +266,7 @@ loadProfile.scale() // returns a LoadProfileScaler instance (documented below)
 ```
 
 **LoadProfileScaler**
-```jsx
+```js
 loadProfileScaler.to(scale) // returns a scaled load profile scaled to the provided number
 loadProfileScaler.toTotalKwh(totalKwh) // returns a scaled load profile scaled based on load to the provided kwh
 loadProfileScaler.toAverageMonthlyBill(amount, rate) // returns a scaled load profile scaled to the amount based on the provided RateInterface, rate
