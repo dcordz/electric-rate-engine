@@ -1,4 +1,5 @@
 import times from 'lodash/times';
+import maxBy from 'lodash/maxBy';
 import { addDecimals } from './utils/decimals';
 import LoadProfileFilter, {LoadProfileFilterArgs} from './LoadProfileFilter';
 import expandedDates, { ExpandedDate } from './utils/expandedDates';
@@ -95,6 +96,14 @@ class LoadProfile {
 
   average(): number {
     return this.sum() / this.count();
+  }
+
+  max(): number {
+    return maxBy(this.expanded(), 'load').load;
+  }
+
+  loadFactor(): number {
+    return this.sum() / (this.count() * this.max());
   }
 
   scale(): LoadProfileScaler {

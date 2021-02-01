@@ -185,9 +185,19 @@ loadProfile.filterBy(loadProfileFilter) // new filtered LoadProfile object
 loadProfile.sumByMonth() // 12 length array of load sums by month
 loadProfile.sum() // load sum (number)
 loadProfile.count() // hours in the load profile (will be less than 8760 if filtered) (number)
-loadProfile.lengh // alias to count()
+loadProfile.length // property alias to count()
 loadProfile.average() // average load based on filtered set (if filtered) (number)
 loadProfile.expanded() // array of DetailedLoadProfileHour objects
+loadProfile.max() // maximum load
+loadProfile.loadFactor() // how much capacity you're using on a regular basis (sum / (length * max))
+loadProfile.scale() // returns a LoadProfileScaler instance (documented below)
+```
+
+**LoadProfileScaler**
+```jsx
+loadProfileScaler.to(scale) // returns a scaled load profile scaled to the provided number
+loadProfileScaler.toTotalKwh(totalKwh) // returns a scaled load profile scaled based on load to the provided kwh
+loadProfileScaler.toAverageMonthlyBill(amount, rate) // returns a scaled load profile scaled to the amount based on the provided RateInterface, rate
 ```
 
 ### Type Definitions
