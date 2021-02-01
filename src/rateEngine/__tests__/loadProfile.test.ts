@@ -21,6 +21,7 @@ describe('Load Profile', () => {
         load: 1,
         month: 0,
         dayOfWeek: 1,
+        hourOfYear: 0,
         hourStart: 0,
         date: '2018-01-01',
       });
@@ -35,6 +36,7 @@ describe('Load Profile', () => {
         load: 1,
         month: 0,
         dayOfWeek: 1,
+        hourOfYear: 0,
         hourStart: 0,
         date: '2018-01-01',
       });
@@ -88,6 +90,32 @@ describe('Load Profile', () => {
   describe('average', () => {
     it('calculates the average load', () => {
       expect(loadProfile.average()).toEqual(1);
+    });
+  });
+
+  describe('max', () => {
+    it('returns the max load', () => {
+      const maxLoadData = getLoadProfileOfOnes();
+      maxLoadData[83] = 4; // set some arbitrary element to somethign bigger than a 1
+      loadProfile = new LoadProfile(maxLoadData, options);
+
+      expect(loadProfile.max()).toEqual(4);
+    });
+  });
+
+  describe('loadFactor', () => {
+    it('returns one from our load profile of ones', () => {
+      expect(loadProfile.loadFactor()).toEqual(1);
+    });
+
+    it('returns nearly 0 for a load profile with just one 1', () => {
+      loadProfile = new LoadProfile([1, ...times(8759, () => 0)], options);
+      expect(loadProfile.loadFactor()).toBeCloseTo(0);
+    });
+
+    it('returns .5 for a half and half load profile', () => {
+      loadProfile = new LoadProfile([...times(4380, () => 10), ...times(4380, () => 0)], options);
+      expect(loadProfile.loadFactor()).toEqual(.5);
     });
   });
 
