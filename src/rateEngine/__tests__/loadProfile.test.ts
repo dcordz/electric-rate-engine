@@ -101,6 +101,12 @@ describe('Load Profile', () => {
 
       expect(loadProfile.max()).toEqual(4);
     });
+
+    it('works empty', () => {
+      loadProfile = new LoadProfile([], {year: 2018});
+
+      expect(loadProfile.max()).toEqual(0);
+    });
   });
 
   describe('loadFactor', () => {
@@ -116,6 +122,12 @@ describe('Load Profile', () => {
     it('returns .5 for a half and half load profile', () => {
       loadProfile = new LoadProfile([...times(4380, () => 10), ...times(4380, () => 0)], options);
       expect(loadProfile.loadFactor()).toEqual(.5);
+    });
+
+    it('works empty', () => {
+      loadProfile = new LoadProfile([], {year: 2018});
+
+      expect(loadProfile.loadFactor()).toEqual(0);
     });
   });
 

@@ -99,10 +99,18 @@ class LoadProfile {
   }
 
   max(): number {
+    if (this.count() === 0) {
+      return 0;
+    }
+
     return maxBy(this.expanded(), 'load').load;
   }
 
   loadFactor(): number {
+    if (this.count() === 0) {
+      return 0;
+    }
+
     return this.sum() / (this.count() * this.max());
   }
 
