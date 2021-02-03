@@ -1,4 +1,4 @@
-# Bellawatt Electric Rate Engine
+# Electric Rate Engine
 
 Electric rate calculations shouldn't be so complicated. There may be a lot of line items and rules, but the calculations are arithmetical. This repo does the math for you, is quick and fully tested, and written for the front-end so that it can be layered on top of any web application.
 
