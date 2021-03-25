@@ -44,8 +44,8 @@ class BlockedTiersInDays extends BillingDeterminants {
     const monthlyExpandedLoadProfile = Object.values(groupBy(expandedLoadProfile, 'month'));
     const kwhByMonth = monthlyExpandedLoadProfile.map((loadProfiles) => sumBy(loadProfiles, 'load'));
 
-    return times(12, () => 0).map((zero, i) => {
-      const kwh = zero + (kwhByMonth[i] || 0);
+    return times(12, i => {
+      const kwh = kwhByMonth[i] || 0;
       if (kwh < mins[i]) {
         return 0;
       }
