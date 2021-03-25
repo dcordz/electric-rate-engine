@@ -1,6 +1,6 @@
 import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
-import BlockedTiersInMonths from '../BlockedTiersInMonths';
+import BlockedTiersInDays from '../BlockedTiersInDays';
 
 // For reference: the number of hours in each month:
 // [ 744, 672, 743, 720, 744, 720, 744, 744, 720, 744, 721, 744 ]
@@ -20,27 +20,26 @@ describe('BlockedTiersInMonths', () => {
   });
 
   describe('calculate', () => {
-    it('calculates blocked tiers in months', () => {
-      const result = new BlockedTiersInMonths({
+    it('calculates blocked tiers in days', () => {
+      const result = new BlockedTiersInDays({
         min,
         max,
       }, loadProfile).calculate();
 
       // This is a handcrafted™ array to test various min/max scenarios.
-      expect(result).toEqual([10,10,10,5,5,5,25,25,20,0,0,0]);
+      expect(result).toEqual([310,280,310,150,155,150,0,0,0,0,0,0]);
     });
-
-    describe('filtered for January only', () => {
-      it('calculates blocked tiers in months', () => {
-        const result = new BlockedTiersInMonths({
-          min,
-          max,
-          months: [0]
-        }, loadProfile).calculate();
-
-        expect(result).toEqual([10,0,0,0,0,0,0,0,0,0,0,0]);
-      });
-    });
-
   });
+
+  describe('filtered by months', () => {
+    it('calculates blocked tiers in days', () => {
+      const result = new BlockedTiersInDays({
+        min,
+        max,
+        months: [0]
+      }, loadProfile).calculate();
+
+      expect(result).toEqual([310,0,0,0,0,0,0,0,0,0,0,0]);
+    });
+  })
 });
