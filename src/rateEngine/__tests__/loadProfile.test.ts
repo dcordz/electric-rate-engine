@@ -139,6 +139,19 @@ describe('Load Profile', () => {
     });
   });
 
+  describe('loadShift', () => {
+    it('returns a shifted load profile instance', () => {
+     const shiftedLoadProfile = loadProfile.loadShift(1, {months: [0]});
+
+     expect(shiftedLoadProfile).toEqual(
+        new LoadProfile(
+          (new Array(31*24).fill(2)).concat((new Array(8760 - (31*24))).fill(1)),
+          options
+        )
+      )
+    }); 
+  });
+
   describe('aggregate', () => {
     it('sums the load profiles by indexes', () => {
       expect(loadProfile.aggregate(loadProfile)).toEqual(
