@@ -58,6 +58,14 @@ class LoadProfile {
     return new LoadProfile(filteredLoadProfile, {year: this._year});
   }
 
+  loadShift(amount: number, filters: LoadProfileFilterArgs) {
+    const filter = new LoadProfileFilter(filters);
+
+    const shiftedLoadProfile = this.expanded().map((detailedLoadProfileHour) => filter.matches(detailedLoadProfileHour) ? detailedLoadProfileHour.load + amount : detailedLoadProfileHour.load);
+
+    return new LoadProfile(shiftedLoadProfile, {year: this._year});
+  }
+
   sumByMonth(): Array<number> {
     let sums = times(12, () => 0);
 

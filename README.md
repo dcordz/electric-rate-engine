@@ -263,6 +263,7 @@ loadProfile.expanded() // array of DetailedLoadProfileHour objects
 loadProfile.max() // maximum load
 loadProfile.loadFactor() // how much capacity you're using on a regular basis (sum / (length * max))
 loadProfile.scale() // returns a LoadProfileScaler instance (documented below)
+loadProfile.loadShift(amount, loadProfileFilter) // new loadprofile shifted by amount on hours that match the provided filter
 ```
 
 **LoadProfileScaler**
