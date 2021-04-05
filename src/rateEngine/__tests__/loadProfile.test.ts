@@ -163,9 +163,9 @@ describe('Load Profile', () => {
     });
   });
 
-  describe('hourlyLoads', () => {
+  describe('loadValues', () => {
     it('returns an array of load values', () => {
-      expect(loadProfile.hourlyLoads()).toEqual(getLoadProfileOfOnes());
+      expect(loadProfile.loadValues()).toEqual(getLoadProfileOfOnes());
     });
   });
 });

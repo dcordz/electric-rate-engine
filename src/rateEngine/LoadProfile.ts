@@ -50,7 +50,7 @@ class LoadProfile {
     })));
   }
 
-  hourlyLoads(): Array<number> {
+  loadValues(): Array<number> {
     return this.expanded().map(({load}) => load);
   }
 
