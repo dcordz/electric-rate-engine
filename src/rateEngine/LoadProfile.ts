@@ -53,7 +53,7 @@ class LoadProfile {
   filterBy(filters: LoadProfileFilterArgs) {
     const filter = new LoadProfileFilter(filters);
 
-    const filteredLoadProfile = this.expanded().filter((detailedLoadProfileHour) => filter.matches(detailedLoadProfileHour));
+    const filteredLoadProfile = this.expanded().map(({load, ...detailedLoadProfileHour}) => filter.matches(detailedLoadProfileHour) ? load : 0);
 
     return new LoadProfile(filteredLoadProfile, {year: this._year});
   }
