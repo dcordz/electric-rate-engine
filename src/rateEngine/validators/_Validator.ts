@@ -1,3 +1,5 @@
+import flatMap from 'lodash/flatMap';
+
 export interface Error {
   english: string,
   type: string,
@@ -21,7 +23,7 @@ abstract class Validator {
   }
 
   allErrors(): Array<Error> {
-    return this._errors.map(({errors}) => errors).flat();
+    return flatMap(this._errors, ({errors}) => errors);
   }
 
   hasErrors(): Boolean {
