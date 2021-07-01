@@ -50,6 +50,10 @@ class LoadProfile {
     })));
   }
 
+  loadValues(): Array<number> {
+    return this.expanded().map(({load}) => load);
+  }
+
   filterBy(filters: LoadProfileFilterArgs) {
     const filter = new LoadProfileFilter(filters);
 

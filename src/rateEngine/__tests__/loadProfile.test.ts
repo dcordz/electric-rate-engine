@@ -162,4 +162,10 @@ describe('Load Profile', () => {
       );
     });
   });
+
+  describe('loadValues', () => {
+    it('returns an array of load values', () => {
+      expect(loadProfile.loadValues()).toEqual(getLoadProfileOfOnes());
+    });
+  });
 });
