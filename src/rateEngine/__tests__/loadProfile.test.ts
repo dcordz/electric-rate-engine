@@ -47,8 +47,9 @@ describe('Load Profile', () => {
     it('filters by month', () => {
       const filteredByMonth = loadProfile.filterBy({months: [0]});
 
-      expect(filteredByMonth.expanded()).toHaveLength(31 * 24);
-      expect(filteredByMonth.expanded().every(({month}) => month === 0)).toBe(true);
+      expect(filteredByMonth.expanded().map(({load}) => load)).toEqual(
+        (new Array(31*24).fill(1)).concat((new Array(8760 - (31*24))).fill(0))
+      );
     });
   });
 
@@ -79,7 +80,6 @@ describe('Load Profile', () => {
   describe('count', () => {
     it('returns the count', () => {
       expect(loadProfile.count()).toEqual(8760);
-      expect(loadProfile.filterBy({months: [0]}).count()).toEqual(31 * 24);
     });
 
     it('allows a length property too', () => {
