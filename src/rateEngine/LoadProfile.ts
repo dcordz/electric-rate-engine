@@ -1,7 +1,7 @@
 import times from 'lodash/times';
 import maxBy from 'lodash/maxBy';
 import { addDecimals } from './utils/decimals';
-import LoadProfileFilter, {LoadProfileFilterArgs} from './LoadProfileFilter';
+import LoadProfileFilter, { LoadProfileFilterArgs } from './LoadProfileFilter';
 import expandedDates, { ExpandedDate } from './utils/expandedDates';
 import LoadProfileScaler from './LoadProfileScaler';
 
@@ -21,7 +21,10 @@ class LoadProfile {
   constructor(loadProfile: Array<number>, options: Options);
   constructor(existingLoadProfile: LoadProfile | Array<number>, options: Options);
   constructor(expandedLoadProfile: Array<DetailedLoadProfileHour>, options: Options);
-  constructor(loadProfileOrExpandedOrExisting: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile, options: Options) {
+  constructor(
+    loadProfileOrExpandedOrExisting: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile,
+    options: Options,
+  ) {
     if (typeof loadProfileOrExpandedOrExisting['expanded'] === 'function') {
       this._expanded = (loadProfileOrExpandedOrExisting as LoadProfile).expanded();
     } else if (typeof loadProfileOrExpandedOrExisting[0] === 'number') {
@@ -41,7 +44,7 @@ class LoadProfile {
     const dates = expandedDates(this._year);
 
     if (dates.length !== this._loadProfile.length) {
-      throw new Error('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
+      throw new Error("Load profile length didn't match annual hours length. Maybe a leap year is involved?");
     }
 
     return (this._expanded = this._loadProfile.map((load, i) => ({
@@ -51,23 +54,27 @@ class LoadProfile {
   }
 
   loadValues(): Array<number> {
-    return this.expanded().map(({load}) => load);
+    return this.expanded().map(({ load }) => load);
   }
 
   filterBy(filters: LoadProfileFilterArgs) {
     const filter = new LoadProfileFilter(filters);
 
-    const filteredLoadProfile = this.expanded().map(({load, ...detailedLoadProfileHour}) => filter.matches(detailedLoadProfileHour) ? load : 0);
+    const filteredLoadProfile = this.expanded().map(({ load, ...detailedLoadProfileHour }) =>
+      filter.matches(detailedLoadProfileHour) ? load : 0,
+    );
 
-    return new LoadProfile(filteredLoadProfile, {year: this._year});
+    return new LoadProfile(filteredLoadProfile, { year: this._year });
   }
 
   loadShift(amount: number, filters: LoadProfileFilterArgs) {
     const filter = new LoadProfileFilter(filters);
 
-    const shiftedLoadProfile = this.expanded().map((detailedLoadProfileHour) => filter.matches(detailedLoadProfileHour) ? detailedLoadProfileHour.load + amount : detailedLoadProfileHour.load);
+    const shiftedLoadProfile = this.expanded().map((detailedLoadProfileHour) =>
+      filter.matches(detailedLoadProfileHour) ? detailedLoadProfileHour.load + amount : detailedLoadProfileHour.load,
+    );
 
-    return new LoadProfile(shiftedLoadProfile, {year: this._year});
+    return new LoadProfile(shiftedLoadProfile, { year: this._year });
   }
 
   sumByMonth(): Array<number> {
@@ -80,18 +87,28 @@ class LoadProfile {
     return sums;
   }
 
+  maxByMonth(): Array<number> {
+    const months = times(12, (i) => i);
+    const expanded = this.expanded();
+
+    return months.map((m) => {
+      const monthLoads = expanded.filter(({ month }) => m === month).map(({ load }) => load);
+      return Math.max(...monthLoads);
+    });
+  }
+
   byMonth(): Array<Array<number>> {
     let months = times(12, () => []);
 
     this.expanded().forEach(({ load, month }) => {
-      months[month].push(load)
+      months[month].push(load);
     });
 
     return months;
   }
 
   sum(): number {
-    return this.expanded().reduce((sum, {load}) => addDecimals(sum, load), 0);
+    return this.expanded().reduce((sum, { load }) => addDecimals(sum, load), 0);
   }
 
   count(): number {
@@ -135,7 +152,7 @@ class LoadProfile {
       this._loadProfile.map((loadHour, idx) => {
         return addDecimals(loadHour, otherLoadProfile.expanded()[idx].load);
       }),
-      {year: this._year}
+      { year: this._year },
     );
   }
 }

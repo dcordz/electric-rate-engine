@@ -109,6 +109,37 @@ describe('Load Profile', () => {
     });
   });
 
+  describe('sumByMonth', () => {
+    it('returns a monthly array of summed load', () => {
+      const loadProfile = new LoadProfile(getLoadProfileOfOnes(), options);
+      expect(loadProfile.sumByMonth()).toEqual(
+        [744, 672, 743, 720, 744, 720, 744, 744, 720, 744, 721, 744]
+      )
+    });
+  });
+
+  describe('maxByMonth', () => {
+    it('returns a monthly array of max load', () => {
+      const loadProfileData = getLoadProfileOfOnes();
+      const loadProfileOfOnes = new LoadProfile(getLoadProfileOfOnes(), options);
+      // This gets the index of the first Wednesday of each month
+      // so that we can set a max value for each month that is > 1.
+      const maxhours = times(12, (i) => i).map((monthIdx) => {
+        const hourOfMonth = loadProfileOfOnes.expanded().find(({month, dayOfWeek}) => (
+          month === monthIdx && dayOfWeek === 3
+        )) 
+        return hourOfMonth.hourOfYear
+      });
+
+      const maxes = [13,14,15,16,17,18,19,20,21,22,23,24];
+      maxhours.forEach((hour, idx) => {
+        loadProfileData[hour] = maxes[idx];
+      });
+      
+      expect(new LoadProfile(loadProfileData, options).maxByMonth()).toEqual(maxes);
+    })
+  })
+
   describe('loadFactor', () => {
     it('returns one from our load profile of ones', () => {
       expect(loadProfile.loadFactor()).toEqual(1);
