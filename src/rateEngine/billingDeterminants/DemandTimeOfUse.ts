@@ -1,8 +1,8 @@
-import BillingDeterminants from './_BillingDeterminants';
 import LoadProfile from '../LoadProfile';
-import {LoadProfileFilterArgs} from '../LoadProfileFilter';
+import { LoadProfileFilterArgs } from '../LoadProfileFilter';
+import BillingDeterminants from './_BillingDeterminants';
 
-export interface EnergyTimeOfUseArgs {
+export interface DemandTimeOfUseArgs {
   months: Array<number>;
   daysOfWeek?: Array<number>;
   hourStarts: Array<number>;
@@ -10,15 +10,15 @@ export interface EnergyTimeOfUseArgs {
   exceptForDays: Array<string>;
 }
 
-class EnergyTimeOfUse extends BillingDeterminants {
+class DemandTimeOfUse extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
   private _loadProfile: LoadProfile;
 
   rateElementType = 'Time Of Use';
-  rateClassificationType = 'energy';
-  units = 'kWh';
+  rateClassificationType = 'demand';
+  units = 'kW';
 
-  constructor(filters: EnergyTimeOfUseArgs, loadProfile: LoadProfile) {
+  constructor(filters: DemandTimeOfUseArgs, loadProfile: LoadProfile) {
     super();
 
     this._filters = filters;
@@ -30,8 +30,8 @@ class EnergyTimeOfUse extends BillingDeterminants {
   }
 
   calculate(): Array<number> {
-    return this.filteredLoadProfile().sumByMonth();
+    return this.filteredLoadProfile().maxByMonth();
   }
 }
 
-export default EnergyTimeOfUse;
+export default DemandTimeOfUse;
