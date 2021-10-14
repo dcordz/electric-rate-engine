@@ -2,7 +2,7 @@ import groupBy from 'lodash/groupBy';
 import sumBy from 'lodash/sumBy';
 import times from 'lodash/times';
 import LoadProfile from '../LoadProfile';
-import BillingDeterminants from './_BillingDeterminants';
+import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
 import { LoadProfileFilterArgs } from '../LoadProfileFilter';
 import { RateElementClassification } from '../RateElement';
 
@@ -21,7 +21,7 @@ class BlockedTiersInDays extends BillingDeterminants {
 
   rateElementType = 'Blocked Tier';
   rateElementClassification = RateElementClassification.ENERGY;
-  units = 'kWh';
+  units = BillingDeterminantsUnits.KWH;
 
   constructor({ min, max, ...filters }: BlockedTiersArgs, loadProfile: LoadProfile) {
     super();

@@ -1,10 +1,17 @@
 import { default as lodashMean } from 'lodash/mean';
 import { RateElementClassification } from '../RateElement';
 
+export enum BillingDeterminantsUnits {
+  KWH = 'kWh',
+  KW = 'kW',
+  DAYS = 'days',
+  MONTHS = 'months',
+}
+
 abstract class BillingDeterminants {
   abstract rateElementType: string;
   abstract rateElementClassification: RateElementClassification;
-  abstract units: string;
+  abstract units: BillingDeterminantsUnits;
   abstract calculate(): Array<number>;
 
   mean(): number {

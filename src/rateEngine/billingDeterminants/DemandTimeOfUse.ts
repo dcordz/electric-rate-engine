@@ -1,6 +1,6 @@
 import LoadProfile from '../LoadProfile';
 import { LoadProfileFilterArgs } from '../LoadProfileFilter';
-import BillingDeterminants from './_BillingDeterminants';
+import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
 import { RateElementClassification } from '../RateElement';
 
 export interface DemandTimeOfUseArgs {
@@ -17,7 +17,7 @@ class DemandTimeOfUse extends BillingDeterminants {
 
   rateElementType = 'Time Of Use';
   rateElementClassification = RateElementClassification.DEMAND;
-  units = 'kW';
+  units = BillingDeterminantsUnits.KW;
 
   constructor(filters: DemandTimeOfUseArgs, loadProfile: LoadProfile) {
     super();
