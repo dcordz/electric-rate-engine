@@ -1,11 +1,12 @@
 import BillingDeterminants from './_BillingDeterminants';
 import times from 'lodash/times';
+import { RateElementClassification } from '../RateElement';
 
 const MONTHS_PER_YEAR = 12;
 
 class FixedPerMonth extends BillingDeterminants {
   rateElementType = 'Fixed Per Month';
-  rateClassificationType = 'fixed';
+  rateElementClassification = 'fixed' as RateElementClassification;
   units = 'months';
 
   calculate(): Array<number> {

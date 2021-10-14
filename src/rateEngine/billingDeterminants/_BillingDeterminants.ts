@@ -1,8 +1,9 @@
 import { default as lodashMean } from 'lodash/mean';
+import { RateElementClassification } from '../RateElement';
 
 abstract class BillingDeterminants {
   abstract rateElementType: string;
-  abstract rateClassificationType: string;
+  abstract rateElementClassification: RateElementClassification;
   abstract units: string;
   abstract calculate(): Array<number>;
 

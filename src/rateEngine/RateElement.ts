@@ -16,11 +16,13 @@ export interface RateElementInterface {
   name: string;
 }
 
+export type RateElementClassification = 'energy' | 'demand' | 'fixed';
+
 class RateElement {
   private _rateComponents: Array<RateComponent>;
   name: string;
   type: RateElementType;
-  classification?: string;
+  classification?: RateElementClassification;
   errors: Array<Error> = [];
 
   constructor({ rateElementType, name, rateComponents }: RateElementInterface, loadProfile: LoadProfile) {
@@ -31,7 +33,7 @@ class RateElement {
       const billingDeterminants = BillingDeterminantFactory.make(rateElementType, { ...rest }, loadProfile);
 
       // set the classification based on the billing determinant
-      this.classification = billingDeterminants.rateClassificationType;
+      this.classification = billingDeterminants.rateElementClassification;
       return new RateComponent({ charge, name, billingDeterminants });
     });
 

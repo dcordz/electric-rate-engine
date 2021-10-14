@@ -5,6 +5,7 @@ import LoadProfile from '../LoadProfile';
 import BillingDeterminants from './_BillingDeterminants';
 import { BlockedTiersArgs } from './BlockedTiersInDays';
 import { LoadProfileFilterArgs } from '../LoadProfileFilter';
+import { RateElementClassification } from '../RateElement';
 
 class BlockedTiersInMonths extends BillingDeterminants {
   private _loadProfile: LoadProfile;
@@ -13,7 +14,7 @@ class BlockedTiersInMonths extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
 
   rateElementType = 'Blocked Tier';
-  rateClassificationType = 'energy';
+  rateElementClassification = 'energy' as RateElementClassification;
   units = 'kWh';
 
   constructor({ min, max, ...filters }: BlockedTiersArgs, loadProfile: LoadProfile) {

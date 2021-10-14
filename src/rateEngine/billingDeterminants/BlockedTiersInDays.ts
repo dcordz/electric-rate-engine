@@ -4,6 +4,7 @@ import times from 'lodash/times';
 import LoadProfile from '../LoadProfile';
 import BillingDeterminants from './_BillingDeterminants';
 import { LoadProfileFilterArgs } from '../LoadProfileFilter';
+import { RateElementClassification } from '../RateElement';
 
 const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -19,7 +20,7 @@ class BlockedTiersInDays extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
 
   rateElementType = 'Blocked Tier';
-  rateClassificationType = 'energy';
+  rateElementClassification = 'energy' as RateElementClassification;
   units = 'kWh';
 
   constructor({ min, max, ...filters }: BlockedTiersArgs, loadProfile: LoadProfile) {
