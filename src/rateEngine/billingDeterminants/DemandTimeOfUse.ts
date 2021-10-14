@@ -16,7 +16,7 @@ class DemandTimeOfUse extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
   rateElementType = 'Time Of Use';
-  rateElementClassification = 'demand' as RateElementClassification;
+  rateElementClassification = RateElementClassification.DEMAND;
   units = 'kW';
 
   constructor(filters: DemandTimeOfUseArgs, loadProfile: LoadProfile) {

@@ -6,7 +6,7 @@ class MonthlyEnergy extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
   rateElementType = 'Monthly Energy';
-  rateElementClassification = 'energy' as RateElementClassification;
+  rateElementClassification = RateElementClassification.ENERGY;
   units: 'kWh';
 
   constructor(loadProfile: LoadProfile) {

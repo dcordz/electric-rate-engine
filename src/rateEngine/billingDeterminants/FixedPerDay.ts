@@ -5,7 +5,7 @@ const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 class FixedPerDay extends BillingDeterminants {
   rateElementType = 'Fixed Per Day';
-  rateElementClassification = 'fixed' as RateElementClassification;
+  rateElementClassification = RateElementClassification.FIXED;
   units = 'days';
 
   calculate(): Array<number> {

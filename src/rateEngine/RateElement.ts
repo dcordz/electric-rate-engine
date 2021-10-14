@@ -16,7 +16,11 @@ export interface RateElementInterface {
   name: string;
 }
 
-export type RateElementClassification = 'energy' | 'demand' | 'fixed';
+export enum RateElementClassification {
+  ENERGY = 'energy',
+  DEMAND = 'demand',
+  FIXED = 'fixed',
+};
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;

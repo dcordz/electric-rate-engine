@@ -6,7 +6,7 @@ const MONTHS_PER_YEAR = 12;
 
 class FixedPerMonth extends BillingDeterminants {
   rateElementType = 'Fixed Per Month';
-  rateElementClassification = 'fixed' as RateElementClassification;
+  rateElementClassification = RateElementClassification.FIXED;
   units = 'months';
 
   calculate(): Array<number> {

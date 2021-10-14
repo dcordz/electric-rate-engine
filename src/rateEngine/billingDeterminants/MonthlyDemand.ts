@@ -1,11 +1,12 @@
 import BillingDeterminants from './_BillingDeterminants';
 import LoadProfile from '../LoadProfile';
+import { RateElementClassification } from '../RateElement';
 
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
   rateElementType = 'Monthly Demand';
-  rateClassificationType = 'demand';
+  rateElementClassification = RateElementClassification.DEMAND;
   units: 'kW';
 
   constructor(loadProfile: LoadProfile) {

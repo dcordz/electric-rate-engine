@@ -14,7 +14,7 @@ class BlockedTiersInMonths extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
 
   rateElementType = 'Blocked Tier';
-  rateElementClassification = 'energy' as RateElementClassification;
+  rateElementClassification = RateElementClassification.ENERGY;
   units = 'kWh';
 
   constructor({ min, max, ...filters }: BlockedTiersArgs, loadProfile: LoadProfile) {
