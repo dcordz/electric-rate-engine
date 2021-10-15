@@ -24,7 +24,13 @@ class RateCalculator {
     this.utilityName = utilityName;
     this.applicability = applicability;
     this.minimumBillAmount = minimumBillAmount;
-    this._rateElements = rateElements.map((element): RateElement => new RateElement(element, loadProfile));
+    this._rateElements = rateElements.map((element, idx): RateElement => {
+      return new RateElement(
+        element,
+        loadProfile,
+        rateElements.filter((_, i) => i !== idx)
+      );
+    });
   }
 
   rateElements(): Array<RateElement> {

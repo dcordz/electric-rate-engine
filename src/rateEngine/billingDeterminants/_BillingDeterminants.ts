@@ -6,6 +6,7 @@ export enum BillingDeterminantsUnits {
   KW = 'kW',
   DAYS = 'days',
   MONTHS = 'months',
+  DOLLARS = 'dollars',
 }
 
 abstract class BillingDeterminants {

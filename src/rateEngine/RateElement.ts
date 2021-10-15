@@ -9,18 +9,24 @@ import LoadProfile from './LoadProfile';
 import ValidatorFactory from './ValidatorFactory';
 import { RateComponentInterface } from './RateComponent';
 import { Error } from './validators/_Validator';
+import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
 
 export interface RateElementInterface {
+  id?: string;
   rateElementType: RateElementType;
-  rateComponents: Array<RateComponentInterface & BillingDeterminantFactoryInterface>;
+  rateComponents?: Array<RateComponentInterface & BillingDeterminantFactoryInterface>;
   name: string;
-  billingCategory: BillingCategory;
+  billingCategory?: BillingCategory;
+  rateElementIds?: Array<string>;
+  percent?: number;
+  appliesToAll ?: boolean;
 }
 
 export enum RateElementClassification {
   ENERGY = 'energy',
   DEMAND = 'demand',
   FIXED = 'fixed',
+  SURCHARGE = 'surcharge',
 };
 
 // Since the billing category is passed into a RateCalculator as part of the
@@ -33,18 +39,49 @@ export enum BillingCategory {
   DELIVERY = 'delivery',
 }
 
+class RateComponentsFactory {
+  static make(
+    {id, rateElementType: type, rateElementIds = [], rateComponents, name, percent, appliesToAll}: RateElementInterface,
+    loadProfile,
+    otherRateElements,
+  ): Array<RateComponentInterface> {
+    switch (type) {
+      case 'SurchargeAsPercent':
+        return otherRateElements.filter(({id}) => {
+          return appliesToAll ? true : rateElementIds.includes(id)
+        }).map((element: RateElementInterface) => ({
+          charge: percent / 100,
+          name: `${name} surcharge - ${element.name}`,
+          rateElementType: 'SurchargeAsPercent',
+          rateElement: new RateElement(element, loadProfile, []),
+        }));
+      default:
+        return rateComponents;
+    }
+  }
+}
+
 class RateElement {
   private _rateComponents: Array<RateComponent>;
+  id: string;
   name: string;
   type: RateElementType;
   classification?: RateElementClassification;
   billingCategory?: BillingCategory;
   errors: Array<Error> = [];
 
-  constructor({ rateElementType, name, rateComponents, billingCategory }: RateElementInterface, loadProfile: LoadProfile) {
+  constructor(rateElementArgs: RateElementInterface, loadProfile: LoadProfile, otherRateElements: Array<RateElementInterface> = []) {
+    const { id, rateElementType, name, billingCategory } = rateElementArgs;
+    this.id = id;
     this.name = name;
     this.type = rateElementType;
     this.billingCategory = billingCategory;
+
+    const rateComponents = RateComponentsFactory.make(
+      rateElementArgs,
+      loadProfile,
+      otherRateElements
+    );
 
     this._rateComponents = rateComponents.map(({ charge, name, ...rest }) => {
       const billingDeterminants = BillingDeterminantFactory.make(rateElementType, { ...rest }, loadProfile);
