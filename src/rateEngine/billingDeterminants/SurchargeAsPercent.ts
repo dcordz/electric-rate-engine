@@ -22,14 +22,7 @@ class SurchargeAsPercent extends BillingDeterminants {
   }
 
   calculate(): Array<number> {
-    let monthlyCosts = new Array(12).fill(0);
-    this._rateElement.rateComponents().forEach((component) => {
-      component.costs().forEach((amount, idx) => {
-        monthlyCosts[idx] += amount;
-      });
-    });
-
-    return monthlyCosts;
+    return this._rateElement.costs();
   }
 }
 

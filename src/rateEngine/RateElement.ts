@@ -105,6 +105,18 @@ class RateElement {
   annualCost(): number {
     return sum(this.rateComponents().map((component) => component.annualCost()));
   }
+
+  costs(): Array<number> {
+    const costs = Array(12).fill(0);
+
+    this.rateComponents().forEach((component) => {
+      component.costs().forEach((cost, monthIdx) => {
+        costs[monthIdx] += cost;
+      });
+    });
+
+    return costs;
+  }
 }
 
 export default RateElement;
