@@ -35,11 +35,12 @@ const rate = {
       rateComponents: [
         {
           charge: 0.32854,
-          name: "Delivery Charge',
-        }
-      ]
+          name: 'Delivery Charge',
+        },
+      ],
     },
     {
+      id: 'some-string-id', // Optional, used when referencing dependent rate elements for things like SurchargeAsPercent
       rateElementType: 'BlockedTiersInDays',
       name: 'First Block Discount',
       rateComponents: [
@@ -125,11 +126,63 @@ const exampleBlockedTiersInDaysData = {
     {
       charge: -0.08633,
       min: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // 12 months,
-      max: [12, 12, 12, 12, 14.2, 14.2, 14.2, 14.2, 14.2, 14.2, 12, 12] // 12 months,
+      max: [12, 12, 12, 12, 14.2, 14.2, 14.2, 14.2, 14.2, 14.2, 12, 12], // 12 months,
       name: 'Discount',
     },
   ],
 }
+```
+
+**SurchargeAsPercent**: Used to specify surcharges such as taxes or other percent based charges. For example, some rates have "improvement" charges which are calculated based on a subset of the other rate elements.
+
+Unlike other rate elements, the `SurchargeAsPercent` does not explicitly define `rateComponents`.
+
+Instead, it will dynamically create `RateComponent`s that calculate a charge based on the specified percentage for each of the rate elements defined by its `rateElementIds` property. If the `appliesToAll` property is set to true, then `RateComponents` will be created for every rate element.
+
+```js
+const exampleWithSurcharges = [
+  {
+    rateElementType: 'SurchargeAsPercent',
+    name: 'Sales tax',
+    percent: 7.25, // note: not defined as a decimal,
+    appliesToAll: true,
+    // Will generate rateComponents for 7.25% * the charges for the FixedPerMonth and MonthlyEnergy rate elements
+  },
+  {
+    rateElementType: 'FixedPerMonth',
+    // rest of data
+  },
+  {
+    rateElementType: 'MonthlyEnergy',
+    // rest of data
+  }
+];
+
+const secondSurchargeExample = [
+  {
+    rateElementType: 'SurchargeAsPercent',
+    name: 'A charge that only applies to certain elements',
+    percent: 10,
+    rateElementIds: ['the-fixed-charge'],
+    // Will generate a rateComponent for 10% * the charges of the FixedPerMonth charge ONLY
+  },
+  {
+    id: 'the-fixed-charge', // ID is arbitrary, it just needs to be the same in the id property and the rateElementIds property in the surcharge.
+    rateElementType: 'FixedPerMonth',
+    // rest of data
+  },
+  {
+    // This id doesn't do anything
+    id: 'a-different-element',
+    rateElementType: 'MonthlyEnergy',
+    // rest of data
+  },
+  {
+    // id is not required for elements not specified in a rateElementIds array
+    rateElementType: 'MonthlyDemand',
+    // rest of data
+  },
+]
 ```
 
 #### Methods
@@ -154,6 +207,7 @@ const rateElements = rateCalculator.rateElements() // array of RateElement objec
 const firstRateElement = rateElements[0];
 firstRateElement.annualCost(); // sum of all RateComponent annual costs (number)
 const rateComponents = firstRateElement.rateComponents() // array of RateComponent objects
+const monthlyCosts = firstRateElement.costs(); // array of costs that sums the costs of all of the rateComponents
 ```
 
 **Rate Component**
