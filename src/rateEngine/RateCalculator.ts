@@ -1,4 +1,4 @@
-import RateElement, { RateElementInterface } from './RateElement';
+import RateElement, { RateElementInterface, RateElementFilterArgs } from './RateElement';
 import LoadProfile from './LoadProfile';
 
 import sum from 'lodash/sum';
@@ -33,12 +33,12 @@ class RateCalculator {
     });
   }
 
-  rateElements(): Array<RateElement> {
-    return this._rateElements;
+  rateElements({...filters}: RateElementFilterArgs = {}): Array<RateElement> {
+    return this._rateElements.filter((element) => element.matches(filters));
   }
 
-  annualCost(): number {
-    return sum(this.rateElements().map((element) => element.annualCost()));
+  annualCost({...filters}: RateElementFilterArgs = {}): number {
+    return sum(this.rateElements(filters).map((element) => element.annualCost()));
   }
 }
 
