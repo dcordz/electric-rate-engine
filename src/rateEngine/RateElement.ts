@@ -14,7 +14,7 @@ import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
 export interface RateElementInterface {
   id?: string;
   rateElementType: RateElementType;
-  rateComponents?: Array<RateComponentInterface & BillingDeterminantFactoryInterface>;
+  rateComponents?: Array<RateComponentInterface>;
   name: string;
   billingCategory?: BillingCategory;
   rateElementIds?: Array<string>;
@@ -39,22 +39,33 @@ export enum BillingCategory {
   DELIVERY = 'delivery',
 }
 
+export interface RateElementFilterArgs {
+  ids?: Array<string>;
+  classifications?: Array<RateElementClassification>;
+  billingCategories?: Array<BillingCategory>;
+}
+
+
 class RateComponentsFactory {
   static make(
-    {id, rateElementType: type, rateElementIds = [], rateComponents, name, percent, appliesToAll}: RateElementInterface,
+    {rateElementType, rateComponents, name, percent, appliesToAll}: RateElementInterface,
     loadProfile,
     otherRateElements,
   ): Array<RateComponentInterface> {
-    switch (type) {
+    switch (rateElementType) {
       case 'SurchargeAsPercent':
-        return otherRateElements.filter(({id}) => {
-          return appliesToAll ? true : rateElementIds.includes(id)
-        }).map((element: RateElementInterface) => ({
-          charge: percent / 100,
-          name: `${name} surcharge - ${element.name}`,
-          rateElementType: 'SurchargeAsPercent',
-          rateElement: new RateElement(element, loadProfile, []),
-        }));
+        return rateComponents.map(({ name: rateComponentName, charge, ...filterArgs }: RateComponentInterface) => {
+          return otherRateElements
+            .filter((element: RateElementInterface) => (
+              new RateElement(element, loadProfile, []).matches(filterArgs)
+            ))
+            .map((element: RateElementInterface) => ({
+              charge,
+              name: `${rateComponentName} surcharge - ${element.name}`,
+              rateElementType: 'SurchargeAsPercent',
+              rateElement: new RateElement(element, loadProfile, []),
+            }))
+        }).flat();
       default:
         return rateComponents;
     }
@@ -63,7 +74,7 @@ class RateComponentsFactory {
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;
-  id: string;
+  id?: string;
   name: string;
   type: RateElementType;
   classification?: RateElementClassification;
@@ -116,6 +127,12 @@ class RateElement {
     });
 
     return costs;
+  }
+
+  matches({ billingCategories, classifications, ids }: RateElementFilterArgs) {
+    return (billingCategories ? billingCategories.includes(this.billingCategory) : true) &&
+      (classifications ? classifications.includes(this.classification) : true) &&
+      (ids ? ids.includes(this.id) : true);
   }
 }
 

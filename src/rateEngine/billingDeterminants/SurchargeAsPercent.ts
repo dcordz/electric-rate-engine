@@ -9,10 +9,9 @@ export interface SurchargeAsPercentArgs {
 
 class SurchargeAsPercent extends BillingDeterminants {
   private _rateElement: RateElement;
-  private _percent: number;
 
   rateElementType = 'Surcharge';
-  rateElementClassification = RateElementClassification.ENERGY;
+  rateElementClassification = RateElementClassification.SURCHARGE;
   units = BillingDeterminantsUnits.DOLLARS;
 
   constructor({rateElement}: SurchargeAsPercentArgs) {
