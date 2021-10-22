@@ -17,9 +17,6 @@ export interface RateElementInterface {
   rateComponents?: Array<RateComponentInterface>;
   name: string;
   billingCategory?: BillingCategory;
-  rateElementIds?: Array<string>;
-  percent?: number;
-  appliesToAll ?: boolean;
 }
 
 export enum RateElementClassification {
@@ -48,7 +45,7 @@ export interface RateElementFilterArgs {
 
 class RateComponentsFactory {
   static make(
-    {rateElementType, rateComponents, name, percent, appliesToAll}: RateElementInterface,
+    {rateElementType, rateComponents, name}: RateElementInterface,
     loadProfile,
     otherRateElements,
   ): Array<RateComponentInterface> {
