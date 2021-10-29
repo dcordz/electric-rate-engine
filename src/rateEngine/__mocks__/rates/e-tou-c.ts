@@ -1,5 +1,7 @@
 import RateInterface from '../../RateInterface';
 import { times } from 'lodash';
+import { LoadProfileFilterArgs } from '../../LoadProfileFilter';
+import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
 
 const summerPeakCharge = 0.41333;
 const summmerOffpeakCharge = 0.34989;
@@ -36,9 +38,11 @@ const etouc: RateInterface = {
       rateComponents: [
         {
           charge: summerPeakCharge,
-          months: [5, 6, 7, 8],
-          daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
-          hourStarts: [16, 17, 18, 19, 20],
+          ...{
+            months: [5, 6, 7, 8],
+            daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
+            hourStarts: [16, 17, 18, 19, 20],
+          } as LoadProfileFilterArgs,
           name: 'summer peak',
         },
         {
@@ -70,8 +74,10 @@ const etouc: RateInterface = {
       rateComponents: [
         {
           charge: -0.08633,
-          min: times(12, (_) => 0),
-          max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
+          ...{
+            min: times(12, (_) => 0),
+            max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
+          } as BlockedTiersArgs,
           name: 'Discount',
         },
         {
