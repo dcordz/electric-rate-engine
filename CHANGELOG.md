@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2021-10-29
+
+* Improves the scale-to-a-monthly-bill functionality for load profiles. Before only values in the 100s of dollars would reliably converge. With these changes, arbitrarily large bill amounts should scale as well.
+* Adds a debugging option for the load profile scaler.
+* Allows passing goal seek parameters to the `toAverageMonthlyBill` method
+
 ## [1.6.0] - 2021-10-29
 
 * Add `billingCategory` metadata field for rate elements
