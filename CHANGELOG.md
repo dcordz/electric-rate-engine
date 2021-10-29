@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2021-10-29
+
+* Add `billingCategory` metadata field for rate elements
+* Add a `SurchargeAsPercent` billing determinant type
+* Add optional rate element filter arguments for the `RateCalculator` `annualCost` and `rateElements` methods
+* Add an `HourlyEnergy` billing determinant type
+* Add a tiered demand charge billing deteminant as `DemandTiersInMonths`
+
 ## [1.5.0] - 2021-10-13
 
 The changelog is missing a few versions, but since 1.4.2, 1.5.0 adds
