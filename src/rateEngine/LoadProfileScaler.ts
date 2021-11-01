@@ -47,7 +47,7 @@ class LoadProfileScaler {
         fnParams,
         percentTolerance: 0.1,
         maxIterations: 1000,
-        maxStep: 0.5 * magnitudeScaler,
+        maxStep: magnitudeScaler * 10, // a goal of 999 needs a max step of 1000
         goal: amount,
         independentVariableIdx: 0,
         ...goalSeekParams,
