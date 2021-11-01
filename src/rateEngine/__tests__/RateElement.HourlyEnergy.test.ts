@@ -11,7 +11,7 @@ priceData[ARBITRARY_HOUR_INDEX] = 5;
 const rateElementData = {
   name: 'An hourly energy rate',
   rateElementType: 'HourlyEnergy' as RateElementType,
-  priceProfile: new PriceProfile(priceData, {year: YEAR}),
+  priceProfile: priceData,
 };
 
 const loadProfile = new LoadProfile(Array(8760).fill(2), {year: YEAR})
@@ -26,6 +26,20 @@ describe('RateElement', () => {
     });
 
     it('calculates the monthly costs', () => {
+      expect(rateElement.costs()).toEqual(
+        [10,0,0,0,0,0,0,0,0,0,0,0]
+      )
+    });
+
+    it('works with a PriceProfile for backwards compatibility', () => {
+      const data = {
+        name: 'A rate element with a PriceProfile',
+        rateElementType: 'HourlyEnergy' as RateElementType,
+        priceProfile: new PriceProfile(priceData, {year: YEAR})
+      }
+
+      const element = new RateElement(data, loadProfile);
+
       expect(rateElement.costs()).toEqual(
         [10,0,0,0,0,0,0,0,0,0,0,0]
       )
