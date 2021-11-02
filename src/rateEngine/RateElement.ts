@@ -18,7 +18,7 @@ export interface RateElementInterface {
   rateComponents?: Array<RateComponentInterface>;
   name: string;
   billingCategory?: BillingCategory;
-  priceProfile?: PriceProfile;
+  priceProfile?: Array<number> | PriceProfile;
 }
 
 export enum RateElementClassification {
@@ -46,7 +46,7 @@ export interface RateElementFilterArgs {
 
 class RateComponentsFactory {
   static make(
-    {rateElementType, rateComponents, name, priceProfile}: RateElementInterface,
+    {rateElementType, rateComponents, name, priceProfile: priceProfileData}: RateElementInterface,
     loadProfile,
     otherRateElements,
   ): Array<RateComponentInterface> {
@@ -65,6 +65,7 @@ class RateComponentsFactory {
             }))
         }).flat();
       case 'HourlyEnergy':
+        const priceProfile = new PriceProfile(priceProfileData, {year: loadProfile.year})
         return priceProfile.expanded().map(({price, hourOfYear}) => ({
           name: `${name} - Hour ${hourOfYear}`,
           charge: price,
