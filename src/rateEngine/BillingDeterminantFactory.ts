@@ -9,8 +9,21 @@ import MonthlyDemand from './billingDeterminants/MonthlyDemand';
 import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
 import SurchargeAsPercent, { SurchargeAsPercentArgs } from './billingDeterminants/SurchargeAsPercent';
 import HourlyEnergy, { HourlyEnergyArgs } from './billingDeterminants/HourlyEnergy';
+import DemandTiersInMonths from './billingDeterminants/DemandTiersInMonths';
+import DemandTimeOfUse, { DemandTimeOfUseArgs } from './billingDeterminants/DemandTimeOfUse';
 
-export type RateElementType = 'EnergyTimeOfUse' | 'BlockedTiersInDays' | 'BlockedTiersInMonths' | 'FixedPerDay' | 'FixedPerMonth' | 'MonthlyEnergy' | 'MonthlyDemand' | 'SurchargeAsPercent' | 'HourlyEnergy';
+export type RateElementType =
+  'EnergyTimeOfUse' |
+  'BlockedTiersInDays' |
+  'BlockedTiersInMonths' |
+  'FixedPerDay' |
+  'FixedPerMonth' |
+  'MonthlyEnergy' |
+  'MonthlyDemand' |
+  'SurchargeAsPercent' |
+  'HourlyEnergy' |
+  'DemandTimeOfUse' |
+  'DemandTiersInMonths';
 
 export type BillingDeterminantFactoryInterface = EnergyTimeOfUseArgs |
   BlockedTiersArgs |
@@ -43,6 +56,10 @@ class BillingDeterminantFactory {
         return new SurchargeAsPercent(args as SurchargeAsPercentArgs);
       case 'HourlyEnergy':
         return new HourlyEnergy(args as HourlyEnergyArgs, loadProfile);
+      case 'DemandTiersInMonths':
+        return new DemandTiersInMonths(args as BlockedTiersArgs, loadProfile);
+      case 'DemandTimeOfUse':
+        return new DemandTimeOfUse(args as DemandTimeOfUseArgs, loadProfile);
     }
   }
 }
