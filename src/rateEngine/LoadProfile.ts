@@ -99,20 +99,6 @@ class LoadProfile {
     });
   }
 
-  maxPerDayByMonth(): Array<number> {
-    const months = times(12, (i) => i);
-    const expanded = this.expanded();
-
-    return months.map((m) => {
-      const monthLoads = expanded.filter(({ month }) => m === month);
-
-      // chunk monthly loads by day (31-element array for January, etc.)
-      const dayLoads = Object.values(groupBy(monthLoads, (val) => val.date));
-      // sum the max demand for each day in the month
-      return sum(dayLoads.map((day) => Math.max(...day.map(({ load }) => load))));
-    });
-  }
-
   byMonth(): Array<Array<number>> {
     let months = times(12, () => []);
 

@@ -2,7 +2,7 @@ import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
 import DemandPerDay, { DemandPerDayArgs } from '../DemandPerDay';
 import data from './DemandPerDayData';
-import { DAYS_PER_MONTH } from '../../utils/assumptions';
+import { daysPerMonth } from '../../utils/assumptions';
 
 interface TestData {
   name: string;
@@ -36,7 +36,7 @@ describe('DemandPerDay', () => {
       ).calculate();
 
       result.forEach((val, i) => {
-        expect(val).toBeCloseTo(DAYS_PER_MONTH[i]);
+        expect(val).toBeCloseTo(daysPerMonth(loadProfile.year)[i]);
       });
     });
 
