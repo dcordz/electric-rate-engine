@@ -5,9 +5,7 @@ import LoadProfile from '../LoadProfile';
 import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
 import { LoadProfileFilterArgs } from '../LoadProfileFilter';
 import { RateElementClassification } from '../RateElement';
-
-const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+import { daysPerMonth } from '../utils/assumptions';
 export interface BlockedTiersArgs extends LoadProfileFilterArgs {
   min: Array<number>;
   max: Array<number>;
@@ -37,15 +35,15 @@ class BlockedTiersInDays extends BillingDeterminants {
   }
 
   calculate(): Array<number> {
-    const mins = DAYS_PER_MONTH.map((days, i) => days * this._min[i]);
-    const maxes = DAYS_PER_MONTH.map((days, i) => days * this._max[i]);
+    const mins = daysPerMonth(this._loadProfile.year).map((days, i) => days * this._min[i]);
+    const maxes = daysPerMonth(this._loadProfile.year).map((days, i) => days * this._max[i]);
 
     const expandedLoadProfile = this.filteredLoadProfile().expanded();
 
     const monthlyExpandedLoadProfile = Object.values(groupBy(expandedLoadProfile, 'month'));
     const kwhByMonth = monthlyExpandedLoadProfile.map((loadProfiles) => sumBy(loadProfiles, 'load'));
 
-    return times(12, i => {
+    return times(12, (i) => {
       const kwh = kwhByMonth[i] || 0;
       if (kwh < mins[i]) {
         return 0;
