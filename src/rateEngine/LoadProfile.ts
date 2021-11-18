@@ -4,6 +4,8 @@ import { addDecimals } from './utils/decimals';
 import LoadProfileFilter, { LoadProfileFilterArgs } from './LoadProfileFilter';
 import expandedDates, { ExpandedDate } from './utils/expandedDates';
 import LoadProfileScaler, { LoadProfileScalerOptions } from './LoadProfileScaler';
+import sum from 'lodash/sum';
+import groupBy from 'lodash/groupBy';
 
 export interface DetailedLoadProfileHour extends ExpandedDate {
   load: number;
@@ -94,6 +96,20 @@ class LoadProfile {
     return months.map((m) => {
       const monthLoads = expanded.filter(({ month }) => m === month).map(({ load }) => load);
       return Math.max(...monthLoads);
+    });
+  }
+
+  maxPerDayByMonth(): Array<number> {
+    const months = times(12, (i) => i);
+    const expanded = this.expanded();
+
+    return months.map((m) => {
+      const monthLoads = expanded.filter(({ month }) => m === month);
+
+      // chunk monthly loads by day (31-element array for January, etc.)
+      const dayLoads = Object.values(groupBy(monthLoads, (val) => val.date));
+      // sum the max demand for each day in the month
+      return sum(dayLoads.map((day) => Math.max(...day.map(({ load }) => load))));
     });
   }
 
