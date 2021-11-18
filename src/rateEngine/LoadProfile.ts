@@ -4,8 +4,6 @@ import { addDecimals } from './utils/decimals';
 import LoadProfileFilter, { LoadProfileFilterArgs } from './LoadProfileFilter';
 import expandedDates, { ExpandedDate } from './utils/expandedDates';
 import LoadProfileScaler, { LoadProfileScalerOptions } from './LoadProfileScaler';
-import sum from 'lodash/sum';
-import groupBy from 'lodash/groupBy';
 
 export interface DetailedLoadProfileHour extends ExpandedDate {
   load: number;
