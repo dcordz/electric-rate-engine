@@ -6,6 +6,7 @@ import BlockedTiersInMonths from './billingDeterminants/BlockedTiersInMonths';
 import { default as EnergyTimeOfUse, EnergyTimeOfUseArgs } from './billingDeterminants/EnergyTimeOfUse';
 import LoadProfile from './LoadProfile';
 import MonthlyDemand from './billingDeterminants/MonthlyDemand';
+import AnnualDemand from './billingDeterminants/AnnualDemand';
 import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
 import SurchargeAsPercent, { SurchargeAsPercentArgs } from './billingDeterminants/SurchargeAsPercent';
 import HourlyEnergy, { HourlyEnergyArgs } from './billingDeterminants/HourlyEnergy';
@@ -21,6 +22,7 @@ export type RateElementType =
   | 'FixedPerMonth'
   | 'MonthlyEnergy'
   | 'MonthlyDemand'
+  | 'AnnualDemand'
   | 'SurchargeAsPercent'
   | 'HourlyEnergy'
   | 'DemandTimeOfUse'
@@ -53,6 +55,8 @@ class BillingDeterminantFactory {
         return new FixedPerMonth();
       case 'MonthlyDemand':
         return new MonthlyDemand(loadProfile);
+      case 'AnnualDemand':
+        return new AnnualDemand(loadProfile);
       case 'MonthlyEnergy':
         return new MonthlyEnergy(loadProfile);
       case 'SurchargeAsPercent':
