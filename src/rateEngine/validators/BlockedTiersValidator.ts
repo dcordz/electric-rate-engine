@@ -1,14 +1,9 @@
 import Validator from './_Validator';
 import times from 'lodash/times';
-import { BlockedTiersArgs } from '../billingDeterminants/BlockedTiersInDays';
 import expandedDates from '../utils/expandedDates';
 import LoadProfileFilter from '../LoadProfileFilter';
 import LoadProfile from '../LoadProfile';
-
-interface MinMaxPair {
-  min: number;
-  max: number;
-}
+import type { MinMaxPair, BlockedTiersArgs } from '../types';
 
 class BlockedTiersValidator extends Validator {
   private _args: Array<BlockedTiersArgs>;

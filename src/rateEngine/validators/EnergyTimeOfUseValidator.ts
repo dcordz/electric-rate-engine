@@ -1,9 +1,8 @@
 import Validator from './_Validator';
 import expandedDates from '../utils/expandedDates';
-import { EnergyTimeOfUseArgs } from '../billingDeterminants/EnergyTimeOfUse';
 import LoadProfileFilter from '../LoadProfileFilter';
 import LoadProfile from '../LoadProfile';
-import { RateComponentInterface } from '../RateComponent';
+import type { RateComponentInterface, EnergyTimeOfUseArgs } from '../types';
 
 class EnergyTimeOfUseValidator extends Validator {
   private _args: Array<RateComponentInterface & EnergyTimeOfUseArgs>;

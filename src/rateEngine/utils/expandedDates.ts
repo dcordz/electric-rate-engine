@@ -1,15 +1,8 @@
 import moment from 'moment-timezone';
 import times from 'lodash/times';
+import type { ExpandedDate } from '../types';
 
 moment.tz.setDefault('America/New_York');
-
-export interface ExpandedDate {
-  month: number;
-  hourStart: number;
-  dayOfWeek: number;
-  date: string;
-  hourOfYear: number;
-};
 
 const dates = {};
 

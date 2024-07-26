@@ -1,15 +1,7 @@
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
+import BillingDeterminants from './_BillingDeterminants';
 import LoadProfile from '../LoadProfile';
-import {LoadProfileFilterArgs} from '../LoadProfileFilter';
-import { RateElementClassification } from '../RateElement';
-
-export interface EnergyTimeOfUseArgs {
-  months: Array<number>;
-  daysOfWeek?: Array<number>;
-  hourStarts: Array<number>;
-  onlyOnDays: Array<string>;
-  exceptForDays: Array<string>;
-}
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import type { EnergyTimeOfUseArgs, LoadProfileFilterArgs } from '../types';
 
 class EnergyTimeOfUse extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;

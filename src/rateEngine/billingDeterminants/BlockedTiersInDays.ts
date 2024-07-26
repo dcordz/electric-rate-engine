@@ -2,14 +2,11 @@ import groupBy from 'lodash/groupBy';
 import sumBy from 'lodash/sumBy';
 import times from 'lodash/times';
 import LoadProfile from '../LoadProfile';
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
-import { LoadProfileFilterArgs } from '../LoadProfileFilter';
-import { RateElementClassification } from '../RateElement';
+import BillingDeterminants from './_BillingDeterminants';
+import {  } from '../LoadProfileFilter';
 import { daysPerMonth } from '../utils/assumptions';
-export interface BlockedTiersArgs extends LoadProfileFilterArgs {
-  min: Array<number>;
-  max: Array<number>;
-}
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import type { BlockedTiersArgs, LoadProfileFilterArgs } from '../types';
 
 class BlockedTiersInDays extends BillingDeterminants {
   private _loadProfile: LoadProfile;

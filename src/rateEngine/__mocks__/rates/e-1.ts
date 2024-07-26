@@ -1,7 +1,5 @@
 import { times } from 'lodash';
-import RateInterface from '../../RateInterface';
-import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
-import { RateComponentInterface } from '../../RateComponent';
+import type { RateInterface, RateComponentInterface, BlockedTiersArgs } from '../../types';
 
 const SUMMMER_MONTHS = [4, 5, 6, 7, 8, 9];
 const cutoff_1 = times(12, (i) => (SUMMMER_MONTHS.includes(i) ? 13 : 12.5));

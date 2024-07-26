@@ -2,10 +2,9 @@ import groupBy from 'lodash/groupBy';
 import sumBy from 'lodash/sumBy';
 import times from 'lodash/times';
 import LoadProfile from '../LoadProfile';
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
-import { BlockedTiersArgs } from './BlockedTiersInDays';
-import { LoadProfileFilterArgs } from '../LoadProfileFilter';
-import { RateElementClassification } from '../RateElement';
+import BillingDeterminants from './_BillingDeterminants';
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import type { BlockedTiersArgs, LoadProfileFilterArgs } from '../types';
 
 class BlockedTiersInMonths extends BillingDeterminants {
   private _loadProfile: LoadProfile;

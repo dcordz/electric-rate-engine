@@ -1,11 +1,8 @@
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
-import RateElement, { RateElementClassification } from '../RateElement';
+import BillingDeterminants from './_BillingDeterminants';
+import RateElement from '../RateElement';
 import LoadProfile from '../LoadProfile';
-
-export interface SurchargeAsPercentArgs {
-  rateElement: RateElement;
-  percent: number;
-}
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
+import type { SurchargeAsPercentArgs } from '../types';
 
 class SurchargeAsPercent extends BillingDeterminants {
   private _rateElement: RateElement;

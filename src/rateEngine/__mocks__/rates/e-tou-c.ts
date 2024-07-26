@@ -1,7 +1,5 @@
-import RateInterface from '../../RateInterface';
 import { times } from 'lodash';
-import { LoadProfileFilterArgs } from '../../LoadProfileFilter';
-import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
+import type { RateInterface, LoadProfileFilterArgs, BlockedTiersArgs } from '../../types';
 
 const summerPeakCharge = 0.41333;
 const summmerOffpeakCharge = 0.34989;

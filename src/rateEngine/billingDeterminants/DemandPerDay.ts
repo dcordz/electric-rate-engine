@@ -1,18 +1,10 @@
 import LoadProfile from '../LoadProfile';
-import { LoadProfileFilterArgs } from '../LoadProfileFilter';
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
-import { RateElementClassification } from '../RateElement';
+import BillingDeterminants from './_BillingDeterminants';
 import times from 'lodash/times';
 import groupBy from 'lodash/groupBy';
 import sum from 'lodash/sum';
-
-export interface DemandPerDayArgs {
-  months: Array<number>;
-  daysOfWeek?: Array<number>;
-  hourStarts: Array<number>;
-  onlyOnDays: Array<string>;
-  exceptForDays: Array<string>;
-}
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import type { DemandPerDayArgs, LoadProfileFilterArgs } from '../types';
 
 class DemandPerDay extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;

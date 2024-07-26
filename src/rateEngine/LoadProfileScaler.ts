@@ -1,18 +1,11 @@
 import LoadProfile from './LoadProfile';
 import RateCalculator from './RateCalculator';
 import goalSeek from 'goal-seek';
-import RateInterface from './RateInterface';
+import type { GoalSeekArgs, LoadProfileScalerOptions, RateInterface } from './types';
 
 // TODO: use proper math for scaling
 // TODO: fix the toAverageMonthlyBill argument... how to properly pass in a rate?
 
-interface GoalSeekArgs {
-  [key: string]: any
-};
-
-export interface LoadProfileScalerOptions {
-  debug: boolean;
-}
 class LoadProfileScaler {
   loadProfile: LoadProfile;
   debug: boolean;

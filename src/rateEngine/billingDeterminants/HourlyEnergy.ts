@@ -1,11 +1,8 @@
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
-import { RateElementClassification } from '../RateElement';
-import expandedDates, { ExpandedDate } from '../utils/expandedDates';
+import BillingDeterminants from './_BillingDeterminants';
+import expandedDates from '../utils/expandedDates';
 import LoadProfile from '../LoadProfile';
-
-export interface HourlyEnergyArgs {
-  hourOfYear: number;
-}
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
+import type { HourlyEnergyArgs, ExpandedDate } from '../types';
 
 class HourlyEnergy extends BillingDeterminants {
   private _load: number;

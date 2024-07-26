@@ -1,16 +1,7 @@
-import RateElement, { RateElementInterface, RateElementFilterArgs } from './RateElement';
+import RateElement from './RateElement';
 import LoadProfile from './LoadProfile';
-
 import sum from 'lodash/sum';
-
-export interface RateCalculatorInterface {
-  name: string;
-  utilityName?: string;
-  applicability?: string;
-  minimumBillAmount?: number;
-  rateElements: Array<RateElementInterface>;
-  loadProfile: LoadProfile;
-}
+import type { RateCalculatorInterface, RateElementInterface, RateElementFilterArgs } from './types';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;

@@ -1,7 +1,8 @@
 import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
-import DemandTimeOfUse, { DemandTimeOfUseArgs } from '../DemandTimeOfUse';
+import DemandTimeOfUse from '../DemandTimeOfUse';
 import data from './DemandTimeOfUseData';
+import type { DemandTimeOfUseArgs } from '../../types';
 
 interface TestData {
   name: string;

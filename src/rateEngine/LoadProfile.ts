@@ -1,17 +1,16 @@
 import times from 'lodash/times';
 import maxBy from 'lodash/maxBy';
 import { addDecimals } from './utils/decimals';
-import LoadProfileFilter, { LoadProfileFilterArgs } from './LoadProfileFilter';
-import expandedDates, { ExpandedDate } from './utils/expandedDates';
-import LoadProfileScaler, { LoadProfileScalerOptions } from './LoadProfileScaler';
-
-export interface DetailedLoadProfileHour extends ExpandedDate {
-  load: number;
-}
-
-interface Options {
-  year: number;
-}
+import LoadProfileFilter from './LoadProfileFilter';
+import expandedDates from './utils/expandedDates';
+import LoadProfileScaler from './LoadProfileScaler';
+import type {
+  DetailedLoadProfileHour,
+  LoadProfileOptions as Options,
+  LoadProfileFilterArgs,
+  ExpandedDate,
+  LoadProfileScalerOptions,
+} from './types';
 
 class LoadProfile {
   private _loadProfile?: Array<number>;

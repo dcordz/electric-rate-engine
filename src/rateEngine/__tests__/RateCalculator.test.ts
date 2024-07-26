@@ -1,7 +1,7 @@
 import LoadProfile from '../LoadProfile';
 import RateCalculator from '../RateCalculator';
-import { RateElementType } from '../BillingDeterminantFactory';
-import { BillingCategory } from '../RateElement';
+import type { RateElementType } from '../types';
+import { BillingCategory } from '../constants';
 
 describe('RateCalculator', () => {
   describe('annualCost', () => {

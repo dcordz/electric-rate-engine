@@ -1,13 +1,4 @@
-import { ExpandedDate } from './utils/expandedDates';
-
-export interface LoadProfileFilterArgs {
-  months?: Array<number>;
-  daysOfWeek?: Array<number>;
-  hourStarts?: Array<number>;
-  onlyOnDays?: Array<string>;
-  exceptForDays?: Array<string>;
-  hoursOfYear?: Array<number>;
-}
+import type { LoadProfileFilterArgs, ExpandedDate } from './types';
 
 class LoadProfileFilter {
   months?: Array<number>;

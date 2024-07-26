@@ -1,15 +1,5 @@
 import flatMap from 'lodash/flatMap';
-
-export interface Error {
-  english: string,
-  type: string,
-  data: {},
-}
-
-interface LabeledError {
-  label: string
-  errors: Array<Error>
-} 
+import { ValidatorError as Error, LabeledError } from '../types';
 
 abstract class Validator {
   protected _errors: Array<LabeledError> = [];

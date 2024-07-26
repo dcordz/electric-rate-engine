@@ -1,8 +1,10 @@
 import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
-import DemandPerDay, { DemandPerDayArgs } from '../DemandPerDay';
+import DemandPerDay from '../DemandPerDay';
 import data from './DemandPerDayData';
 import { daysPerMonth } from '../../utils/assumptions';
+import type { DemandPerDayArgs } from '../../types';
+
 
 interface TestData {
   name: string;

@@ -1,7 +1,5 @@
-import RateInterface from '../../RateInterface';
 import { times } from 'lodash';
-import { LoadProfileFilterArgs } from '../../LoadProfileFilter';
-import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
+import type { RateInterface, BlockedTiersArgs, LoadProfileFilterArgs } from '../../types';
 
 const HOLIDAYS = [
   '2018-01-01',
