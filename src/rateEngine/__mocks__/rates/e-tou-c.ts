@@ -36,11 +36,9 @@ const etouc: RateInterface = {
       rateComponents: [
         {
           charge: summerPeakCharge,
-          ...{
-            months: [5, 6, 7, 8],
-            daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
-            hourStarts: [16, 17, 18, 19, 20],
-          } as LoadProfileFilterArgs,
+          months: [5, 6, 7, 8],
+          daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
+          hourStarts: [16, 17, 18, 19, 20],
           name: 'summer peak',
         },
         {
@@ -72,10 +70,8 @@ const etouc: RateInterface = {
       rateComponents: [
         {
           charge: -0.08633,
-          ...{
-            min: times(12, (_) => 0),
-            max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
-          } as BlockedTiersArgs,
+          min: times(12, (_) => 0),
+          max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
           name: 'Discount',
         },
         {

@@ -9,13 +9,13 @@ const baseFilter: LoadProfileFilterArgs = {
   exceptForDays: [],
 };
 
-const expandedDate = {
+const expandedDate: ExpandedDate = {
   month: 3,
   date: '2019-03-15',
   hourStart: 3,
   dayOfWeek: 5,
   hourOfYear: 0,
-} as ExpandedDate;
+};
 
 describe('LoadProfileFilter', () => {
   describe('matches', () => {

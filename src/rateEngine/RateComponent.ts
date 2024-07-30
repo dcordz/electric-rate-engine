@@ -3,7 +3,6 @@ import mean from 'lodash/mean';
 import sum from 'lodash/sum';
 import BillingDeterminants from './billingDeterminants/_BillingDeterminants';
 import { multiplyDecimals } from './utils/decimals';
-import BillingDeterminantFactoryInterface from './BillingDeterminantFactory';
 import type {
   RateComponentArgs,
   RateComponentInterface,

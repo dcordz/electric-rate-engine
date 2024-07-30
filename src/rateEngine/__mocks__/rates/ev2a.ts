@@ -36,10 +36,8 @@ const ev2a: RateInterface = {
       rateComponents: [
         {
           charge: summerPeakCharge,
-          ...{
-            months: [5, 6, 7, 8],
-            hourStarts: [16, 17, 18, 19, 20],
-          } as LoadProfileFilterArgs,
+          months: [5, 6, 7, 8],
+          hourStarts: [16, 17, 18, 19, 20],
           name: 'summer peak',
         },
         {
