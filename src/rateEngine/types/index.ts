@@ -221,7 +221,7 @@ export interface ExpandedDate {
 export interface ValidatorError {
   english: string,
   type: string,
-  data: {}, // any non-null value
+  data: Record<string, unknown>,
 }
 
 export interface LabeledError {

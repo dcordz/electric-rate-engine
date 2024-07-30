@@ -7,7 +7,7 @@ import type { MinMaxPair, BlockedTiersArgs } from '../types';
 
 class BlockedTiersValidator extends Validator {
   private _args: Array<BlockedTiersArgs>;
-  private _localErrors: Array<{english: string, data: {}, type: string}> = [];
+  private _localErrors: Array<{english: string, data: Record<string, unknown>, type: string}> = [];
   private _year: number;
 
   constructor (args: Array<BlockedTiersArgs>, loadProfile: LoadProfile) {
