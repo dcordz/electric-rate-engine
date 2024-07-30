@@ -13,14 +13,16 @@ import type {
   RateElementFilterArgs,
   ValidatorError as Error,
   RateComponentInterface,
+  SurchargeAsPercentArgs,
 } from './types';
 
 class RateComponentsFactory {
   static make(
-    {rateElementType, rateComponents, name, priceProfile: priceProfileData}: RateElementInterface,
-    loadProfile,
-    otherRateElements,
-  ): Array<RateComponentInterface> {
+    rateElement: RateElementInterface,
+    loadProfile: LoadProfile,
+    otherRateElements: RateElementInterface[],
+  ) {
+    const {rateElementType, rateComponents, name} = rateElement;
     switch (rateElementType) {
       case 'SurchargeAsPercent':
         return rateComponents.map(({ name: rateComponentName, charge, ...filterArgs }: RateComponentInterface) => {
@@ -36,11 +38,11 @@ class RateComponentsFactory {
             }))
         }).flat();
       case 'HourlyEnergy':
-        const priceProfile = new PriceProfile(priceProfileData, {year: loadProfile.year})
+        const priceProfile = new PriceProfile(rateElement.priceProfile, {year: loadProfile.year})
         return priceProfile.expanded().map(({price, hourOfYear}) => ({
           name: `${name} - Hour ${hourOfYear}`,
           charge: price,
-          hourOfYear: hourOfYear,
+          hourOfYear,
           rateElementType: 'HourlyEnergy',
         }))
       default:
