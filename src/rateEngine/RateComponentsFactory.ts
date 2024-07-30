@@ -15,10 +15,7 @@ import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
 import LoadProfile from './LoadProfile';
 import PriceProfile from './PriceProfile';
 import RateElement from './RateElement';
-import type {
-  RateElementInterface,
-  RateComponentInterface,
-} from './types';
+import type { RateElementInterface } from './types';
 
 export default class RateComponentsFactory {
   static make(
@@ -29,7 +26,7 @@ export default class RateComponentsFactory {
     const { rateElementType, rateComponents, name } = rateElement;
     switch (rateElementType) {
       case 'SurchargeAsPercent':
-        return rateComponents.map(({ name: rateComponentName, charge, ...filterArgs }: RateComponentInterface) => {
+        return rateComponents.map(({ name: rateComponentName, charge, ...filterArgs }) => {
           return otherRateElements
             .filter((element: RateElementInterface) => (
               new RateElement(element, loadProfile, []).matches(filterArgs)
