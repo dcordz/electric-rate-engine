@@ -49,6 +49,10 @@ class RateComponent {
   annualCost(): number {
     return sum(this.costs());
   }
+
+  rateElementClassification() {
+    return this._billingDeterminants.rateElementClassification;
+  }
 }
 
 export default RateComponent;

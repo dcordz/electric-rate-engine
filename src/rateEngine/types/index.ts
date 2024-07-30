@@ -196,14 +196,6 @@ export interface LoadProfileOptions {
   year: number;
 }
 
-export type BillingDeterminantFactoryInterface =
-  | BlockedTiersArgs
-  | DemandPerDayArgs
-  | DemandTimeOfUseArgs
-  | EnergyTimeOfUseArgs
-  | HourlyEnergyArgs
-  | SurchargeAsPercentArgs;
-
 export interface BlockedTiersArgs extends LoadProfileFilterArgs {
   min: Array<number>;
   max: Array<number>;

@@ -8,7 +8,7 @@ import { RateComponentInterface, EnergyTimeOfUseArgs, BlockedTiersArgs, RateElem
 class ValidatorFactory {
   static make(
     type: RateElementType,
-    args,
+    args: RateComponentInterface[],
     loadProfile: LoadProfile
   ): Validator {
     switch(type) {
