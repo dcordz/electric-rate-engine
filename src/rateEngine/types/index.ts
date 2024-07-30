@@ -36,6 +36,16 @@ import { Params as GoalSeekParams } from 'goal-seek';
  *   ]                                                                   :
  * }                                                                     :
  */
+
+export interface RateCalculatorInterface {
+  name: string;
+  utilityName?: string;
+  applicability?: string;
+  minimumBillAmount?: number;
+  rateElements: Array<RateElementInterface>;
+  loadProfile: LoadProfile;
+}
+
 export interface RateInterface {
   name: string;
   title: string;
@@ -51,13 +61,7 @@ interface BaseRateElementInterface {
 type BaseRateComponentInterface = {
   charge: number | Array<number>;
   name: string;
-} & RateElementFilterArgs;
-
-export interface RateElementFilterArgs {
-  ids?: Array<string>;
-  classifications?: Array<RateElementClassification>;
-  billingCategories?: Array<BillingCategory>;
-}
+};
 
 export type RateElementInterface =
     | AnnualDemandRateElementInterface
@@ -121,8 +125,10 @@ export interface MonthlyEnergyRateElementInterface extends BaseRateElementInterf
 export interface SurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'SurchargeAsPercent';
   // Note that this does NOT union with SurchargeAsPercentArgs.
-  // This rate element is special-cased by `RateElement`'s `RateComponentsFactory`.
-  rateComponents: Array<BaseRateComponentInterface>;
+  // This rate element is special-cased by `RateComponentsFactory`.
+  // But it DOES union with RateElementFilterArgs, because
+  // `RateComponentsFactory` uses that to do its special-casing
+  rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs>;
 };
 
 export interface HourlyEnergyRateElementInterface extends BaseRateElementInterface {
@@ -154,15 +160,6 @@ export interface RateComponentArgs {
   charge: number | Array<number>;
   name: string;
   billingDeterminants: BillingDeterminants;
-}
-
-export interface RateCalculatorInterface {
-  name: string;
-  utilityName?: string;
-  applicability?: string;
-  minimumBillAmount?: number;
-  rateElements: Array<RateElementInterface>;
-  loadProfile: LoadProfile;
 }
 
 export interface DetailedPriceProfileHour extends ExpandedDate {
@@ -235,4 +232,10 @@ export interface LabeledError {
 export interface MinMaxPair {
   min: number;
   max: number;
+}
+
+export interface RateElementFilterArgs {
+  ids?: Array<string>;
+  classifications?: Array<RateElementClassification>;
+  billingCategories?: Array<BillingCategory>;
 }
