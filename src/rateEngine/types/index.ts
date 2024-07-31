@@ -194,8 +194,8 @@ export interface LoadProfileOptions {
 }
 
 export interface BlockedTiersArgs extends LoadProfileFilterArgs {
-  min: Array<number>;
-  max: Array<number>;
+  min: Array<number | 'Infinity'>;
+  max: Array<number | 'Infinity'>;
 }
 
 export type DemandPerDayArgs = LoadProfileFilterArgs;
