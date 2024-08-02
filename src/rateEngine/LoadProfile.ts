@@ -150,7 +150,7 @@ class LoadProfile {
     return this.sum() / (this.count() * this.max());
   }
 
-  scale(options: LoadProfileScalerOptions): LoadProfileScaler {
+  scale(options?: LoadProfileScalerOptions): LoadProfileScaler {
     return new LoadProfileScaler(this, options);
   }
 
