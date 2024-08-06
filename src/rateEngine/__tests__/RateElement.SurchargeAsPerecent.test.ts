@@ -1,6 +1,7 @@
-import RateElement, { BillingCategory, RateElementClassification } from '../RateElement';
+import RateElement from '../RateElement';
 import LoadProfile from '../LoadProfile';
-import { RateElementType } from '../BillingDeterminantFactory';
+import type { RateElementType, RateElementInterface } from '../types';
+import { BillingCategory, RateElementClassification } from '../constants';
 
 const getLoadProfileOfOnes = () => Array(8760).fill(1);
 
@@ -8,9 +9,9 @@ const FIXED_CHARGE = 10;
 const SURCHARGE_AS_DECIMAL = 0.10;
 const MONTHS_PER_YEAR = 12;
 
-const FIXED_RATE_ELEMENT_DATA = {
+const FIXED_RATE_ELEMENT_DATA: RateElementInterface = {
   id: 'fixed-charge',
-  rateElementType: 'FixedPerMonth' as RateElementType,
+  rateElementType: 'FixedPerMonth',
   name: 'A fixed monthly charge',
   rateComponents: [
     {
@@ -20,9 +21,9 @@ const FIXED_RATE_ELEMENT_DATA = {
   ],
 };
 
-const ENERGY_CHARGE_DATA = {
+const ENERGY_CHARGE_DATA: RateElementInterface = {
   id: 'energy-charge',
-  rateElementType: 'MonthlyEnergy' as RateElementType,
+  rateElementType: 'MonthlyEnergy',
   name: 'An energy charge',
   rateComponents: [
     {
@@ -163,7 +164,7 @@ describe('RateElement', () => {
       it('returns true with a match', () => {
         const rateElement = new RateElement(
           {
-            billingCategory: 'supply' as BillingCategory,
+            billingCategory: BillingCategory.SUPPLY,
             name: 'rate element',
             rateElementType: 'FixedPerMonth',
             rateComponents: [],
@@ -171,13 +172,13 @@ describe('RateElement', () => {
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
         );
 
-        expect(rateElement.matches({billingCategories: ['supply' as BillingCategory]})).toBe(true);
+        expect(rateElement.matches({billingCategories: [BillingCategory.SUPPLY]})).toBe(true);
       });
 
       it('returns false when it does not match', () => {
         const rateElement = new RateElement(
           {
-            billingCategory: 'supply' as BillingCategory,
+            billingCategory: BillingCategory.SUPPLY,
             name: 'rate element',
             rateElementType: 'FixedPerMonth',
             rateComponents: [],
@@ -185,7 +186,7 @@ describe('RateElement', () => {
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
         );
 
-        expect(rateElement.matches({billingCategories: ['delivery' as BillingCategory]})).toBe(false);
+        expect(rateElement.matches({billingCategories: [BillingCategory.DELIVERY]})).toBe(false);
       });
     });
 

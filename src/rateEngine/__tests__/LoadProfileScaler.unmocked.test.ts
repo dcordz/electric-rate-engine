@@ -2,13 +2,13 @@ import LoadProfileScaler from '../LoadProfileScaler';
 import times from 'lodash/times';
 import sum from 'lodash/sum';
 import LoadProfile from '../LoadProfile';
-//import goalSeek from 'goal-seek';
 import e1 from '../__mocks__/rates/e-1';
-import RateCalculator, { RateCalculatorInterface } from '../RateCalculator';
+import RateCalculator from '../RateCalculator';
+import type { RateCalculatorInterface, RateInterface } from '../types';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
-const dummyRate = {
+const dummyRate: RateInterface = {
   name: 'some rate',
   title: 'that will not converge',
   rateElements: [
@@ -75,7 +75,7 @@ describe('LoadProfileScaler', () => {
         const rateCalculator = new RateCalculator({
           ...dummyRate,
           loadProfile: scaledLoadProfile,
-        } as RateCalculatorInterface);
+        });
         expect(rateCalculator.annualCost() / 12).toBeCloseTo(billAmount);
       });
     });

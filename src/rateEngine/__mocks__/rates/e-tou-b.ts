@@ -1,5 +1,4 @@
-import RateInterface from '../../RateInterface';
-import { LoadProfileFilterArgs } from '../../LoadProfileFilter';
+import type { RateInterface, LoadProfileFilterArgs } from '../../types';
 
 const HOLIDAYS = [
   '2018-01-01',
@@ -47,12 +46,10 @@ const etoub: RateInterface = {
       rateComponents: [
         {
           charge: summerPeakCharge,
-          ...{
-            months: [5, 6, 7, 8],
-            daysOfWeek: [1, 2, 3, 4, 5], // M-F
-            hourStarts: [16, 17, 18, 19, 20],
-            exceptForDays: HOLIDAYS,
-          } as LoadProfileFilterArgs,
+          months: [5, 6, 7, 8],
+          daysOfWeek: [1, 2, 3, 4, 5], // M-F
+          hourStarts: [16, 17, 18, 19, 20],
+          exceptForDays: HOLIDAYS,
           name: 'summer peak',
         },
         {

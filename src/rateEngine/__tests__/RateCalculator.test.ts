@@ -1,18 +1,19 @@
 import LoadProfile from '../LoadProfile';
 import RateCalculator from '../RateCalculator';
-import { RateElementType } from '../BillingDeterminantFactory';
-import { BillingCategory } from '../RateElement';
+import type { RateElementType, RateInterface } from '../types';
+import { BillingCategory } from '../constants';
 
 describe('RateCalculator', () => {
   describe('annualCost', () => {
     it('calculates annual the annual cost', () => {
-      const rate = {
+      const rate: RateInterface = {
         name: 'a rate with multiple elements',
+        title: 'anything',
         rateElements: [
           {
             name: 'One fixed charge',
-            billingCategory: 'supply' as BillingCategory,
-            rateElementType: 'FixedPerMonth' as RateElementType,
+            billingCategory: BillingCategory.SUPPLY,
+            rateElementType: 'FixedPerMonth',
             rateComponents: [
               {
                 charge: 10,
@@ -22,8 +23,8 @@ describe('RateCalculator', () => {
           },
           {
             name: 'Second fixed charge',
-            billingCategory: 'delivery' as BillingCategory,
-            rateElementType: 'FixedPerMonth' as RateElementType,
+            billingCategory: BillingCategory.DELIVERY,
+            rateElementType: 'FixedPerMonth',
             rateComponents: [
               {
                 charge: 20,

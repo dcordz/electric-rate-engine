@@ -1,7 +1,5 @@
-import RateInterface from '../../RateInterface';
 import { times } from 'lodash';
-import { LoadProfileFilterArgs } from '../../LoadProfileFilter';
-import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
+import type { RateInterface, BlockedTiersArgs, LoadProfileFilterArgs } from '../../types';
 
 const HOLIDAYS = [
   '2018-01-01',
@@ -49,12 +47,10 @@ const etoua: RateInterface = {
       rateComponents: [
         {
           charge: summerPeakCharge,
-          ...{
-            months: [5, 6, 7, 8],
-            daysOfWeek: [1, 2, 3, 4, 5], // M-F
-            hourStarts: [15, 16, 17, 18, 19],
-            exceptForDays: HOLIDAYS,
-          } as LoadProfileFilterArgs,
+          months: [5, 6, 7, 8],
+          daysOfWeek: [1, 2, 3, 4, 5], // M-F
+          hourStarts: [15, 16, 17, 18, 19],
+          exceptForDays: HOLIDAYS,
           name: 'summer peak',
         },
         {
@@ -117,10 +113,8 @@ const etoua: RateInterface = {
       rateComponents: [
         {
           charge: -0.08633,
-          ...{
-            min: times(12, (_) => 0),
-            max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
-          } as BlockedTiersArgs,
+          min: times(12, (_) => 0),
+          max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
           name: 'Discount',
         },
         {

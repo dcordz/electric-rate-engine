@@ -1,7 +1,8 @@
 import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
-import EnergyTimeOfUse, { EnergyTimeOfUseArgs } from '../EnergyTimeOfUse';
+import EnergyTimeOfUse from '../EnergyTimeOfUse';
 import data from './EnergyTimeOfUseData';
+import type { EnergyTimeOfUseArgs } from '../../types';
 
 interface TestData {
   name: string;

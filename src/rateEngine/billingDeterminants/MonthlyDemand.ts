@@ -1,6 +1,6 @@
-import BillingDeterminants, { BillingDeterminantsUnits } from './_BillingDeterminants';
+import BillingDeterminants from './_BillingDeterminants';
 import LoadProfile from '../LoadProfile';
-import { RateElementClassification } from '../RateElement';
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
 
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;

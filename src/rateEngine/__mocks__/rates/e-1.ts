@@ -1,7 +1,5 @@
 import { times } from 'lodash';
-import RateInterface from '../../RateInterface';
-import { BlockedTiersArgs } from '../../billingDeterminants/BlockedTiersInDays';
-import { RateComponentInterface } from '../../RateComponent';
+import type { RateInterface, BlockedTiersArgs } from '../../types';
 
 const SUMMMER_MONTHS = [4, 5, 6, 7, 8, 9];
 const cutoff_1 = times(12, (i) => (SUMMMER_MONTHS.includes(i) ? 13 : 12.5));
@@ -37,29 +35,23 @@ const e1: RateInterface = {
       rateComponents: [
         {
           charge: 0.24373,
-          ...{
-            min: times(12, (_) => 0),
-            max: cutoff_1,
-          } as BlockedTiersArgs,
+          min: times(12, (_) => 0),
+          max: cutoff_1,
           name: 'Tier 1',
         },
         {
           charge: 0.30672,
-          ...{
-            min: cutoff_1,
-            max: cutoff_2,
-          } as BlockedTiersArgs,
+          min: cutoff_1,
+          max: cutoff_2,
           name: 'Tier 2',
         },
         {
           charge: 0.53738,
-          ...{
-            min: cutoff_2,
-            max: times(12, (_) => Infinity)
-          } as BlockedTiersArgs,
+          min: cutoff_2,
+          max: times(12, (_) => Infinity),
           name: 'Tier 3',
         },
-      ] as Array<RateComponentInterface>,
+      ],
     },
   ],
 };

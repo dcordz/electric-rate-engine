@@ -1,12 +1,5 @@
-import LoadProfileFilter, { LoadProfileFilterArgs } from '../LoadProfileFilter';
-import { ExpandedDate } from '../utils/expandedDates';
-// this.months
-// this.daysOfWeek
-// this.hourStarts
-// this.onlyOnDays
-// this.exceptForDays
-
-// empty values too!
+import LoadProfileFilter from '../LoadProfileFilter';
+import { ExpandedDate, LoadProfileFilterArgs } from '../types';
 
 const baseFilter: LoadProfileFilterArgs = {
   months: [],
@@ -16,13 +9,13 @@ const baseFilter: LoadProfileFilterArgs = {
   exceptForDays: [],
 };
 
-const expandedDate = {
+const expandedDate: ExpandedDate = {
   month: 3,
   date: '2019-03-15',
   hourStart: 3,
   dayOfWeek: 5,
   hourOfYear: 0,
-} as ExpandedDate;
+};
 
 describe('LoadProfileFilter', () => {
   describe('matches', () => {

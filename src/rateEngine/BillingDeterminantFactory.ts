@@ -1,40 +1,28 @@
 import BillingDeterminant from './billingDeterminants/_BillingDeterminants';
 import FixedPerDay from './billingDeterminants/FixedPerDay';
 import FixedPerMonth from './billingDeterminants/FixedPerMonth';
-import { default as BlockedTiersInDays, BlockedTiersArgs } from './billingDeterminants/BlockedTiersInDays';
+import BlockedTiersInDays from './billingDeterminants/BlockedTiersInDays';
 import BlockedTiersInMonths from './billingDeterminants/BlockedTiersInMonths';
-import { default as EnergyTimeOfUse, EnergyTimeOfUseArgs } from './billingDeterminants/EnergyTimeOfUse';
+import EnergyTimeOfUse from './billingDeterminants/EnergyTimeOfUse';
 import LoadProfile from './LoadProfile';
 import MonthlyDemand from './billingDeterminants/MonthlyDemand';
 import AnnualDemand from './billingDeterminants/AnnualDemand';
 import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
-import SurchargeAsPercent, { SurchargeAsPercentArgs } from './billingDeterminants/SurchargeAsPercent';
-import HourlyEnergy, { HourlyEnergyArgs } from './billingDeterminants/HourlyEnergy';
+import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
+import HourlyEnergy from './billingDeterminants/HourlyEnergy';
 import DemandTiersInMonths from './billingDeterminants/DemandTiersInMonths';
-import DemandTimeOfUse, { DemandTimeOfUseArgs } from './billingDeterminants/DemandTimeOfUse';
-import DemandPerDay, { DemandPerDayArgs } from './billingDeterminants/DemandPerDay';
-
-export type RateElementType =
-  | 'EnergyTimeOfUse'
-  | 'BlockedTiersInDays'
-  | 'BlockedTiersInMonths'
-  | 'FixedPerDay'
-  | 'FixedPerMonth'
-  | 'MonthlyEnergy'
-  | 'MonthlyDemand'
-  | 'AnnualDemand'
-  | 'SurchargeAsPercent'
-  | 'HourlyEnergy'
-  | 'DemandTimeOfUse'
-  | 'DemandPerDay'
-  | 'DemandTiersInMonths';
-
-export type BillingDeterminantFactoryInterface =
-  | EnergyTimeOfUseArgs
-  | BlockedTiersArgs
-  | SurchargeAsPercentArgs
-  | HourlyEnergyArgs
-  | {};
+import DemandTimeOfUse from './billingDeterminants/DemandTimeOfUse';
+import DemandPerDay from './billingDeterminants/DemandPerDay';
+import type {
+  RateElementType,
+  BillingDeterminantFactoryInterface,
+  BlockedTiersArgs,
+  EnergyTimeOfUseArgs,
+  SurchargeAsPercentArgs,
+  HourlyEnergyArgs,
+  DemandTimeOfUseArgs,
+  DemandPerDayArgs,
+} from './types';
 
 class BillingDeterminantFactory {
   static make(
