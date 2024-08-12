@@ -124,20 +124,13 @@ export interface MonthlyEnergyRateElementInterface extends BaseRateElementInterf
 
 export interface SurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'SurchargeAsPercent';
-  // Note that this does NOT union with SurchargeAsPercentArgs.
-  // This rate element is special-cased by `RateComponentsFactory`.
-  // But it DOES union with RateElementFilterArgs, because
-  // `RateComponentsFactory` uses that to do its special-casing
-  rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs>;
+  rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs & SurchargeAsPercentArgs>;
 };
 
 export interface HourlyEnergyRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'HourlyEnergy';
   priceProfile: Array<number> | PriceProfile;
-  // This type never uses `rateComponents`, but it's just
-  // x% easier to define it anyway. If you're brave, remove
-  // it and start fixing errors.
-  rateComponents?: [],
+  rateComponents?: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
 };
 
 export interface DemandTiersInMonthsRateElementInterface extends BaseRateElementInterface {
@@ -207,7 +200,7 @@ export interface HourlyEnergyArgs {
 }
 
 export interface SurchargeAsPercentArgs {
-  rateElement: RateElement;
+  rateElement?: RateElement;
 }
 
 export interface ExpandedDate {
