@@ -13,6 +13,10 @@ class SurchargeAsPercent extends BillingDeterminants {
   constructor({rateElement}: SurchargeAsPercentArgs) {
     super();
 
+    if (!rateElement) {
+      throw new Error("Cannot calculate surcharge without a rate element.")
+    }
+
     this._rateElement = rateElement;
   }
 

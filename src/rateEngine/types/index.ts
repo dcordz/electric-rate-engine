@@ -130,7 +130,7 @@ export interface SurchargeAsPercentRateElementInterface extends BaseRateElementI
 export interface HourlyEnergyRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'HourlyEnergy';
   priceProfile: Array<number> | PriceProfile;
-  rateComponents?: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
+  rateComponents: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
 };
 
 export interface DemandTiersInMonthsRateElementInterface extends BaseRateElementInterface {
@@ -200,7 +200,7 @@ export interface HourlyEnergyArgs {
 }
 
 export interface SurchargeAsPercentArgs {
-  rateElement?: RateElement;
+  rateElement: RateElement;
 }
 
 export interface ExpandedDate {

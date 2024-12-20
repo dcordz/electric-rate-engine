@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "src/rateEngine/**/__mocks__", "src/rateEngine/**/__tests__", "src/types"]
+}

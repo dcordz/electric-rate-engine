@@ -6,16 +6,16 @@ import type {
   DetailedLoadProfileHour,
   LoadProfileFilterArgs,
   LoadProfileOptions,
-  LoadProfileScalerOptions
+  LoadProfileScalerOptions,
 } from './types';
 import { addDecimals } from './utils/decimals';
 import expandedDates from './utils/expandedDates';
 
 const isLoadProfileObject = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is LoadProfile => {
-  return typeof p['expanded'] === 'function';
+  return 'expanded' in p && typeof p['expanded'] === 'function';
 };
 
-const isNumberArray = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is Array<number> => {
+const isNumberArray = (p: Array<number> | Array<DetailedLoadProfileHour>): p is Array<number> => {
   return typeof p[0] === 'number';
 };
 
@@ -49,7 +49,7 @@ class LoadProfile {
 
     const dates = expandedDates(this._year);
 
-    if (dates.length !== this._loadProfile.length) {
+    if (dates.length !== this._loadProfile?.length) {
       throw new Error("Load profile length didn't match annual hours length. Maybe a leap year is involved?");
     }
 
@@ -107,7 +107,7 @@ class LoadProfile {
     const months = times(12, () => []);
 
     this.expanded().forEach(({ load, month }) => {
-      months[month].push(load);
+      (months[month] as Array<number>).push(load);
     });
 
     return months;
@@ -138,7 +138,7 @@ class LoadProfile {
       return 0;
     }
 
-    return maxBy(this.expanded(), 'load').load;
+    return maxBy(this.expanded(), 'load')?.load ?? 0;
   }
 
   loadFactor(): number {
@@ -155,7 +155,7 @@ class LoadProfile {
 
   aggregate(otherLoadProfile: LoadProfile): LoadProfile {
     return new LoadProfile(
-      this._loadProfile.map((loadHour, idx) => {
+      (this._loadProfile ?? []).map((loadHour, idx) => {
         return addDecimals(loadHour, otherLoadProfile.expanded()[idx].load);
       }),
       { year: this._year },

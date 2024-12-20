@@ -1,19 +1,15 @@
 import maxBy from 'lodash/maxBy';
 import times from 'lodash/times';
 import LoadProfileFilter from './LoadProfileFilter';
-import type {
-  DetailedPriceProfileHour,
-  LoadProfileFilterArgs,
-  PriceProfileOptions
-} from './types';
+import type { DetailedPriceProfileHour, LoadProfileFilterArgs, PriceProfileOptions } from './types';
 import { addDecimals } from './utils/decimals';
 import expandedDates from './utils/expandedDates';
 
 const isPriceProfileObject = (p: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile): p is PriceProfile => {
-  return typeof p['expanded'] === 'function';
+  return 'expanded' in p && typeof p['expanded'] === 'function';
 };
 
-const isNumberArray = (p: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile): p is Array<number> => {
+const isNumberArray = (p: Array<number> | Array<DetailedPriceProfileHour>): p is Array<number> => {
   return typeof p[0] === 'number';
 };
 
@@ -29,7 +25,6 @@ class PriceProfile {
     priceProfileOrExpandedOrExisting: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile,
     options: PriceProfileOptions,
   ) {
-
     if (isPriceProfileObject(priceProfileOrExpandedOrExisting)) {
       this._expanded = priceProfileOrExpandedOrExisting.expanded();
     } else if (isNumberArray(priceProfileOrExpandedOrExisting)) {
@@ -48,7 +43,7 @@ class PriceProfile {
 
     const dates = expandedDates(this._year);
 
-    if (dates.length !== this._priceProfile.length) {
+    if (dates.length !== this._priceProfile?.length) {
       throw new Error("Price profile length didn't match annual hours length. Maybe a leap year is involved?");
     }
 
@@ -107,7 +102,7 @@ class PriceProfile {
       return 0;
     }
 
-    return maxBy(this.expanded(), 'price').price;
+    return maxBy(this.expanded(), 'price')?.price ?? 0;
   }
 }
 

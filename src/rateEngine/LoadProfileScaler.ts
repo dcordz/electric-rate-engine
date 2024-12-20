@@ -10,7 +10,7 @@ class LoadProfileScaler {
   loadProfile: LoadProfile;
   debug: boolean;
 
-  constructor(loadProfile, { debug }: LoadProfileScalerOptions = { debug: false }) {
+  constructor(loadProfile: LoadProfile, { debug }: LoadProfileScalerOptions = { debug: false }) {
     this.loadProfile = loadProfile;
     this.debug = debug;
   }

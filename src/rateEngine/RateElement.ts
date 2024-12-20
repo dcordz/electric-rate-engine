@@ -5,12 +5,7 @@ import ValidatorFactory from './ValidatorFactory';
 import LoadProfile from './LoadProfile';
 import RateComponentsFactory from './RateComponentsFactory';
 import { BillingCategory, RateElementClassification } from './constants';
-import type {
-  RateElementType,
-  RateElementInterface,
-  RateElementFilterArgs,
-  ValidatorError,
-} from './types';
+import type { RateElementType, RateElementInterface, RateElementFilterArgs, ValidatorError } from './types';
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;
@@ -21,7 +16,11 @@ class RateElement {
   billingCategory?: BillingCategory;
   errors: Array<ValidatorError> = [];
 
-  constructor(rateElementArgs: RateElementInterface, loadProfile: LoadProfile, otherRateElements: Array<RateElementInterface> = []) {
+  constructor(
+    rateElementArgs: RateElementInterface,
+    loadProfile: LoadProfile,
+    otherRateElements: Array<RateElementInterface> = [],
+  ) {
     const { id, rateElementType, name, billingCategory } = rateElementArgs;
     this.id = id;
     this.name = name;
@@ -29,20 +28,20 @@ class RateElement {
     this.billingCategory = billingCategory;
 
     if (RateCalculator.shouldValidate) {
-      const validator = ValidatorFactory.make(rateElementType, rateElementArgs['rateComponents'], loadProfile).validate();
-      
+      const validator = ValidatorFactory.make(
+        rateElementType,
+        rateElementArgs['rateComponents'] ?? [],
+        loadProfile,
+      ).validate();
+
       if (RateCalculator.shouldLogValidationErrors) {
         validator.reportErrors();
       }
-      
+
       this.errors = validator.allErrors();
     }
 
-    this._rateComponents = RateComponentsFactory.make(
-      rateElementArgs,
-      loadProfile,
-      otherRateElements
-    );
+    this._rateComponents = RateComponentsFactory.make(rateElementArgs, loadProfile, otherRateElements);
 
     // Should we be assuming that all components
     // have the same classification?
@@ -70,9 +69,11 @@ class RateElement {
   }
 
   matches({ billingCategories, classifications, ids }: RateElementFilterArgs) {
-    return (billingCategories ? billingCategories.includes(this.billingCategory) : true) &&
-      (classifications ? classifications.includes(this.classification) : true) &&
-      (ids ? ids.includes(this.id) : true);
+    return (
+      (this.billingCategory && billingCategories ? billingCategories.includes(this.billingCategory) : true) &&
+      (this.classification && classifications ? classifications.includes(this.classification) : true) &&
+      (this.id && ids ? ids.includes(this.id) : true)
+    );
   }
 }
 
