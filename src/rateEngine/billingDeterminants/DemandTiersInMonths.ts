@@ -1,11 +1,9 @@
-import groupBy from 'lodash/groupBy';
-import sumBy from 'lodash/sumBy';
 import times from 'lodash/times';
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
 import LoadProfile from '../LoadProfile';
-import BillingDeterminants from './_BillingDeterminants';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
 import { BlockedTiersArgs, LoadProfileFilterArgs } from '../types';
 import convertInfinities from '../utils/convertInfinities';
+import BillingDeterminants from './_BillingDeterminants';
 
 class DemandTiersInMonths extends BillingDeterminants {
   private _loadProfile: LoadProfile;

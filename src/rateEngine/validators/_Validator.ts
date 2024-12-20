@@ -15,7 +15,7 @@ abstract class Validator {
     return this._errors.map(({ errors }) => errors).flat();
   }
 
-  hasErrors(): Boolean {
+  hasErrors(): boolean {
     return this._errors.length > 0;
   }
 

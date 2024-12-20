@@ -22,7 +22,9 @@ class BlockedTiersValidator extends Validator {
     this.validateBasics();
     this.validateExpandedDates();
 
-    this._localErrors.length > 0 && this.addError('Blocked Tiers Error', this._localErrors);
+    if (this._localErrors.length > 0) {
+      this.addError('Blocked Tiers Error', this._localErrors)
+    }
 
     return this;
   }
@@ -68,13 +70,13 @@ class BlockedTiersValidator extends Validator {
     });
   }
 
-  protected getSortedPairs(minsAndMaxes: Array<{ min: number[]; max: number[]; }>): Array<Array<MinMaxPair>> {
+  protected getSortedPairs(minsAndMaxes: Array<{ min: Array<number>; max: Array<number>; }>): Array<Array<MinMaxPair>> {
     return times(12, i => {
       return minsAndMaxes.map(({min, max}) => ({min: min[i], max: max[i]})).sort((a, b) => a.min - b.min);
     });
   }
 
-  protected validateOverlap(minsAndMaxes: Array<{ min: number[]; max: number[]; }>) {
+  protected validateOverlap(minsAndMaxes: Array<{ min: Array<number>; max: Array<number>; }>) {
     if (this._args.length < 2) return;
 
     const monthPairs = this.getSortedPairs(minsAndMaxes);
@@ -92,7 +94,7 @@ class BlockedTiersValidator extends Validator {
     });
   }
 
-  protected validateRange(minsAndMaxes: Array<{ min: number[]; max: number[]; }>) {
+  protected validateRange(minsAndMaxes: Array<{ min: Array<number>; max: Array<number>; }>) {
     const monthPairs = this.getSortedPairs(minsAndMaxes);
 
     monthPairs.forEach((pairs, month) => {

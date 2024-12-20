@@ -1,15 +1,13 @@
-import times from 'lodash/times';
 import maxBy from 'lodash/maxBy';
-import { addDecimals } from './utils/decimals';
+import times from 'lodash/times';
 import LoadProfileFilter from './LoadProfileFilter';
-import expandedDates from './utils/expandedDates';
-import LoadProfileScaler from './LoadProfileScaler';
 import type {
   DetailedPriceProfileHour,
-  PriceProfileOptions,
-  ExpandedDate,
   LoadProfileFilterArgs,
+  PriceProfileOptions
 } from './types';
+import { addDecimals } from './utils/decimals';
+import expandedDates from './utils/expandedDates';
 
 const isPriceProfileObject = (p: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile): p is PriceProfile => {
   return typeof p['expanded'] === 'function';

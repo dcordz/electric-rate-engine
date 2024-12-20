@@ -9,8 +9,9 @@
     "outDir": "./lib",
     "strict": false,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "sourceMap": true
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/rateEngine/**/__mocks__", "src/rateEngine/**/__tests__"]
 }

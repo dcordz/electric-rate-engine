@@ -1,9 +1,9 @@
-import RateElement from '../RateElement';
-import LoadProfile from '../LoadProfile';
-import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
-import PriceProfile from '../PriceProfile';
-import { RateElementClassification, BillingCategory, BillingDeterminantsUnits } from '../constants';
 import { Params as GoalSeekParams } from 'goal-seek';
+import LoadProfile from '../LoadProfile';
+import PriceProfile from '../PriceProfile';
+import RateElement from '../RateElement';
+import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
+import { BillingCategory, RateElementClassification } from '../constants';
 
 /**
  * Here's an example rate definition, with the types of the
@@ -58,7 +58,7 @@ interface BaseRateElementInterface {
   billingCategory?: BillingCategory;
 };
 
-type BaseRateComponentInterface = {
+interface BaseRateComponentInterface {
   charge: number | Array<number>;
   name: string;
 };

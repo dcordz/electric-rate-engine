@@ -10,7 +10,7 @@ class LoadProfileScaler {
   loadProfile: LoadProfile;
   debug: boolean;
 
-  constructor(loadProfile, {debug}: LoadProfileScalerOptions = {debug: false}) {
+  constructor(loadProfile, { debug }: LoadProfileScalerOptions = { debug: false }) {
     this.loadProfile = loadProfile;
     this.debug = debug;
   }
@@ -34,28 +34,24 @@ class LoadProfileScaler {
     const initialScalerGuess = magnitudeScaler;
     const fnParams = [initialScalerGuess, rate, this, magnitude];
 
-    try {
-      const finalScaler = goalSeek({
-        fn: this.scaledMonthlyCost,
-        fnParams,
-        percentTolerance: 0.1,
-        maxIterations: 1000,
-        maxStep: magnitudeScaler * 10, // a goal of 999 needs a max step of 1000
-        goal: amount,
-        independentVariableIdx: 0,
-        ...goalSeekParams,
-      });
+    const finalScaler = goalSeek({
+      fn: this.scaledMonthlyCost,
+      fnParams,
+      percentTolerance: 0.1,
+      maxIterations: 1000,
+      maxStep: magnitudeScaler * 10, // a goal of 999 needs a max step of 1000
+      goal: amount,
+      independentVariableIdx: 0,
+      ...goalSeekParams,
+    });
 
-      const scalerAsDecimal = finalScaler / magnitudeScaler;
-      return this.to(scalerAsDecimal);
-    } catch (e) {
-      throw e;
-    }
+    const scalerAsDecimal = finalScaler / magnitudeScaler;
+    return this.to(scalerAsDecimal);
   }
 
   toMonthlyKwh(monthlyKwh: Array<number>): LoadProfile {
     if (monthlyKwh.length !== 12) {
-      throw 'monthlyKwh must be an array of 12 numbers';
+      throw new Error('monthlyKwh must be an array of 12 numbers');
     }
     const scalersByMonth = this.loadProfile.sumByMonth().map((kwh, idx) => {
       return monthlyKwh[idx] / kwh;

@@ -1,16 +1,15 @@
-import times from 'lodash/times';
 import maxBy from 'lodash/maxBy';
-import { addDecimals } from './utils/decimals';
+import times from 'lodash/times';
 import LoadProfileFilter from './LoadProfileFilter';
-import expandedDates from './utils/expandedDates';
 import LoadProfileScaler from './LoadProfileScaler';
 import type {
   DetailedLoadProfileHour,
-  LoadProfileOptions,
   LoadProfileFilterArgs,
-  ExpandedDate,
-  LoadProfileScalerOptions,
+  LoadProfileOptions,
+  LoadProfileScalerOptions
 } from './types';
+import { addDecimals } from './utils/decimals';
+import expandedDates from './utils/expandedDates';
 
 const isLoadProfileObject = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is LoadProfile => {
   return typeof p['expanded'] === 'function';
@@ -85,7 +84,7 @@ class LoadProfile {
   }
 
   sumByMonth(): Array<number> {
-    let sums = times(12, () => 0);
+    const sums = times(12, () => 0);
 
     this.expanded().forEach(({ load, month }) => {
       sums[month] = addDecimals(sums[month], load);
@@ -105,7 +104,7 @@ class LoadProfile {
   }
 
   byMonth(): Array<Array<number>> {
-    let months = times(12, () => []);
+    const months = times(12, () => []);
 
     this.expanded().forEach(({ load, month }) => {
       months[month].push(load);

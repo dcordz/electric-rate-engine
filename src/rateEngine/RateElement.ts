@@ -30,7 +30,11 @@ class RateElement {
 
     if (RateCalculator.shouldValidate) {
       const validator = ValidatorFactory.make(rateElementType, rateElementArgs['rateComponents'], loadProfile).validate();
-      RateCalculator.shouldLogValidationErrors && validator.reportErrors();
+      
+      if (RateCalculator.shouldLogValidationErrors) {
+        validator.reportErrors();
+      }
+      
       this.errors = validator.allErrors();
     }
 

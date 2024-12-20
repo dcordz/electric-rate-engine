@@ -1,6 +1,5 @@
-import BlockedTiersValidator from "./BlockedTiersValidator";
 import LoadProfile from '../LoadProfile';
-import RateCalculator from '../RateCalculator';
+import BlockedTiersValidator from "./BlockedTiersValidator";
 
 describe('BlockedTiersValidator', () => {
   let loadProfile;
