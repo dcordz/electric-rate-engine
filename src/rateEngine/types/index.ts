@@ -200,7 +200,7 @@ export interface HourlyEnergyArgs {
 }
 
 export interface SurchargeAsPercentArgs {
-  rateElement: RateElement;
+  rateElement?: RateElement;
 }
 
 export interface ExpandedDate {

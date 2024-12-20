@@ -12,6 +12,7 @@ const rateElementData: RateElementInterface = {
   name: 'An hourly energy rate',
   rateElementType: 'HourlyEnergy',
   priceProfile: priceData,
+  rateComponents: []
 };
 
 const loadProfile = new LoadProfile(Array(8760).fill(2), {year: YEAR})
@@ -35,10 +36,11 @@ describe('RateElement', () => {
       const data: RateElementInterface = {
         name: 'A rate element with a PriceProfile',
         rateElementType: 'HourlyEnergy',
-        priceProfile: new PriceProfile(priceData, {year: YEAR})
+        priceProfile: new PriceProfile(priceData, {year: YEAR}),
+        rateComponents: []
       }
 
-      const element = new RateElement(data, loadProfile);
+      const rateElement = new RateElement(data, loadProfile);
 
       expect(rateElement.costs()).toEqual(
         [10,0,0,0,0,0,0,0,0,0,0,0]

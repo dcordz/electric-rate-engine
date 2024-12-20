@@ -6,7 +6,7 @@ const getLoadProfileOfOnes = () => times(8760, () => 1);
 const options = {year: 2018};
 
 describe('Load Profile', () => {
-  let loadProfile;
+  let loadProfile: LoadProfile;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(getLoadProfileOfOnes(), options);
@@ -128,7 +128,7 @@ describe('Load Profile', () => {
         const hourOfMonth = loadProfileOfOnes.expanded().find(({month, dayOfWeek}) => (
           month === monthIdx && dayOfWeek === 3
         )) 
-        return hourOfMonth.hourOfYear
+        return hourOfMonth?.hourOfYear ?? 0
       });
 
       const maxes = [13,14,15,16,17,18,19,20,21,22,23,24];

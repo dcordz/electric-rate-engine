@@ -5,7 +5,7 @@ import MonthlyDemand from '../MonthlyDemand';
 const getLoadProfileOfOneThroughTen = () => times(8760, num => num % 10 + 1);
 
 describe('MonthlyDemand', () => {
-  let loadProfile;
+  let loadProfile: LoadProfile;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(getLoadProfileOfOneThroughTen(), {year: 2019});

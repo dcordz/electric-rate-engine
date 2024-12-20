@@ -8,10 +8,9 @@ import BlockedTiersInDays from '../BlockedTiersInDays';
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
 describe('BlockedTiersInMonths', () => {
-  let loadProfile;
-  let min;
-  let max;
-  let charge;
+  let loadProfile: LoadProfile;
+  let min: Array<number>;
+  let max: Array<number>;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(getLoadProfileOfOnes(), {year: 2018});

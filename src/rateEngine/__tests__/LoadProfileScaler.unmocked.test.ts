@@ -47,7 +47,7 @@ const dummyRate: RateInterface = {
 
 describe('LoadProfileScaler', () => {
   const initialLoadProfile = new LoadProfile(getLoadProfileOfOnes(), { year: 2019 });
-  let loadProfileScaler;
+  let loadProfileScaler: LoadProfileScaler;
 
   beforeEach(() => {
     loadProfileScaler = new LoadProfileScaler(initialLoadProfile);
