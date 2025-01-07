@@ -4,13 +4,15 @@ import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
+  name: string | undefined;
   utilityName: string | undefined;
   applicability: string | undefined;
   minimumBillAmount: number | undefined;
   static shouldValidate = true;
   static shouldLogValidationErrors = true;
 
-  constructor({ name: _name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface) {
+  constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface) {
+    this.name = name;
     this.utilityName = utilityName;
     this.applicability = applicability;
     this.minimumBillAmount = minimumBillAmount;

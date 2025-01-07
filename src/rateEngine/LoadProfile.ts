@@ -49,6 +49,9 @@ class LoadProfile {
 
     const dates = expandedDates(this._year);
 
+    if (!this._loadProfile?.length) {
+      throw new Error("Cannot build LoadProfile instance. Instantiated with an empty loadProfile array.");
+    }
     if (dates.length !== this._loadProfile?.length) {
       throw new Error("Load profile length didn't match annual hours length. Maybe a leap year is involved?");
     }

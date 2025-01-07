@@ -1,6 +1,5 @@
 import LoadProfileScaler from '../LoadProfileScaler';
 import times from 'lodash/times';
-import sum from 'lodash/sum';
 import LoadProfile from '../LoadProfile';
 import e1 from '../__mocks__/rates/e-1';
 import RateCalculator from '../RateCalculator';
@@ -84,8 +83,9 @@ describe('LoadProfileScaler', () => {
   describe('optional debugging', () => {
     it('prints things to the console', () => {
       console.log = jest.fn();
-      const scaler = new LoadProfileScaler(initialLoadProfile, { debug: true });
-      const avgMonthlyBill = scaler.toAverageMonthlyBill(100, e1);
+      
+      new LoadProfileScaler(initialLoadProfile, { debug: true }).toAverageMonthlyBill(100, e1);
+
       expect(console.log).toHaveBeenCalled();
     });
   });
