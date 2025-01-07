@@ -5,8 +5,13 @@
 
     // switch to true to use with source-map-explorer
     // npm run analyze
-    "sourceMap": false
+    "sourceMap": false,
+
+    "removeComments": true,
+
+    "declaration": true,
+    "emitDeclarationOnly": false
   },
   "include": ["src"],
-  "exclude": ["node_modules", "src/rateEngine/**/__mocks__", "src/rateEngine/**/__tests__"]
+  "exclude": ["node_modules", "src/rateEngine/**/__mocks__", "src/rateEngine/**/__tests__", "**/**/*.test.ts"]
 }
