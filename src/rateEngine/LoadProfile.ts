@@ -148,7 +148,7 @@ class LoadProfile {
     );
   }
 
-  _buildFromNumberArray(loadProfileNumberArray: Array<number>): Array<DetailedLoadProfileHour> {
+  private _buildFromNumberArray(loadProfileNumberArray: Array<number>): Array<DetailedLoadProfileHour> {
     const dates = expandedDates(this._year);
 
     if (!loadProfileNumberArray.length) {
