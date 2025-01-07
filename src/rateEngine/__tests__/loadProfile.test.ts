@@ -69,11 +69,8 @@ describe('Load Profile', () => {
     });
 
     it('raises an error when the data and the expected year hours dont match up', () => {
-      const leapYearNotEnoughLoad = new LoadProfile(getLoadProfileOfOnes(), {year: 2020});
-      const leapLoadNotYear = new LoadProfile(times(8784, () => 1), {year: 2019});
-
-      expect(() => leapYearNotEnoughLoad.expanded()).toThrow('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
-      expect(() => leapLoadNotYear.expanded()).toThrow('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
+      expect(() => new LoadProfile(getLoadProfileOfOnes(), {year: 2020})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
+      expect(() => new LoadProfile(times(8784, () => 1), {year: 2019})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
     });
   });
 
@@ -157,9 +154,9 @@ describe('Load Profile', () => {
     });
 
     it('works empty', () => {
-      loadProfile = new LoadProfile([], {year: 2018});
+      const lp = new LoadProfile([], {year: 2018});
 
-      expect(loadProfile.loadFactor()).toEqual(0);
+      expect(lp.loadFactor()).toEqual(0);
     });
   });
 

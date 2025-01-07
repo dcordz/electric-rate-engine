@@ -24,6 +24,8 @@ class PriceProfile {
     priceProfileOrExpandedOrExisting: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile,
     options: PriceProfileOptions,
   ) {
+    this._year = options.year;
+    
     if (isPriceProfileObject(priceProfileOrExpandedOrExisting)) {
       this._expanded = priceProfileOrExpandedOrExisting.expanded();
     } else if (isNumberArray(priceProfileOrExpandedOrExisting)) {
@@ -31,8 +33,6 @@ class PriceProfile {
     } else {
       this._expanded = priceProfileOrExpandedOrExisting;
     }
-
-    this._year = options.year;
   }
 
   expanded(): Array<DetailedPriceProfileHour> {

@@ -42,7 +42,7 @@ class BillingDeterminantsFactory {
       case 'SurchargeAsPercent':
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new SurchargeAsPercent(args) }));
       case 'HourlyEnergy':
-        return (rateComponents ?? []).map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new HourlyEnergy(args, loadProfile) }));
+        return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new HourlyEnergy(args, loadProfile) }));
       case 'DemandTiersInMonths':
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new DemandTiersInMonths(args, loadProfile) }));
       case 'DemandTimeOfUse':
