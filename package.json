@@ -2,14 +2,9 @@
   "name": "@bellawatt/electric-rate-engine",
   "version": "2.0.1",
   "description": "Electric Rate Engine",
-<<<<<<< HEAD
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-=======
   "type": "module",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/esm/index.js",
->>>>>>> 34b4662 (rollup - packaging with rollup)
   "files": [
     "lib"
   ],
@@ -18,8 +13,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "test:watch": "jest --config jestconfig.json --watch",
-    "build": "rm -rf lib && npm run build-rollup",
-    "build-rollup": "rollup -c rollup.config.js",
+    "build": "rm -rf lib && rollup -c rollup.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "analyze": "source-map-explorer 'lib/**/*.js' --no-border-checks",
     "lint": "npx eslint -c eslint.config.js src"
