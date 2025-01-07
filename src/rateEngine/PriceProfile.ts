@@ -14,8 +14,7 @@ const isNumberArray = (p: Array<number> | Array<DetailedPriceProfileHour>): p is
 };
 
 class PriceProfile {
-  private _priceProfile?: Array<number>;
-  private _expanded?: Array<DetailedPriceProfileHour>;
+  private _expanded: Array<DetailedPriceProfileHour>;
   private _year: number;
 
   constructor(loadProfile: Array<number>, options: PriceProfileOptions);
@@ -28,7 +27,7 @@ class PriceProfile {
     if (isPriceProfileObject(priceProfileOrExpandedOrExisting)) {
       this._expanded = priceProfileOrExpandedOrExisting.expanded();
     } else if (isNumberArray(priceProfileOrExpandedOrExisting)) {
-      this._priceProfile = priceProfileOrExpandedOrExisting;
+      this._expanded = this._buildFromNumberArray(priceProfileOrExpandedOrExisting);
     } else {
       this._expanded = priceProfileOrExpandedOrExisting;
     }
@@ -37,20 +36,7 @@ class PriceProfile {
   }
 
   expanded(): Array<DetailedPriceProfileHour> {
-    if (this._expanded) {
-      return this._expanded;
-    }
-
-    const dates = expandedDates(this._year);
-
-    if (dates.length !== this._priceProfile?.length) {
-      throw new Error("Price profile length didn't match annual hours length. Maybe a leap year is involved?");
-    }
-
-    return (this._expanded = this._priceProfile.map((price, i) => ({
-      price,
-      ...dates[i],
-    })));
+    return this._expanded;
   }
 
   priceValues(): Array<number> {
@@ -103,6 +89,19 @@ class PriceProfile {
     }
 
     return maxBy(this.expanded(), 'price')?.price ?? 0;
+  }
+
+  _buildFromNumberArray(priceProfile: Array<number>) {
+    const dates = expandedDates(this._year);
+
+    if (dates.length !== priceProfile.length) {
+      throw new Error("Price profile length didn't match annual hours length. Maybe a leap year is involved?");
+    }
+
+    return (this._expanded = priceProfile.map((price, i) => ({
+      price,
+      ...dates[i],
+    })));
   }
 }
 
