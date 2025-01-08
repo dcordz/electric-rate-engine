@@ -1,6 +1,5 @@
 import LoadProfileScaler from '../LoadProfileScaler';
 import times from 'lodash/times';
-import sum from 'lodash/sum';
 import LoadProfile from '../LoadProfile';
 import goalSeek from 'goal-seek';
 import e1 from '../__mocks__/rates/e-1';
@@ -12,7 +11,7 @@ jest.mock('goal-seek');
 
 describe('LoadProfileScaler', () => {
   const initialLoadProfile = new LoadProfile(getLoadProfileOfOnes(), {year: 2019});
-  let loadProfileScaler;
+  let loadProfileScaler: LoadProfileScaler;
 
   beforeEach(() => {
     loadProfileScaler = new LoadProfileScaler(initialLoadProfile);
@@ -33,8 +32,10 @@ describe('LoadProfileScaler', () => {
         times(8760, (i) => i % 10),
         {year: 2019}
       );
+      const newLoadProfileScaler = new LoadProfileScaler(loadProfile);
 
       expect(loadProfileScaler.toTotalKwh(totalKwh).sum()).toBeCloseTo(totalKwh);
+      expect(newLoadProfileScaler.toTotalKwh(totalKwh).sum()).toBeCloseTo(totalKwh);
     });
   });
 

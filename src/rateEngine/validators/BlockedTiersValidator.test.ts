@@ -1,9 +1,8 @@
-import BlockedTiersValidator from "./BlockedTiersValidator";
 import LoadProfile from '../LoadProfile';
-import RateCalculator from '../RateCalculator';
+import BlockedTiersValidator from "./BlockedTiersValidator";
 
 describe('BlockedTiersValidator', () => {
-  let loadProfile;
+  let loadProfile: LoadProfile;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(new Array(8760).fill(1), {year: 2018})

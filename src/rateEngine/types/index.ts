@@ -1,9 +1,9 @@
-import RateElement from '../RateElement';
-import LoadProfile from '../LoadProfile';
-import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
-import PriceProfile from '../PriceProfile';
-import { RateElementClassification, BillingCategory, BillingDeterminantsUnits } from '../constants';
 import { Params as GoalSeekParams } from 'goal-seek';
+import LoadProfile from '../LoadProfile';
+import PriceProfile from '../PriceProfile';
+import RateElement from '../RateElement';
+import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
+import { BillingCategory, RateElementClassification } from '../constants';
 
 /**
  * Here's an example rate definition, with the types of the
@@ -58,12 +58,12 @@ interface BaseRateElementInterface {
   billingCategory?: BillingCategory;
 };
 
-type BaseRateComponentInterface = {
+interface BaseRateComponentInterface {
   charge: number | Array<number>;
   name: string;
 };
 
-export type RateElementInterface =
+type BaseRateElementType =
     | AnnualDemandRateElementInterface
     | BlockedTiersInDaysRateElementInterface
     | BlockedTiersInMonthsRateElementInterface
@@ -75,8 +75,15 @@ export type RateElementInterface =
     | FixedPerMonthRateElementInterface
     | HourlyEnergyRateElementInterface
     | MonthlyDemandRateElementInterface
-    | MonthlyEnergyRateElementInterface
-    | SurchargeAsPercentRateElementInterface;
+    | MonthlyEnergyRateElementInterface;
+
+export type RateElementInterface = 
+    | BaseRateElementType
+    | UnprocessedSurchargeAsPercentRateElementInterface;
+
+export type ProcessedRateElementInterface = 
+    | BaseRateElementType
+    | ProcessedSurchargeAsPercentRateElementInterface;
 
 export type RateComponentInterface = RateElementInterface['rateComponents'][number];
 
@@ -122,15 +129,22 @@ export interface MonthlyEnergyRateElementInterface extends BaseRateElementInterf
   rateComponents: Array<BaseRateComponentInterface>;
 };
 
-export interface SurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
+// The interface that the user uses to definte the rate
+export interface UnprocessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'SurchargeAsPercent';
-  rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs & SurchargeAsPercentArgs>;
-};
+  rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs>;
+}
+
+// The rate element interface that's used after processing
+export interface ProcessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
+  rateElementType: 'SurchargeAsPercent';
+  rateComponents: Array<BaseRateComponentInterface & SurchargeAsPercentArgs>;
+}
 
 export interface HourlyEnergyRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'HourlyEnergy';
   priceProfile: Array<number> | PriceProfile;
-  rateComponents?: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
+  rateComponents: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
 };
 
 export interface DemandTiersInMonthsRateElementInterface extends BaseRateElementInterface {
@@ -200,7 +214,7 @@ export interface HourlyEnergyArgs {
 }
 
 export interface SurchargeAsPercentArgs {
-  rateElement?: RateElement;
+  rateElement: RateElement;
 }
 
 export interface ExpandedDate {

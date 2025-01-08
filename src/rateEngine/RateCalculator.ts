@@ -1,17 +1,18 @@
-import RateElement from './RateElement';
-import LoadProfile from './LoadProfile';
 import sum from 'lodash/sum';
-import type { RateCalculatorInterface, RateElementInterface, RateElementFilterArgs } from './types';
+import RateElement from './RateElement';
+import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
+  name: string | undefined;
   utilityName: string | undefined;
   applicability: string | undefined;
   minimumBillAmount: number | undefined;
-  static shouldValidate: Boolean = true;
-  static shouldLogValidationErrors: Boolean = true;
+  static shouldValidate = true;
+  static shouldLogValidationErrors = true;
 
   constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface) {
+    this.name = name;
     this.utilityName = utilityName;
     this.applicability = applicability;
     this.minimumBillAmount = minimumBillAmount;

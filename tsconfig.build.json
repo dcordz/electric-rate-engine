@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES6",
+
+    // switch to true to use with source-map-explorer
+    // npm run analyze
+    "sourceMap": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "src/rateEngine/**/__mocks__", "src/rateEngine/**/__tests__"]
+}

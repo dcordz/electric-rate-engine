@@ -5,7 +5,7 @@ import MonthlyEnergy from '../MonthlyEnergy';
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
 describe('MonthlyEnergy', () => {
-  let loadProfile;
+  let loadProfile: LoadProfile;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(getLoadProfileOfOnes(), {year: 2019});

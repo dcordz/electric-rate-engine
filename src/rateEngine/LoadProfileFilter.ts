@@ -28,7 +28,7 @@ class LoadProfileFilter {
     );
   }
 
-  private sanitize(arg) {
+  private sanitize(arg?: Array<any>) {
     if (arg && arg.length === 0) {
       return undefined;
     }

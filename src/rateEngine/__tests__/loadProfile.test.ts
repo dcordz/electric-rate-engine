@@ -6,7 +6,7 @@ const getLoadProfileOfOnes = () => times(8760, () => 1);
 const options = {year: 2018};
 
 describe('Load Profile', () => {
-  let loadProfile;
+  let loadProfile: LoadProfile;
 
   beforeEach(() => {
     loadProfile = new LoadProfile(getLoadProfileOfOnes(), options);
@@ -69,11 +69,8 @@ describe('Load Profile', () => {
     });
 
     it('raises an error when the data and the expected year hours dont match up', () => {
-      const leapYearNotEnoughLoad = new LoadProfile(getLoadProfileOfOnes(), {year: 2020});
-      const leapLoadNotYear = new LoadProfile(times(8784, () => 1), {year: 2019});
-
-      expect(() => leapYearNotEnoughLoad.expanded()).toThrow('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
-      expect(() => leapLoadNotYear.expanded()).toThrow('Load profile length didn\'t match annual hours length. Maybe a leap year is involved?');
+      expect(() => new LoadProfile(getLoadProfileOfOnes(), {year: 2020})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
+      expect(() => new LoadProfile(times(8784, () => 1), {year: 2019})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
     });
   });
 
@@ -122,13 +119,16 @@ describe('Load Profile', () => {
     it('returns a monthly array of max load', () => {
       const loadProfileData = getLoadProfileOfOnes();
       const loadProfileOfOnes = new LoadProfile(getLoadProfileOfOnes(), options);
+
       // This gets the index of the first Wednesday of each month
       // so that we can set a max value for each month that is > 1.
-      const maxhours = times(12, (i) => i).map((monthIdx) => {
+      const maxhours = times(12).map((monthIdx) => {
         const hourOfMonth = loadProfileOfOnes.expanded().find(({month, dayOfWeek}) => (
           month === monthIdx && dayOfWeek === 3
         )) 
-        return hourOfMonth.hourOfYear
+
+        // .find's interface returns T | undefined so we need the ?? 0 here although it should never be 0
+        return hourOfMonth?.hourOfYear ?? 0
       });
 
       const maxes = [13,14,15,16,17,18,19,20,21,22,23,24];
@@ -156,9 +156,9 @@ describe('Load Profile', () => {
     });
 
     it('works empty', () => {
-      loadProfile = new LoadProfile([], {year: 2018});
+      const lp = new LoadProfile([], {year: 2018});
 
-      expect(loadProfile.loadFactor()).toEqual(0);
+      expect(lp.loadFactor()).toEqual(0);
     });
   });
 

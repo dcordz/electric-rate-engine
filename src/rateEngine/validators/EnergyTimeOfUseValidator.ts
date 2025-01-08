@@ -7,7 +7,7 @@ import type { RateComponentInterface, EnergyTimeOfUseArgs } from '../types';
 class EnergyTimeOfUseValidator extends Validator {
   private _args: Array<RateComponentInterface & EnergyTimeOfUseArgs>;
   private _year: number;
-  
+
   constructor(args: Array<RateComponentInterface & EnergyTimeOfUseArgs>, loadProfile: LoadProfile) {
     super();
 
@@ -18,11 +18,11 @@ class EnergyTimeOfUseValidator extends Validator {
   validate() {
     const dates = expandedDates(this._year);
     const filters = this.filters();
-    const errors: Array<{english: string, data: {}, type: string}> = [];
+    const errors: Array<{ english: string; data: Record<string, any>; type: string }> = [];
 
-    dates.forEach(date => {
-      const matches = filters.filter(({filter}) => filter.matches(date))
-    
+    dates.forEach((date) => {
+      const matches = filters.filter(({ filter }) => filter.matches(date));
+
       if (matches.length === 0) {
         errors.push({
           english: `No filter set found that matches ${JSON.stringify(date)}`,
@@ -32,19 +32,21 @@ class EnergyTimeOfUseValidator extends Validator {
       } else if (matches.length > 1) {
         errors.push({
           english: `${matches.length} filter sets found that match ${JSON.stringify(date)}`,
-          data: {...date, rateComponents: matches.map(({name}) => name)},
+          data: { ...date, rateComponents: matches.map(({ name }) => name) },
           type: 'duplicate',
         });
       }
     });
 
-    errors.length > 0 && this.addError('Energy Time Of Use Error', errors);
+    if (errors.length > 0) {
+      this.addError('Energy Time Of Use Error', errors);
+    }
 
     return this;
   }
 
   filters() {
-    return this._args.map(({name, ...filters}) => ({name, filter: new LoadProfileFilter(filters)}));
+    return this._args.map(({ name, ...filters }) => ({ name, filter: new LoadProfileFilter(filters) }));
   }
 }
 
