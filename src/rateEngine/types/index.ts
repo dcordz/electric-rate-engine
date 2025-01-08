@@ -129,13 +129,13 @@ export interface MonthlyEnergyRateElementInterface extends BaseRateElementInterf
   rateComponents: Array<BaseRateComponentInterface>;
 };
 
-// The rate element interface that's used for initial creation
+// The interface that the user uses to definte the rate
 export interface UnprocessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'SurchargeAsPercent';
   rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs>;
 }
 
-// The rate element interface that's used after processing and in the factory
+// The rate element interface that's used after processing
 export interface ProcessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'SurchargeAsPercent';
   rateComponents: Array<BaseRateComponentInterface & SurchargeAsPercentArgs>;
