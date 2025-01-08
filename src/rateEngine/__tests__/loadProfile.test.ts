@@ -122,11 +122,13 @@ describe('Load Profile', () => {
 
       // This gets the index of the first Wednesday of each month
       // so that we can set a max value for each month that is > 1.
-      const maxhours = times(12, (i) => i).map((monthIdx) => {
-        const hourOfMonth = loadProfileOfOnes.expanded().findIndex(({month, dayOfWeek}) => (
+      const maxhours = times(12).map((monthIdx) => {
+        const hourOfMonth = loadProfileOfOnes.expanded().find(({month, dayOfWeek}) => (
           month === monthIdx && dayOfWeek === 3
         )) 
-        return hourOfMonth
+
+        // .find's interface returns T | undefined so we need the ?? 0 here although it should never be 0
+        return hourOfMonth?.hourOfYear ?? 0
       });
 
       const maxes = [13,14,15,16,17,18,19,20,21,22,23,24];
