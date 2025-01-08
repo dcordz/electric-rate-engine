@@ -20,8 +20,7 @@ const isNumberArray = (p: Array<number> | Array<DetailedLoadProfileHour>): p is 
 };
 
 class LoadProfile {
-  private _loadProfile?: Array<number>;
-  private _expanded?: Array<DetailedLoadProfileHour>;
+  private _expanded: Array<DetailedLoadProfileHour>;
   private _year: number;
 
   constructor(loadProfile: Array<number>, options: LoadProfileOptions);
@@ -31,35 +30,19 @@ class LoadProfile {
     loadProfileOrExpandedOrExisting: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile,
     options: LoadProfileOptions,
   ) {
+    this._year = options.year;
+
     if (isLoadProfileObject(loadProfileOrExpandedOrExisting)) {
       this._expanded = loadProfileOrExpandedOrExisting.expanded();
     } else if (isNumberArray(loadProfileOrExpandedOrExisting)) {
-      this._loadProfile = loadProfileOrExpandedOrExisting;
+      this._expanded = this._buildFromNumberArray(loadProfileOrExpandedOrExisting);
     } else {
       this._expanded = loadProfileOrExpandedOrExisting;
     }
-
-    this._year = options.year;
   }
 
   expanded(): Array<DetailedLoadProfileHour> {
-    if (this._expanded) {
-      return this._expanded;
-    }
-
-    const dates = expandedDates(this._year);
-
-    if (!this._loadProfile?.length) {
-      throw new Error("Cannot build LoadProfile instance. Instantiated with an empty loadProfile array.");
-    }
-    if (dates.length !== this._loadProfile?.length) {
-      throw new Error("Load profile length didn't match annual hours length. Maybe a leap year is involved?");
-    }
-
-    return (this._expanded = this._loadProfile.map((load, i) => ({
-      load,
-      ...dates[i],
-    })));
+    return this._expanded;
   }
 
   loadValues(): Array<number> {
@@ -141,6 +124,7 @@ class LoadProfile {
       return 0;
     }
 
+    // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
     return maxBy(this.expanded(), 'load')?.load ?? 0;
   }
 
@@ -158,11 +142,33 @@ class LoadProfile {
 
   aggregate(otherLoadProfile: LoadProfile): LoadProfile {
     return new LoadProfile(
-      (this._loadProfile ?? []).map((loadHour, idx) => {
-        return addDecimals(loadHour, otherLoadProfile.expanded()[idx].load);
+      this.expanded().map(({ load }, idx) => {
+        return addDecimals(load, otherLoadProfile.expanded()[idx].load);
       }),
       { year: this._year },
     );
+  }
+
+  private _buildFromNumberArray(loadProfileNumberArray: Array<number>): Array<DetailedLoadProfileHour> {
+    const dates = expandedDates(this._year);
+
+    if (!loadProfileNumberArray.length) {
+      throw new Error('Cannot build LoadProfile instance. Instantiated with an empty loadProfile array.');
+    }
+
+    if (dates.length !== loadProfileNumberArray.length) {
+      const isLeapYearInvolved = Math.abs(dates.length - loadProfileNumberArray.length) === 24;
+      throw new Error(
+        `Load profile length didn't match annual hours length.${
+          isLeapYearInvolved ? " It's likely a leap year is involved." : ' Maybe a leap year is involved.'
+        }`,
+      );
+    }
+
+    return loadProfileNumberArray.map((load, i) => ({
+      load,
+      ...dates[i],
+    }));
   }
 }
 

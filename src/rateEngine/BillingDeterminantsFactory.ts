@@ -13,12 +13,12 @@ import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
 import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
 import LoadProfile from './LoadProfile';
 import type {
-  RateElementInterface,
+  ProcessedRateElementInterface,
 } from './types';
 
 class BillingDeterminantsFactory {
   static make(
-    rateElement: RateElementInterface,
+    rateElement: ProcessedRateElementInterface,
     loadProfile: LoadProfile,
   ) {
     const { rateElementType, rateComponents } = rateElement;
@@ -42,7 +42,7 @@ class BillingDeterminantsFactory {
       case 'SurchargeAsPercent':
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new SurchargeAsPercent(args) }));
       case 'HourlyEnergy':
-        return (rateComponents ?? []).map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new HourlyEnergy(args, loadProfile) }));
+        return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new HourlyEnergy(args, loadProfile) }));
       case 'DemandTiersInMonths':
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new DemandTiersInMonths(args, loadProfile) }));
       case 'DemandTimeOfUse':
