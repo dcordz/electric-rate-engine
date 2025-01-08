@@ -1,9 +1,9 @@
-import LoadProfileScaler from '../LoadProfileScaler';
-import times from 'lodash/times';
-import LoadProfile from '../LoadProfile';
-import e1 from '../__mocks__/rates/e-1';
-import RateCalculator from '../RateCalculator';
-import type { RateInterface } from '../types';
+import LoadProfileScaler from '../LoadProfileScaler.ts';
+import {times} from 'lodash';
+import LoadProfile from '../LoadProfile.ts';
+import e1 from '../__mocks__/rates/e-1.ts';
+import RateCalculator from '../RateCalculator.ts';
+import type { RateInterface } from '../types/index.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 

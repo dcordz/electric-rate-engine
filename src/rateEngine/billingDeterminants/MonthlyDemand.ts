@@ -1,11 +1,11 @@
-import BillingDeterminants from './_BillingDeterminants';
-import LoadProfile from '../LoadProfile';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants/index.ts';
 
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Monthly Demand';
+  rateElementType = 'Monthly Demand.ts';
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 

@@ -1,11 +1,11 @@
-import RateComponent from './RateComponent';
-import RateCalculator from './RateCalculator';
-import sum from 'lodash/sum';
-import ValidatorFactory from './ValidatorFactory';
-import LoadProfile from './LoadProfile';
-import RateComponentsFactory from './RateComponentsFactory';
-import { BillingCategory, RateElementClassification } from './constants';
-import type { RateElementType, RateElementInterface, RateElementFilterArgs, ValidatorError } from './types';
+import { sum } from 'lodash';
+import RateComponent from './RateComponent.ts';
+import RateCalculator from './RateCalculator.ts';
+import ValidatorFactory from './ValidatorFactory.ts';
+import LoadProfile from './LoadProfile.ts';
+import RateComponentsFactory from './RateComponentsFactory.ts';
+import { BillingCategory, RateElementClassification } from './constants/index.ts';
+import type { RateElementType, RateElementInterface, RateElementFilterArgs, ValidatorError } from './types/index.ts';
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;

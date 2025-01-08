@@ -1,6 +1,6 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import BlockedTiersInDays from '../BlockedTiersInDays';
+import LoadProfile from '../../LoadProfile.ts';
+import {times} from 'lodash';
+import BlockedTiersInDays from '../BlockedTiersInDays.ts';
 
 // For reference: the number of hours in each month:
 // [ 744, 672, 743, 720, 744, 720, 744, 744, 720, 744, 721, 744 ]

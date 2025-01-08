@@ -1,9 +1,7 @@
-import times from 'lodash/times';
-import mean from 'lodash/mean';
-import sum from 'lodash/sum';
-import BillingDeterminants from './billingDeterminants/_BillingDeterminants';
-import { multiplyDecimals } from './utils/decimals';
-import type { RateComponentArgs } from './types';
+import { mean, sum, times } from 'lodash';
+import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
+import type { RateComponentArgs } from './types/index.ts';
+import { multiplyDecimals } from './utils/decimals.ts';
 
 const MONTHS_PER_YEAR = 12;
 

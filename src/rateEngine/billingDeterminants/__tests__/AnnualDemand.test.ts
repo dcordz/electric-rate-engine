@@ -1,6 +1,6 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import AnnualDemand from '../AnnualDemand';
+import {times} from 'lodash';
+import LoadProfile from '../../LoadProfile.ts';
+import AnnualDemand from '../AnnualDemand.ts';
 
 const getLoadProfileOfOneThroughTen = () => times(8760, (num) => (num % 10) + 1);
 const getLoadProfileWithOneNonZero = () => times(8760, (i) => (i === 1234 ? 100 : 0));

@@ -1,11 +1,11 @@
-import BillingDeterminants from './_BillingDeterminants';
-import LoadProfile from '../LoadProfile';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants/index.ts';
 
 class MonthlyEnergy extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Monthly Energy';
+  rateElementType = 'Monthly Energy.ts';
   rateElementClassification = RateElementClassification.ENERGY;
   units = BillingDeterminantsUnits.KWH;
 
