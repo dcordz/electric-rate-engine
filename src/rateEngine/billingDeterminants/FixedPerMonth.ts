@@ -1,6 +1,6 @@
-import BillingDeterminants from './_BillingDeterminants';
-import times from 'lodash/times';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import {times} from 'lodash';
+import { RateElementClassification, BillingDeterminantsUnits } from '../constants/index.ts';
 
 const MONTHS_PER_YEAR = 12;
 

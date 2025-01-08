@@ -1,8 +1,8 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import EnergyTimeOfUse from '../EnergyTimeOfUse';
-import data from './EnergyTimeOfUseData';
-import type { EnergyTimeOfUseArgs } from '../../types';
+import LoadProfile from '../../LoadProfile.ts';
+import {times} from 'lodash';
+import EnergyTimeOfUse from '../EnergyTimeOfUse.ts';
+import data from './EnergyTimeOfUseData.ts';
+import type { EnergyTimeOfUseArgs } from '../../types/index.ts';
 
 interface TestData {
   name: string;

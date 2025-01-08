@@ -98,6 +98,7 @@ export default [
             "lib/",
             "node_modules/",
             "eslint.config.js",
+            "rollup.config.js",
             "**/__mocks__",
             "**/__tests__",
         ],

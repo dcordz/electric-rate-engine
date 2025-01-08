@@ -1,12 +1,12 @@
-import RateElement from '../RateElement';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
-import type { SurchargeAsPercentArgs } from '../types';
-import BillingDeterminants from './_BillingDeterminants';
+import RateElement from '../RateElement.ts';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants/index.ts';
+import type { SurchargeAsPercentArgs } from '../types/index.ts';
 
 class SurchargeAsPercent extends BillingDeterminants {
   private _rateElement: RateElement;
 
-  rateElementType = 'Surcharge';
+  rateElementType = 'Surcharge.ts';
   rateElementClassification = RateElementClassification.SURCHARGE;
   units = BillingDeterminantsUnits.DOLLARS;
 

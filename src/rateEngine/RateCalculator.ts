@@ -1,6 +1,6 @@
-import sum from 'lodash/sum';
-import RateElement from './RateElement';
-import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
+import { sum } from "lodash"
+import RateElement from './RateElement.ts';
+import type { RateCalculatorInterface, RateElementFilterArgs } from './types/index.ts';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
