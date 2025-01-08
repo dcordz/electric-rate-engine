@@ -13,12 +13,12 @@ import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
 import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
 import LoadProfile from './LoadProfile';
 import type {
-  RateElementInterface,
+  ProcessedRateElementInterface,
 } from './types';
 
 class BillingDeterminantsFactory {
   static make(
-    rateElement: RateElementInterface,
+    rateElement: ProcessedRateElementInterface,
     loadProfile: LoadProfile,
   ) {
     const { rateElementType, rateComponents } = rateElement;

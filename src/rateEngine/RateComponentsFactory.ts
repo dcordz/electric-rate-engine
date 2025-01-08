@@ -3,7 +3,7 @@ import LoadProfile from './LoadProfile';
 import PriceProfile from './PriceProfile';
 import RateComponent from './RateComponent';
 import RateElement from './RateElement';
-import type { RateElementInterface } from './types';
+import type { RateElementInterface, ProcessedRateElementInterface } from './types';
 
 export default class RateComponentsFactory {
   static make(
@@ -22,7 +22,7 @@ export default class RateComponentsFactory {
     rateElement: RateElementInterface,
     loadProfile: LoadProfile,
     otherRateElements: Array<RateElementInterface>,
-  ): RateElementInterface {
+  ): ProcessedRateElementInterface {
     switch (rateElement.rateElementType) {
       case 'SurchargeAsPercent': {
         const rateComponents = rateElement.rateComponents.flatMap(
