@@ -24,6 +24,8 @@ class PriceProfile {
     priceProfileOrExpandedOrExisting: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile,
     options: PriceProfileOptions,
   ) {
+    this._year = options.year;
+    
     if (isPriceProfileObject(priceProfileOrExpandedOrExisting)) {
       this._expanded = priceProfileOrExpandedOrExisting.expanded();
     } else if (isNumberArray(priceProfileOrExpandedOrExisting)) {
@@ -31,8 +33,6 @@ class PriceProfile {
     } else {
       this._expanded = priceProfileOrExpandedOrExisting;
     }
-
-    this._year = options.year;
   }
 
   expanded(): Array<DetailedPriceProfileHour> {
@@ -88,6 +88,7 @@ class PriceProfile {
       return 0;
     }
 
+    // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
     return maxBy(this.expanded(), 'price')?.price ?? 0;
   }
 
