@@ -18,7 +18,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "test:watch": "jest --config jestconfig.json --watch",
-    "build": "rm -rf lib && tsc -p tsconfig.build.json && npm run build-rollup",
+    "build": "rm -rf lib && npm run build-rollup",
     "build-rollup": "rollup -c rollup.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "analyze": "source-map-explorer 'lib/**/*.js' --no-border-checks",
