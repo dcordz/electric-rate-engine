@@ -1,24 +1,23 @@
-import moment from 'moment-timezone';
+import dayjs from "dayjs";
 import times from 'lodash/times';
 import type { ExpandedDate } from '../types';
-
-moment.tz.setDefault('America/New_York');
+import { isLeapYear } from './datetimes';
 
 const dates: Record<number, Array<ExpandedDate>> = {};
 
 const generateDates = (year: number): Array<ExpandedDate> => {
-  const profileTime = moment(year, 'Y');
+  let profileTime = dayjs().year(year).month(0).date(1).hour(0).minute(0).second(0);
 
-  return times(profileTime.isLeapYear() ? 8784 : 8760, (hourOfYear) => {
+  return times(isLeapYear(profileTime.toDate()) ? 8784 : 8760, (hourOfYear) => {
     const val = {
-      month: profileTime.month(),
-      dayOfWeek: profileTime.day(),
+      month: profileTime.month(), // 0-based, January is 0
+      dayOfWeek: profileTime.day(), // 0-based, Sunday is 0
       hourStart: profileTime.hour(),
       date: profileTime.format('YYYY-MM-DD'),
       hourOfYear,
     };
 
-    profileTime.add(1, 'hour');
+    profileTime = profileTime.add(1, "hour")
     return val;
   });
 };
@@ -29,4 +28,4 @@ export default (year: number): Array<ExpandedDate> => {
   }
 
   return dates[year];
-}
+};

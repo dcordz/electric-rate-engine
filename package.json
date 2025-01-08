@@ -21,9 +21,9 @@
   "keywords": [],
   "author": "",
   "dependencies": {
+    "dayjs": "^1.11.13",
     "goal-seek": "^0.1.4",
     "lodash": "^4.17.21",
-    "moment-timezone": "^0.5.46",
     "typescript": "^5.7"
   },
   "devDependencies": {

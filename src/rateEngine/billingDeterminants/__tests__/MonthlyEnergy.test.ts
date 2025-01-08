@@ -1,6 +1,7 @@
 import LoadProfile from '../../LoadProfile';
 import times from 'lodash/times';
 import MonthlyEnergy from '../MonthlyEnergy';
+import { sum } from 'lodash';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
@@ -19,6 +20,7 @@ describe('MonthlyEnergy', () => {
       const result = new MonthlyEnergy(loadProfile).calculate();
 
       expect(result).toEqual(hoursPerMonth);
+      expect(sum(result)).toEqual(8760);
     });
   });
 });

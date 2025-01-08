@@ -1,6 +1,6 @@
-import moment from 'moment-timezone';
+import { isLeapYear, setYearOnDate } from './datetimes';
 
 export const daysPerMonth = (year?: number): Array<number> => {
-  const isLeapYear = year === undefined ? false : moment(year, 'Y').isLeapYear();
-  return [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const _isLeapYear = year === undefined ? false : isLeapYear(setYearOnDate(new Date(), year));
+  return [31, _isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 };
