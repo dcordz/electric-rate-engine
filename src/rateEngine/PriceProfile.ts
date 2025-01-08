@@ -88,6 +88,7 @@ class PriceProfile {
       return 0;
     }
 
+    // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
     return maxBy(this.expanded(), 'price')?.price ?? 0;
   }
 
