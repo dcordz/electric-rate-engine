@@ -11,6 +11,7 @@ import HourlyEnergy from './billingDeterminants/HourlyEnergy';
 import MonthlyDemand from './billingDeterminants/MonthlyDemand';
 import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
 import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
+import { ERateElementType } from './constants';
 import LoadProfile from './LoadProfile';
 import type {
   ProcessedRateElementInterface,
@@ -23,31 +24,31 @@ class BillingDeterminantsFactory {
   ) {
     const { rateElementType, rateComponents } = rateElement;
     switch (rateElementType) {
-      case 'EnergyTimeOfUse':
+      case ERateElementType.EnergyTimeOfUse:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new EnergyTimeOfUse(args, loadProfile) }));
-      case 'BlockedTiersInDays':
+      case ERateElementType.BlockedTiersInDays:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new BlockedTiersInDays(args, loadProfile) }));
-      case 'BlockedTiersInMonths':
+      case ERateElementType.BlockedTiersInMonths:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new BlockedTiersInMonths(args, loadProfile) }));
-      case 'FixedPerDay':
+      case ERateElementType.FixedPerDay:
         return rateComponents.map(({ charge, name, }) => ({ charge, name, billingDeterminants: new FixedPerDay() }));
-      case 'FixedPerMonth':
+      case ERateElementType.FixedPerMonth:
         return rateComponents.map(({ charge, name, }) => ({ charge, name, billingDeterminants: new FixedPerMonth() }));
-      case 'MonthlyDemand':
+      case ERateElementType.MonthlyDemand:
         return rateComponents.map(({ charge, name, }) => ({ charge, name, billingDeterminants: new MonthlyDemand(loadProfile) }));
-      case 'AnnualDemand':
+      case ERateElementType.AnnualDemand:
         return rateComponents.map(({ charge, name, }) => ({ charge, name, billingDeterminants: new AnnualDemand(loadProfile) }));
-      case 'MonthlyEnergy':
+      case ERateElementType.MonthlyEnergy:
         return rateComponents.map(({ charge, name, }) => ({ charge, name, billingDeterminants: new MonthlyEnergy(loadProfile) }));
-      case 'SurchargeAsPercent':
+      case ERateElementType.SurchargeAsPercent:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new SurchargeAsPercent(args) }));
-      case 'HourlyEnergy':
+      case ERateElementType.HourlyEnergy:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new HourlyEnergy(args, loadProfile) }));
-      case 'DemandTiersInMonths':
+      case ERateElementType.DemandTiersInMonths:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new DemandTiersInMonths(args, loadProfile) }));
-      case 'DemandTimeOfUse':
+      case ERateElementType.DemandTimeOfUse:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new DemandTimeOfUse(args, loadProfile) }));
-      case 'DemandPerDay':
+      case ERateElementType.DemandPerDay:
         return rateComponents.map(({ charge, name, ...args }) => ({ charge, name, billingDeterminants: new DemandPerDay(args, loadProfile) }));
       default:
         throw new Error(`Unknown rateElementType: ${rateElementType}`);
