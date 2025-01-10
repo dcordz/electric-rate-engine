@@ -23,6 +23,10 @@ class RateComponent {
     return this._billingDeterminants.map((determinant, idx) => multiplyDecimals(determinant, this.charge[idx]));
   }
 
+  getDeterminants(): BillingDeterminants {
+    return this._billingDeterminants;
+  }
+
   billingDeterminants(): Array<number> {
     return this._billingDeterminants.all();
   }
@@ -60,15 +64,6 @@ class RateComponent {
         return _mean(this.charge).toFixed(2);
       }
     }
-  }
-
-  formatBillingDeterminant(): string {
-    const determinant = Math.round(this.typicalBillingDeterminant());
-    const units =
-      determinant === 1 && this._billingDeterminants.units.endsWith('s')
-        ? this._billingDeterminants.units.slice(0, this._billingDeterminants.units.length - 1)
-        : this._billingDeterminants.units;
-    return `${determinant} ${units}`;
   }
 }
 
