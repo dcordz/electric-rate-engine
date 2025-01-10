@@ -11,8 +11,3 @@ export function setYearOnDate(date: Date, year: number) {
   date.setFullYear(year);
   return date;
 }
-
-export function zeroDate(date: Date) {
-    // Set the date to the beginning of the year (January 1st, 00:00:00)
-    return new Date(date.getFullYear(), 0, 1, 2, 0, 0); // (year, month, day)
-  }
