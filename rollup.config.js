@@ -25,7 +25,7 @@ export default [
   {
     input: './src/index.ts',
     output: [
-      { file: "./lib/commonjs/index.d.ts", format: "cjs" },
+      { file: "./lib/cjs/index.d.ts", format: "cjs" },
       { file: "./lib/esm/index.d.ts", format: "es" },
     ],
     plugins: [
