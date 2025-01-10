@@ -1,11 +1,11 @@
 import BillingDeterminants from './_BillingDeterminants';
 import LoadProfile from '../LoadProfile';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
 
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Monthly Demand';
+  rateElementType = ERateElementType.MonthlyDemand;
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 

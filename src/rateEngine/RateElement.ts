@@ -4,7 +4,11 @@ import sum from 'lodash/sum';
 import ValidatorFactory from './ValidatorFactory';
 import LoadProfile from './LoadProfile';
 import RateComponentsFactory from './RateComponentsFactory';
-import { BillingCategory, RateElementClassification } from './constants';
+import {
+  BillingCategory,
+  RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE,
+  RateElementClassification,
+} from './constants';
 import type { RateElementType, RateElementInterface, RateElementFilterArgs, ValidatorError } from './types';
 
 class RateElement {
@@ -12,7 +16,7 @@ class RateElement {
   id?: string;
   name: string;
   type: RateElementType;
-  classification?: RateElementClassification;
+  classification: RateElementClassification;
   billingCategory?: BillingCategory;
   errors: Array<ValidatorError> = [];
 
@@ -45,7 +49,9 @@ class RateElement {
 
     // Should we be assuming that all components
     // have the same classification?
-    this.classification = this._rateComponents[0]?.rateElementClassification();
+    this.classification =
+      this._rateComponents[0]?.rateElementClassification() ??
+      RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE[rateElementType];
   }
 
   rateComponents(): Array<RateComponent> {

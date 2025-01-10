@@ -1,8 +1,8 @@
-import lodashMean from 'lodash/mean';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
+import { mean as lodashMean } from 'lodash';
+import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants';
 
 abstract class BillingDeterminants {
-  abstract rateElementType: string;
+  abstract rateElementType: ERateElementType;
   abstract rateElementClassification: RateElementClassification;
   abstract units: BillingDeterminantsUnits;
   abstract calculate(): Array<number>;

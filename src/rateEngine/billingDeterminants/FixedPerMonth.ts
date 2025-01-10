@@ -1,11 +1,11 @@
 import BillingDeterminants from './_BillingDeterminants';
 import times from 'lodash/times';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
 
 const MONTHS_PER_YEAR = 12;
 
 class FixedPerMonth extends BillingDeterminants {
-  rateElementType = 'Fixed Per Month';
+  rateElementType = ERateElementType.FixedPerMonth;
   rateElementClassification = RateElementClassification.FIXED;
   units = BillingDeterminantsUnits.MONTHS;
 

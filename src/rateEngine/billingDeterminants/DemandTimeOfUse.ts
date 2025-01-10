@@ -1,13 +1,13 @@
 import LoadProfile from '../LoadProfile';
 import BillingDeterminants from './_BillingDeterminants';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
 import type { DemandTimeOfUseArgs, LoadProfileFilterArgs } from '../types';
 
 class DemandTimeOfUse extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Time Of Use';
+  rateElementType = ERateElementType.DemandTimeOfUse;
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 
