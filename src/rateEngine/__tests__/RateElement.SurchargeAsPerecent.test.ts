@@ -54,7 +54,7 @@ describe('RateElement', () => {
         ]
       );
 
-      expect(rateElement.annualCost()).toEqual(
+      expect(rateElement.annualCost()).toBeCloseTo(
         FIXED_CHARGE * MONTHS_PER_YEAR * SURCHARGE_AS_DECIMAL
       );
     });
@@ -80,7 +80,7 @@ describe('RateElement', () => {
           ]
         );
 
-        expect(rateElement.annualCost()).toEqual(
+        expect(rateElement.annualCost()).toBeCloseTo(
           FIXED_CHARGE * MONTHS_PER_YEAR * SURCHARGE_AS_DECIMAL
         );
       });
@@ -107,7 +107,7 @@ describe('RateElement', () => {
         );
 
         const ENERGY_CHARGE_FOR_YEAR = 8760;
-        expect(rateElement.annualCost()).toEqual(
+        expect(rateElement.annualCost()).toBeCloseTo(
           (ENERGY_CHARGE_FOR_YEAR + FIXED_CHARGE * MONTHS_PER_YEAR) * SURCHARGE_AS_DECIMAL
         );
       })

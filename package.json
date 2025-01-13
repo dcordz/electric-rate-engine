@@ -1,6 +1,6 @@
 {
   "name": "@bellawatt/electric-rate-engine",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Electric Rate Engine",
   "type": "module",
   "main": "./lib/cjs/index.cjs",
