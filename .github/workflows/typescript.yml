@@ -1,0 +1,24 @@
+name: Typescript
+
+on:
+  workflow_call:
+
+jobs:
+  tsc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Run Typescript tsc
+        run: npx tsc --project tsconfig.json
