@@ -1,5 +1,5 @@
 import LoadProfile from '../LoadProfile.ts';
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import LoadProfileScaler from '../LoadProfileScaler.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);

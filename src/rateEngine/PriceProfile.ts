@@ -1,4 +1,4 @@
-import { maxBy, times } from 'lodash';
+import { maxBy, times } from 'lodash-es';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import type { DetailedPriceProfileHour, LoadProfileFilterArgs, PriceProfileOptions } from './types/index.ts';
 import { addDecimals } from './utils/decimals.ts';

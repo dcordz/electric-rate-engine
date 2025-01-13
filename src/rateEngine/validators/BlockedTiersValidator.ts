@@ -1,4 +1,4 @@
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import Validator from './_Validator.ts';
 import expandedDates from '../utils/expandedDates.ts';
 import LoadProfileFilter from '../LoadProfileFilter.ts';

@@ -1,4 +1,4 @@
-import { times } from 'lodash';
+import { times } from 'lodash-es';
 import BillingDeterminants from './_BillingDeterminants.ts';
 import LoadProfile from '../LoadProfile.ts';
 import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants/index.ts';

@@ -1,5 +1,5 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import BlockedTiersInMonths from '../BlockedTiersInMonths.ts';
 
 // For reference: the number of hours in each month:

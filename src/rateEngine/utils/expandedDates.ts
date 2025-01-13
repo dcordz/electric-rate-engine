@@ -1,5 +1,12 @@
 import dayjs from "dayjs";
-import {times} from 'lodash';
+// @ts-ignore
+import timezone from "dayjs/plugin/timezone";
+// @ts-ignore
+dayjs.extend(timezone)
+// @ts-ignore
+dayjs.tz.setDefault("America/New_York")
+
+import { times } from 'lodash-es';
 import type { ExpandedDate } from '../types/index.ts';
 import { isLeapYear } from './datetimes.ts';
 

@@ -1,5 +1,5 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import DemandPerDay from '../DemandPerDay.ts';
 import data from './DemandPerDayData.ts';
 import { daysPerMonth } from '../../utils/assumptions.ts';

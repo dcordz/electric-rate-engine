@@ -1,5 +1,5 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import MonthlyDemand from '../MonthlyDemand.ts';
 
 const getLoadProfileOfOneThroughTen = () => times(8760, num => num % 10 + 1);

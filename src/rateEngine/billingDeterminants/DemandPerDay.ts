@@ -1,4 +1,4 @@
-import { groupBy, sum, times } from 'lodash';
+import { groupBy, sum, times } from 'lodash-es';
 import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { DemandPerDayArgs, LoadProfileFilterArgs } from '../types/index.ts';

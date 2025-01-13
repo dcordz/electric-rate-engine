@@ -1,4 +1,4 @@
-import {times} from 'lodash';
+import {times} from 'lodash-es';
 import LoadProfile from '../../LoadProfile.ts';
 import AnnualDemand from '../AnnualDemand.ts';
 

@@ -1,10 +1,11 @@
 import LoadProfileScaler from '../LoadProfileScaler.ts';
-import {times} from 'lodash';
+import { times } from 'lodash-es';
 import LoadProfile from '../LoadProfile.ts';
 import e1 from '../__mocks__/rates/e-1.ts';
 import RateCalculator from '../RateCalculator.ts';
 import type { RateInterface } from '../types/index.ts';
 import { ERateElementType } from '../constants/index.ts';
+import { jest } from '@jest/globals';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
@@ -84,7 +85,7 @@ describe('LoadProfileScaler', () => {
   describe('optional debugging', () => {
     it('prints things to the console', () => {
       console.log = jest.fn();
-      
+
       new LoadProfileScaler(initialLoadProfile, { debug: true }).toAverageMonthlyBill(100, e1);
 
       expect(console.log).toHaveBeenCalled();
