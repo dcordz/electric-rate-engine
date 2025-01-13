@@ -1,7 +1,7 @@
-import LoadProfile from '../LoadProfile';
-import RateCalculator from '../RateCalculator';
-import type { RateInterface } from '../types';
-import { BillingCategory } from '../constants';
+import LoadProfile from '../LoadProfile.ts';
+import RateCalculator from '../RateCalculator.ts';
+import type { RateInterface } from '../types/index.ts';
+import { BillingCategory } from '../constants/index.ts';
 
 describe('RateCalculator', () => {
   describe('annualCost', () => {

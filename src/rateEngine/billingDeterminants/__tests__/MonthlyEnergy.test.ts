@@ -1,6 +1,6 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import MonthlyEnergy from '../MonthlyEnergy';
+import LoadProfile from '../../LoadProfile.ts';
+import {times} from 'lodash';
+import MonthlyEnergy from '../MonthlyEnergy.ts';
 import { sum } from 'lodash';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);

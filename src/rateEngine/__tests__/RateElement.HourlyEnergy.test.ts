@@ -1,7 +1,7 @@
-import PriceProfile from '../PriceProfile';
-import LoadProfile from '../LoadProfile';
-import RateElement from '../RateElement';
-import { RateElementInterface } from '../types';
+import PriceProfile from '../PriceProfile.ts';
+import LoadProfile from '../LoadProfile.ts';
+import RateElement from '../RateElement.ts';
+import { RateElementInterface } from '../types/index.ts';
 
 const YEAR = 2019;
 const priceData = Array(8760).fill(0);

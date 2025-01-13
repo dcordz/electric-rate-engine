@@ -1,4 +1,4 @@
-import type { RateInterface } from '../../types';
+import type { RateInterface } from '../../types/index.ts';
 
 const HOLIDAYS = [
   '2018-01-01',

@@ -1,8 +1,8 @@
-import Validator from './_Validator';
-import expandedDates from '../utils/expandedDates';
-import LoadProfileFilter from '../LoadProfileFilter';
-import LoadProfile from '../LoadProfile';
-import type { RateComponentInterface, EnergyTimeOfUseArgs } from '../types';
+import Validator from './_Validator.ts';
+import expandedDates from '../utils/expandedDates.ts';
+import LoadProfileFilter from '../LoadProfileFilter.ts';
+import LoadProfile from '../LoadProfile.ts';
+import type { RateComponentInterface, EnergyTimeOfUseArgs } from '../types/index.ts';
 
 class EnergyTimeOfUseValidator extends Validator {
   private _args: Array<RateComponentInterface & EnergyTimeOfUseArgs>;

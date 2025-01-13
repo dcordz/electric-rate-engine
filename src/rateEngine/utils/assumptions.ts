@@ -1,4 +1,4 @@
-import { isLeapYear, setYearOnDate } from './datetimes';
+import { isLeapYear, setYearOnDate } from './datetimes.ts';
 
 export const daysPerMonth = (year?: number): Array<number> => {
   const _isLeapYear = year === undefined ? false : isLeapYear(setYearOnDate(new Date(), year));

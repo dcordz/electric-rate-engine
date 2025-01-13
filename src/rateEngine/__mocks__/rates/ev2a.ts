@@ -1,4 +1,4 @@
-import type { RateInterface } from '../../types';
+import type { RateInterface } from '../../types/index.ts';
 
 const summerPeakCharge = 0.47861;
 const summerPartpeakCharge = 0.36812;

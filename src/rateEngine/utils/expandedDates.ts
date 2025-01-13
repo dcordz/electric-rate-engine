@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
-import times from 'lodash/times';
-import type { ExpandedDate } from '../types';
-import { isLeapYear } from './datetimes';
+import dayjs from "dayjs/esm";
+import {times} from 'lodash';
+import type { ExpandedDate } from '../types/index.ts';
+import { isLeapYear } from './datetimes.ts';
 
 const dates: Record<number, Array<ExpandedDate>> = {};
 

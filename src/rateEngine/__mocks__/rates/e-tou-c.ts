@@ -1,5 +1,5 @@
 import { times } from 'lodash';
-import type { RateInterface } from '../../types';
+import type { RateInterface } from '../../types/index.ts';
 
 const summerPeakCharge = 0.41333;
 const summmerOffpeakCharge = 0.34989;
