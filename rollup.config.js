@@ -17,7 +17,7 @@ export default [
       json(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.build.json", declaration: false, noEmit: true, emitDeclarationOnly: false, allowImportingTsExtensions: true }),
+      typescript({ tsconfig: "./tsconfig.build.json", declaration: false }),
       // terser()
     ],
   },
@@ -29,7 +29,7 @@ export default [
       { file: "./lib/esm/index.d.ts", format: "es" },
     ],
     plugins: [
-      dts({ tsconfig: "./tsconfig.build.json", noEmit: true, emitDeclarationOnly: true }),
+      dts({ tsconfig: "./tsconfig.build.json", emitDeclarationOnly: true }),
     ],
   },
 ];
