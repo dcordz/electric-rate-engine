@@ -1,5 +1,5 @@
 import { groupBy, sumBy, times } from 'lodash';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants/index.ts';
+import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import convertInfinities from '../utils/convertInfinities.ts';
@@ -11,7 +11,7 @@ class BlockedTiersInMonths extends BillingDeterminants {
   private _max: Array<number>;
   private _filters: LoadProfileFilterArgs;
 
-  rateElementType = 'Blocked Tier';
+  rateElementType = ERateElementType.BlockedTiersInMonths;
   rateElementClassification = RateElementClassification.ENERGY;
   units = BillingDeterminantsUnits.KWH;
 

@@ -1,9 +1,10 @@
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants/index.ts';
-import BillingDeterminants from './_BillingDeterminants.ts';
+import { ERateElementType } from '../constants';
+import { BillingDeterminantsUnits, RateElementClassification } from '../constants/index.ts';
 import { daysPerMonth } from '../utils/assumptions.ts';
+import BillingDeterminants from './_BillingDeterminants.ts';
 
 class FixedPerDay extends BillingDeterminants {
-  rateElementType = 'Fixed Per Day.ts';
+  rateElementType = ERateElementType.FixedPerDay;
   rateElementClassification = RateElementClassification.FIXED;
   units = BillingDeterminantsUnits.DAYS;
 

@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import BillingDeterminantsFactory from './BillingDeterminantsFactory.ts';
 import LoadProfile from './LoadProfile.ts';
 import PriceProfile from './PriceProfile.ts';
 import RateComponent from './RateComponent.ts';
 import RateElement from './RateElement.ts';
 import type { RateElementInterface, ProcessedRateElementInterface } from './types/index.ts';
+=======
+import BillingDeterminantsFactory from './BillingDeterminantsFactory';
+import { ERateElementType } from './constants';
+import LoadProfile from './LoadProfile';
+import PriceProfile from './PriceProfile';
+import RateComponent from './RateComponent';
+import RateElement from './RateElement';
+import type { RateElementInterface, ProcessedRateElementInterface } from './types';
+>>>>>>> sorting-formatting-rates
 
 export default class RateComponentsFactory {
   static make(
@@ -24,7 +34,7 @@ export default class RateComponentsFactory {
     otherRateElements: Array<RateElementInterface>,
   ): ProcessedRateElementInterface {
     switch (rateElement.rateElementType) {
-      case 'SurchargeAsPercent': {
+      case ERateElementType.SurchargeAsPercent: {
         const rateComponents = rateElement.rateComponents.flatMap(
           ({ name: rateComponentName, charge, ...filterArgs }) => {
             return otherRateElements
@@ -44,7 +54,7 @@ export default class RateComponentsFactory {
           rateComponents,
         };
       }
-      case 'HourlyEnergy': {
+      case ERateElementType.HourlyEnergy: {
         const priceProfile = new PriceProfile(rateElement.priceProfile, { year: loadProfile.year });
         return {
           ...rateElement,

@@ -1,12 +1,12 @@
 import { times } from 'lodash';
 import BillingDeterminants from './_BillingDeterminants.ts';
 import LoadProfile from '../LoadProfile.ts';
-import { RateElementClassification, BillingDeterminantsUnits } from '../constants/index.ts';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants/index.ts';
 
 class AnnualDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Annual Demand.ts';
+  rateElementType = ERateElementType.AnnualDemand;
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 

@@ -1,5 +1,5 @@
 import { groupBy, sum, times } from 'lodash';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants/index.ts';
+import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { DemandPerDayArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
@@ -8,7 +8,7 @@ class DemandPerDay extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Demand Per Day.ts';
+  rateElementType = ERateElementType.DemandPerDay;
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 
