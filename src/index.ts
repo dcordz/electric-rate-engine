@@ -6,4 +6,4 @@ export { default as RateComponent } from './rateEngine/RateComponent.ts';
 export * from './rateEngine/constants/index.ts';
 export * from './rateEngine/types/index.ts';
 
-export const RateEngineVersion = "2.0.1"
+export const RateEngineVersion = "2.0.2"

@@ -1,9 +1,8 @@
 import dayjs from "dayjs";
-// @ts-ignore
+// @ts-expect-error - no import from dayjs
 import timezone from "dayjs/plugin/timezone";
-// @ts-ignore
 dayjs.extend(timezone)
-// @ts-ignore
+// @ts-expect-error - no import from dayjs
 dayjs.tz.setDefault("America/New_York")
 
 import { times } from 'lodash-es';
