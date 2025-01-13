@@ -25,8 +25,7 @@ export default [
   {
     input: './src/index.ts',
     output: [
-      { file: "./lib/cjs/index.d.ts", format: "cjs" },
-      { file: "./lib/esm/index.d.ts", format: "es" },
+      { file: "./lib/index.d.ts", format: "es" },
     ],
     plugins: [
       dts({ tsconfig: "./tsconfig.build.json", emitDeclarationOnly: true }),
