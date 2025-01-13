@@ -7,12 +7,6 @@
     // npm run analyze
     "sourceMap": false,
 
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-
-    "declaration": true,
     "emitDeclarationOnly": false
   },
   "include": ["src"],
