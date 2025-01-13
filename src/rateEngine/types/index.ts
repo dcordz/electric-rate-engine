@@ -1,17 +1,9 @@
 import { Params as GoalSeekParams } from 'goal-seek';
-<<<<<<< HEAD
 import LoadProfile from '../LoadProfile.ts';
 import PriceProfile from '../PriceProfile.ts';
 import RateElement from '../RateElement.ts';
 import BillingDeterminants from '../billingDeterminants/_BillingDeterminants.ts';
-import { BillingCategory, RateElementClassification } from '../constants/index.ts';
-=======
-import LoadProfile from '../LoadProfile';
-import PriceProfile from '../PriceProfile';
-import RateElement from '../RateElement';
-import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
-import { BillingCategory, ERateElementType, RateElementClassification } from '../constants';
->>>>>>> sorting-formatting-rates
+import { BillingCategory, ERateElementType, RateElementClassification } from '../constants/index.ts';
 
 /**
  * Here's an example rate definition, with the types of the

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import AnnualDemand from './billingDeterminants/AnnualDemand.ts';
 import BlockedTiersInDays from './billingDeterminants/BlockedTiersInDays.ts';
 import BlockedTiersInMonths from './billingDeterminants/BlockedTiersInMonths.ts';
@@ -12,24 +11,8 @@ import HourlyEnergy from './billingDeterminants/HourlyEnergy.ts';
 import MonthlyDemand from './billingDeterminants/MonthlyDemand.ts';
 import MonthlyEnergy from './billingDeterminants/MonthlyEnergy.ts';
 import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent.ts';
+import { ERateElementType } from './constants/index.ts';
 import LoadProfile from './LoadProfile.ts';
-=======
-import AnnualDemand from './billingDeterminants/AnnualDemand';
-import BlockedTiersInDays from './billingDeterminants/BlockedTiersInDays';
-import BlockedTiersInMonths from './billingDeterminants/BlockedTiersInMonths';
-import DemandPerDay from './billingDeterminants/DemandPerDay';
-import DemandTiersInMonths from './billingDeterminants/DemandTiersInMonths';
-import DemandTimeOfUse from './billingDeterminants/DemandTimeOfUse';
-import EnergyTimeOfUse from './billingDeterminants/EnergyTimeOfUse';
-import FixedPerDay from './billingDeterminants/FixedPerDay';
-import FixedPerMonth from './billingDeterminants/FixedPerMonth';
-import HourlyEnergy from './billingDeterminants/HourlyEnergy';
-import MonthlyDemand from './billingDeterminants/MonthlyDemand';
-import MonthlyEnergy from './billingDeterminants/MonthlyEnergy';
-import SurchargeAsPercent from './billingDeterminants/SurchargeAsPercent';
-import { ERateElementType } from './constants';
-import LoadProfile from './LoadProfile';
->>>>>>> sorting-formatting-rates
 import type {
   ProcessedRateElementInterface,
 } from './types/index.ts';

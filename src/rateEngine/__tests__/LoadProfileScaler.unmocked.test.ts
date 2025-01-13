@@ -4,6 +4,7 @@ import LoadProfile from '../LoadProfile.ts';
 import e1 from '../__mocks__/rates/e-1.ts';
 import RateCalculator from '../RateCalculator.ts';
 import type { RateInterface } from '../types/index.ts';
+import { ERateElementType } from '../constants/index.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
@@ -12,7 +13,7 @@ const dummyRate: RateInterface = {
   title: 'that will not converge',
   rateElements: [
     {
-      rateElementType: 'FixedPerMonth',
+      rateElementType: ERateElementType.FixedPerMonth,
       name: 'Customer Charge',
       rateComponents: [
         {
@@ -22,7 +23,7 @@ const dummyRate: RateInterface = {
       ],
     },
     {
-      rateElementType: 'MonthlyDemand',
+      rateElementType: ERateElementType.MonthlyDemand,
       name: 'Demand Charge',
       rateComponents: [
         {
@@ -32,7 +33,7 @@ const dummyRate: RateInterface = {
       ],
     },
     {
-      rateElementType: 'MonthlyEnergy',
+      rateElementType: ERateElementType.MonthlyEnergy,
       name: 'Energy Charge',
       rateComponents: [
         {

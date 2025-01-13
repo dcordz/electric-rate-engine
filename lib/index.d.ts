@@ -18,6 +18,62 @@ declare enum BillingDeterminantsUnits {
     MONTHS = "months",
     DOLLARS = "dollars"
 }
+declare enum ERateElementType {
+    EnergyTimeOfUse = "EnergyTimeOfUse",
+    BlockedTiersInDays = "BlockedTiersInDays",
+    BlockedTiersInMonths = "BlockedTiersInMonths",
+    FixedPerDay = "FixedPerDay",
+    FixedPerMonth = "FixedPerMonth",
+    MonthlyDemand = "MonthlyDemand",
+    AnnualDemand = "AnnualDemand",
+    MonthlyEnergy = "MonthlyEnergy",
+    SurchargeAsPercent = "SurchargeAsPercent",
+    HourlyEnergy = "HourlyEnergy",
+    DemandTiersInMonths = "DemandTiersInMonths",
+    DemandTimeOfUse = "DemandTimeOfUse",
+    DemandPerDay = "DemandPerDay"
+}
+declare const RATE_ELEMENT_SORT_ORDER: {
+    FixedPerMonth: number;
+    FixedPerDay: number;
+    AnnualDemand: number;
+    MonthlyDemand: number;
+    DemandTiersInMonths: number;
+    DemandTimeOfUse: number;
+    DemandPerDay: number;
+    MonthlyEnergy: number;
+    HourlyEnergy: number;
+    EnergyTimeOfUse: number;
+    BlockedTiersInDays: number;
+    BlockedTiersInMonths: number;
+    SurchargeAsPercent: number;
+};
+declare const RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE: {
+    FixedPerMonth: RateElementClassification;
+    FixedPerDay: RateElementClassification;
+    AnnualDemand: RateElementClassification;
+    MonthlyDemand: RateElementClassification;
+    DemandTiersInMonths: RateElementClassification;
+    DemandTimeOfUse: RateElementClassification;
+    DemandPerDay: RateElementClassification;
+    MonthlyEnergy: RateElementClassification;
+    HourlyEnergy: RateElementClassification;
+    EnergyTimeOfUse: RateElementClassification;
+    BlockedTiersInDays: RateElementClassification;
+    BlockedTiersInMonths: RateElementClassification;
+    SurchargeAsPercent: RateElementClassification;
+};
+
+declare abstract class BillingDeterminants {
+    abstract rateElementType: ERateElementType;
+    abstract rateElementClassification: RateElementClassification;
+    abstract units: BillingDeterminantsUnits;
+    abstract calculate(): Array<number>;
+    mean(): number;
+    all(): Array<number>;
+    map(callback: (arg: number, idx: number) => number): number[];
+    format(): string;
+}
 
 declare class LoadProfileScaler {
     loadProfile: LoadProfile;
@@ -81,16 +137,6 @@ declare class PriceProfile {
     }[];
 }
 
-declare abstract class BillingDeterminants {
-    abstract rateElementType: string;
-    abstract rateElementClassification: RateElementClassification;
-    abstract units: BillingDeterminantsUnits;
-    abstract calculate(): Array<number>;
-    mean(): number;
-    all(): Array<number>;
-    map(callback: (arg: number, idx: number) => number): number[];
-}
-
 /**
  * Here's an example rate definition, with the types of the
  * elements shown on the right
@@ -150,60 +196,60 @@ type ProcessedRateElementInterface = BaseRateElementType | ProcessedSurchargeAsP
 type RateComponentInterface = RateElementInterface['rateComponents'][number];
 type RateElementType = RateElementInterface['rateElementType'];
 interface EnergyTimeOfUseRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'EnergyTimeOfUse';
+    rateElementType: ERateElementType.EnergyTimeOfUse;
     rateComponents: Array<BaseRateComponentInterface & EnergyTimeOfUseArgs>;
 }
 interface BlockedTiersInDaysRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'BlockedTiersInDays';
+    rateElementType: ERateElementType.BlockedTiersInDays;
     rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
 }
 interface BlockedTiersInMonthsRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'BlockedTiersInMonths';
+    rateElementType: ERateElementType.BlockedTiersInMonths;
     rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
 }
 interface FixedPerDayRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'FixedPerDay';
+    rateElementType: ERateElementType.FixedPerDay;
     rateComponents: Array<BaseRateComponentInterface>;
 }
 interface FixedPerMonthRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'FixedPerMonth';
+    rateElementType: ERateElementType.FixedPerMonth;
     rateComponents: Array<BaseRateComponentInterface>;
 }
 interface MonthlyDemandRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'MonthlyDemand';
+    rateElementType: ERateElementType.MonthlyDemand;
     rateComponents: Array<BaseRateComponentInterface>;
 }
 interface AnnualDemandRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'AnnualDemand';
+    rateElementType: ERateElementType.AnnualDemand;
     rateComponents: Array<BaseRateComponentInterface>;
 }
 interface MonthlyEnergyRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'MonthlyEnergy';
+    rateElementType: ERateElementType.MonthlyEnergy;
     rateComponents: Array<BaseRateComponentInterface>;
 }
 interface UnprocessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'SurchargeAsPercent';
+    rateElementType: ERateElementType.SurchargeAsPercent;
     rateComponents: Array<BaseRateComponentInterface & RateElementFilterArgs>;
 }
 interface ProcessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'SurchargeAsPercent';
+    rateElementType: ERateElementType.SurchargeAsPercent;
     rateComponents: Array<BaseRateComponentInterface & SurchargeAsPercentArgs>;
 }
 interface HourlyEnergyRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'HourlyEnergy';
+    rateElementType: ERateElementType.HourlyEnergy;
     priceProfile: Array<number> | PriceProfile;
     rateComponents: Array<BaseRateComponentInterface & HourlyEnergyArgs>;
 }
 interface DemandTiersInMonthsRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'DemandTiersInMonths';
+    rateElementType: ERateElementType.DemandTiersInMonths;
     rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
 }
 interface DemandTimeOfUseRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'DemandTimeOfUse';
+    rateElementType: ERateElementType.DemandTimeOfUse;
     rateComponents: Array<BaseRateComponentInterface & DemandTimeOfUseArgs>;
 }
 interface DemandPerDayRateElementInterface extends BaseRateElementInterface {
-    rateElementType: 'DemandPerDay';
+    rateElementType: ERateElementType.DemandPerDay;
     rateComponents: Array<BaseRateComponentInterface & DemandPerDayArgs>;
 }
 interface RateComponentArgs {
@@ -278,8 +324,10 @@ declare class RateComponent {
     charge: Array<number>;
     name: string;
     private _billingDeterminants;
+    private _classification;
     constructor({ charge, name, billingDeterminants }: RateComponentArgs);
     costs(): Array<number>;
+    getDeterminants(): BillingDeterminants;
     billingDeterminants(): Array<number>;
     typicalMonthlyCost(): number;
     costForMonth(month: number): number;
@@ -287,6 +335,7 @@ declare class RateComponent {
     billingDeterminantsForMonth(month: number): number;
     annualCost(): number;
     rateElementClassification(): RateElementClassification;
+    formatCharge(): string;
 }
 
 declare class RateElement {
@@ -294,7 +343,7 @@ declare class RateElement {
     id?: string;
     name: string;
     type: RateElementType;
-    classification?: RateElementClassification;
+    classification: RateElementClassification;
     billingCategory?: BillingCategory;
     errors: Array<ValidatorError>;
     constructor(rateElementArgs: RateElementInterface, loadProfile: LoadProfile, otherRateElements?: Array<RateElementInterface>);
@@ -312,11 +361,11 @@ declare class RateCalculator {
     minimumBillAmount: number | undefined;
     static shouldValidate: boolean;
     static shouldLogValidationErrors: boolean;
-    constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface);
+    constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile, }: RateCalculatorInterface);
     rateElements({ ...filters }?: RateElementFilterArgs): Array<RateElement>;
     annualCost({ ...filters }?: RateElementFilterArgs): number;
 }
 
 declare const RateEngineVersion = "2.0.1";
 
-export { type AnnualDemandRateElementInterface, BillingCategory, BillingDeterminantsUnits, type BlockedTiersArgs, type BlockedTiersInDaysRateElementInterface, type BlockedTiersInMonthsRateElementInterface, type DemandPerDayArgs, type DemandPerDayRateElementInterface, type DemandTiersInMonthsRateElementInterface, type DemandTimeOfUseArgs, type DemandTimeOfUseRateElementInterface, type DetailedLoadProfileHour, type DetailedPriceProfileHour, type EnergyTimeOfUseArgs, type EnergyTimeOfUseRateElementInterface, type ExpandedDate, type FixedPerDayRateElementInterface, type FixedPerMonthRateElementInterface, type GoalSeekArgs, type HourlyEnergyArgs, type HourlyEnergyRateElementInterface, type LabeledError, LoadProfile, type LoadProfileFilterArgs, type LoadProfileOptions, type LoadProfileScalerOptions, type MinMaxPair, type MonthlyDemandRateElementInterface, type MonthlyEnergyRateElementInterface, type PriceProfileOptions, type ProcessedRateElementInterface, type ProcessedSurchargeAsPercentRateElementInterface, RateCalculator, type RateCalculatorInterface, RateComponent, type RateComponentArgs, type RateComponentInterface, RateElement, RateElementClassification, type RateElementFilterArgs, type RateElementInterface, type RateElementType, RateEngineVersion, type RateInterface, type SurchargeAsPercentArgs, type UnprocessedSurchargeAsPercentRateElementInterface, type ValidatorError };
+export { type AnnualDemandRateElementInterface, BillingCategory, BillingDeterminantsUnits, type BlockedTiersArgs, type BlockedTiersInDaysRateElementInterface, type BlockedTiersInMonthsRateElementInterface, type DemandPerDayArgs, type DemandPerDayRateElementInterface, type DemandTiersInMonthsRateElementInterface, type DemandTimeOfUseArgs, type DemandTimeOfUseRateElementInterface, type DetailedLoadProfileHour, type DetailedPriceProfileHour, ERateElementType, type EnergyTimeOfUseArgs, type EnergyTimeOfUseRateElementInterface, type ExpandedDate, type FixedPerDayRateElementInterface, type FixedPerMonthRateElementInterface, type GoalSeekArgs, type HourlyEnergyArgs, type HourlyEnergyRateElementInterface, type LabeledError, LoadProfile, type LoadProfileFilterArgs, type LoadProfileOptions, type LoadProfileScalerOptions, type MinMaxPair, type MonthlyDemandRateElementInterface, type MonthlyEnergyRateElementInterface, type PriceProfileOptions, type ProcessedRateElementInterface, type ProcessedSurchargeAsPercentRateElementInterface, RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE, RATE_ELEMENT_SORT_ORDER, RateCalculator, type RateCalculatorInterface, RateComponent, type RateComponentArgs, type RateComponentInterface, RateElement, RateElementClassification, type RateElementFilterArgs, type RateElementInterface, type RateElementType, RateEngineVersion, type RateInterface, type SurchargeAsPercentArgs, type UnprocessedSurchargeAsPercentRateElementInterface, type ValidatorError };

@@ -1,19 +1,10 @@
-<<<<<<< HEAD
 import BillingDeterminantsFactory from './BillingDeterminantsFactory.ts';
+import { ERateElementType } from './constants/index.ts';
 import LoadProfile from './LoadProfile.ts';
 import PriceProfile from './PriceProfile.ts';
 import RateComponent from './RateComponent.ts';
 import RateElement from './RateElement.ts';
 import type { RateElementInterface, ProcessedRateElementInterface } from './types/index.ts';
-=======
-import BillingDeterminantsFactory from './BillingDeterminantsFactory';
-import { ERateElementType } from './constants';
-import LoadProfile from './LoadProfile';
-import PriceProfile from './PriceProfile';
-import RateComponent from './RateComponent';
-import RateElement from './RateElement';
-import type { RateElementInterface, ProcessedRateElementInterface } from './types';
->>>>>>> sorting-formatting-rates
 
 export default class RateComponentsFactory {
   static make(

@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import { mean, sum, times } from 'lodash';
+import { mean as _mean, sum, times } from 'lodash';
 import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
 import type { RateComponentArgs } from './types/index.ts';
 import { multiplyDecimals } from './utils/decimals.ts';
-=======
-import { mean as _mean, sum, times } from 'lodash';
-import BillingDeterminants from './billingDeterminants/_BillingDeterminants';
-import { RateElementClassification } from './constants';
-import type { RateComponentArgs } from './types';
-import { multiplyDecimals } from './utils/decimals';
->>>>>>> sorting-formatting-rates
+import { RateElementClassification } from './constants/index.ts';
 
 const MONTHS_PER_YEAR = 12;
 
