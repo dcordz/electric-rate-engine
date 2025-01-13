@@ -20,5 +20,5 @@ jobs:
       - name: Install JS dependencies
         run: npm ci
 
-      - name: Run Typescript tsc
-        run: npx tsc --project tsconfig.json
+      - name: Build the project
+        run: npm run build
