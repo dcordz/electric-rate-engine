@@ -11,7 +11,7 @@ export default class RateComponentsFactory {
     loadProfile: LoadProfile,
     otherRateElements: Array<RateElementInterface>,
   ): Array<RateComponent> {
-    const convertedRateElement = this.preprocess(rateElement, loadProfile, otherRateElements);
+    const convertedRateElement = RateComponentsFactory.preprocess(rateElement, loadProfile, otherRateElements);
     const billingDeterminantsSet = BillingDeterminantsFactory.make(convertedRateElement, loadProfile);
     return billingDeterminantsSet.map(({ charge, name, billingDeterminants }) => {
       return new RateComponent({ charge, name, billingDeterminants });

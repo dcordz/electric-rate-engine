@@ -3,6 +3,8 @@ import RateCalculator from './RateCalculator.ts';
 import goalSeek from 'goal-seek';
 import type { GoalSeekArgs, LoadProfileScalerOptions, RateInterface } from './types/index.ts';
 
+const gs = ('default' in goalSeek ? goalSeek.default : goalSeek) as (params: GoalSeekArgs) => number;
+
 // TODO: use proper math for scaling
 // TODO: fix the toAverageMonthlyBill argument... how to properly pass in a rate?
 
@@ -34,8 +36,7 @@ class LoadProfileScaler {
     const initialScalerGuess = magnitudeScaler;
     const fnParams = [initialScalerGuess, rate, this, magnitude];
 
-    // @ts-ignore
-    const finalScaler = goalSeek({
+    const finalScaler = gs({
       fn: this.scaledMonthlyCost,
       fnParams,
       percentTolerance: 0.1,
