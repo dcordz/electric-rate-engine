@@ -1,4 +1,4 @@
-import dayjs from "dayjs/esm";
+import dayjs from "dayjs";
 import {times} from 'lodash';
 import type { ExpandedDate } from '../types/index.ts';
 import { isLeapYear } from './datetimes.ts';

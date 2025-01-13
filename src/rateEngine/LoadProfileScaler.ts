@@ -34,7 +34,8 @@ class LoadProfileScaler {
     const initialScalerGuess = magnitudeScaler;
     const fnParams = [initialScalerGuess, rate, this, magnitude];
 
-    const finalScaler = goalSeek.default({
+    // @ts-ignore
+    const finalScaler = goalSeek({
       fn: this.scaledMonthlyCost,
       fnParams,
       percentTolerance: 0.1,
