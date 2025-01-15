@@ -1,29 +1,30 @@
-import dayjs from "dayjs";
-// @ts-ignore - no import from dayjs
-import timezone from "dayjs/plugin/timezone";
-dayjs.extend(timezone)
-// @ts-ignore - no import from dayjs
-dayjs.tz.setDefault("America/New_York")
-
 import type { ExpandedDate } from '../types/index.ts';
 import { isLeapYear } from './datetimes.ts';
 
 const dates: Record<number, Array<ExpandedDate>> = {};
 
-const generateDates = (year: number): Array<ExpandedDate> => {
-  let profileTime = dayjs().year(year).month(0).date(1).hour(0).minute(0).second(0);
+function format(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
-  return new Array(isLeapYear(profileTime.toDate()) ? 8784 : 8760).fill(0).map((_, hourOfYear) => {
-    const val = { 
-      month: profileTime.month(), // 0-based, January is 0
-      dayOfWeek: profileTime.day(), // 0-based, Sunday is 0
-      hourStart: profileTime.hour(),
-      date: profileTime.format('YYYY-MM-DD'),
+const generateDates = (year: number): Array<ExpandedDate> => {
+  const profileTime = new Date()
+  profileTime.setFullYear(year)
+
+  return new Array(isLeapYear(profileTime) ? 8784 : 8760).fill(0).map((_, hourOfYear) => {
+    const startOfYear = new Date(year, 0, 1, 0, 0, 0);
+    const date = new Date(startOfYear.getTime() + hourOfYear * 60 * 60 * 1000);
+
+    return {
+      month: date.getMonth(), // 0-based, January is 0
+      dayOfWeek: date.getDay(), // 0-based, Sunday is 0
+      hourStart: date.getHours(),
+      date: format(date),
       hourOfYear,
     };
-
-    profileTime = profileTime.add(1, "hour")
-    return val;
   });
 };
 
@@ -31,6 +32,5 @@ export default (year: number): Array<ExpandedDate> => {
   if (!dates[year]) {
     dates[year] = generateDates(year);
   }
-
   return dates[year];
 };

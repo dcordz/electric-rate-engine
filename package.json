@@ -22,7 +22,6 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "dayjs": "^1.11.13",
     "goal-seek": "^0.1.4",
     "typescript": "^5.7"
   },

@@ -27,3 +27,5 @@ export const groupBy = <T>(
     };
   }, {} as Record<string, Array<T>>);
 };
+
+export const mean = (array: Array<number>) => sum(array) / array.length

@@ -36,7 +36,7 @@ export enum EDayOfWeek {
   
 
   export enum EMonthsOfYear {
-    JANUARY = 0, // dayjs starts at 0
+    JANUARY = 0, // new Date.getMonth() starts at 0
     FEBRUARY = 1,
     MARCH = 2,
     APRIL = 3,

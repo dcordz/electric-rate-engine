@@ -1,9 +1,9 @@
-import groupBy from 'lodash-es/groupBy.js';
+
 import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { DemandPerDayArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
-import { sum } from '../utils/index.ts';
+import { groupBy, sum } from '../utils/index.ts';
 
 class DemandPerDay extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;

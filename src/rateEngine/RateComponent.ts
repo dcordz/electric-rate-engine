@@ -1,8 +1,9 @@
-import { mean as _mean, sum } from 'lodash-es';
+
 import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
 import { MONTHS, RateElementClassification } from './constants/index.ts';
 import type { RateComponentArgs } from './types/index.ts';
 import { multiplyDecimals } from './utils/decimals.ts';
+import { sum, mean as _mean } from './utils/index.ts';
 
 class RateComponent {
   charge: Array<number>;
