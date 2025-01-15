@@ -1,4 +1,5 @@
-import { maxBy, times } from 'lodash-es';
+import { maxBy } from 'lodash-es';
+import { MONTHS } from './constants/time.ts';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import LoadProfileScaler from './LoadProfileScaler.ts';
 import type {
@@ -69,7 +70,7 @@ class LoadProfile {
   }
 
   sumByMonth(): Array<number> {
-    const sums = times(12, () => 0);
+    const sums = MONTHS.map((_) => 0);
 
     this.expanded().forEach(({ load, month }) => {
       sums[month] = addDecimals(sums[month], load);
@@ -79,17 +80,16 @@ class LoadProfile {
   }
 
   maxByMonth(): Array<number> {
-    const months = times(12, (i) => i);
     const expanded = this.expanded();
 
-    return months.map((m) => {
+    return MONTHS.map((m) => {
       const monthLoads = expanded.filter(({ month }) => m === month).map(({ load }) => load);
       return Math.max(...monthLoads);
     });
   }
 
   byMonth(): Array<Array<number>> {
-    const months = times(12, () => []);
+    const months = MONTHS.map((_) => []);
 
     this.expanded().forEach(({ load, month }) => {
       (months[month] as Array<number>).push(load);

@@ -4,6 +4,7 @@ import DemandPerDay from '../DemandPerDay.ts';
 import data from './DemandPerDayData.ts';
 import { daysPerMonth } from '../../utils/assumptions.ts';
 import type { DemandPerDayArgs } from '../../types/index.ts';
+import { MONTHS } from '../../constants/time.ts';
 
 
 interface TestData {
@@ -15,7 +16,7 @@ interface TestData {
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
-const zerosByMonth = times(12, () => 0);
+const zerosByMonth = MONTHS.map(() => 0);
 
 describe('DemandPerDay', () => {
   let loadProfile: LoadProfile;

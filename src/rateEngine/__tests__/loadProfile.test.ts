@@ -1,6 +1,7 @@
 import LoadProfile from '../LoadProfile.ts';
 import {times} from 'lodash-es';
 import LoadProfileScaler from '../LoadProfileScaler.ts';
+import { MONTHS } from '../constants/time.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 const options = {year: 2018};
@@ -122,7 +123,7 @@ describe('Load Profile', () => {
 
       // This gets the index of the first Wednesday of each month
       // so that we can set a max value for each month that is > 1.
-      const maxhours = times(12).map((monthIdx) => {
+      const maxhours = MONTHS.map((_, monthIdx) => {
         const hourOfMonth = loadProfileOfOnes.expanded().find(({month, dayOfWeek}) => (
           month === monthIdx && dayOfWeek === 3
         )) 

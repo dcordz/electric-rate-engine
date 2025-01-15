@@ -3,7 +3,7 @@ export enum RateElementClassification {
   DEMAND = 'demand',
   FIXED = 'fixed',
   SURCHARGE = 'surcharge',
-};
+}
 
 export enum BillingCategory {
   TAX = 'tax',
@@ -65,4 +65,6 @@ export const RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE = {
   [ERateElementType.BlockedTiersInDays]: RateElementClassification.SURCHARGE,
   [ERateElementType.BlockedTiersInMonths]: RateElementClassification.SURCHARGE,
   [ERateElementType.SurchargeAsPercent]: RateElementClassification.SURCHARGE,
-}
+};
+
+export * from "./time.ts"

@@ -1,7 +1,8 @@
-import LoadProfileScaler from '../LoadProfileScaler.ts';
-import {times} from 'lodash-es';
+import { jest } from '@jest/globals';
+import { times } from 'lodash-es';
+import { MONTHS } from '../constants/time.ts';
 import LoadProfile from '../LoadProfile.ts';
-import {jest} from '@jest/globals';
+import LoadProfileScaler from '../LoadProfileScaler.ts';
 
 // import e1 from '../__mocks__/rates/e-1.ts';
 // import goalSeek from 'goal-seek';
@@ -80,7 +81,7 @@ describe('LoadProfileScaler', () => {
 
   describe('toMonthlyKwh', () => {
     it('returns a LoadProfile scaled to the monthly load', () => {
-      const monthlyLoad = times(12, (i) => ((i + 1) * 100));
+      const monthlyLoad = MONTHS.map((i) => ((i + 1) * 100));
       const scaledLoadProfile = loadProfileScaler.toMonthlyKwh(monthlyLoad);
 
       scaledLoadProfile.sumByMonth().forEach((monthlyTotal, idx) => {
@@ -89,7 +90,7 @@ describe('LoadProfileScaler', () => {
     });
 
     it('throws an error with an array without 12 elements', () => {
-      const monthlyLoad = times(11, (i) => ((i + 1) * 100));
+      const monthlyLoad = MONTHS.slice(1).map((i) => ((i + 1) * 100));
       expect(() => loadProfileScaler.toMonthlyKwh(monthlyLoad)).toThrowError();
     });
   });

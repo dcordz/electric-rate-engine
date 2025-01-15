@@ -1,7 +1,6 @@
-import {times} from 'lodash-es';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
-import { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
+import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
+import { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import convertInfinities from '../utils/convertInfinities.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
 
@@ -34,7 +33,7 @@ class DemandTiersInMonths extends BillingDeterminants {
 
     const kwByMonth = this.filteredLoadProfile().maxByMonth();
 
-    return times(12, i => {
+    return MONTHS.map(i => {
       const kw = kwByMonth[i] || 0;
       if (kw < mins[i]) {
         return 0;

@@ -1,6 +1,7 @@
 import LoadProfile from '../../LoadProfile.ts';
 import {times} from 'lodash-es';
 import MonthlyDemand from '../MonthlyDemand.ts';
+import { MONTHS } from '../../constants/time.ts';
 
 const getLoadProfileOfOneThroughTen = () => times(8760, num => num % 10 + 1);
 
@@ -15,7 +16,7 @@ describe('MonthlyDemand', () => {
     it('calculates the energy demand', () => {
       const result = new MonthlyDemand(loadProfile).calculate();
 
-      expect(result).toEqual(times(12, () => 10));
+      expect(result).toEqual(MONTHS.map(() => 10));
     });
   });
 });

@@ -3,6 +3,7 @@ import {times} from 'lodash-es';
 import EnergyTimeOfUse from '../EnergyTimeOfUse.ts';
 import data from './EnergyTimeOfUseData.ts';
 import type { EnergyTimeOfUseArgs } from '../../types/index.ts';
+import { MONTHS } from '../../constants/time.ts';
 
 interface TestData {
   name: string;
@@ -14,7 +15,7 @@ interface TestData {
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
 const sumByMonthNoFilters = [744, 672, 743, 720, 744, 720, 744, 744, 720, 744, 721, 744];
-const zerosByMonth = times(12, () => 0);
+const zerosByMonth = MONTHS.map(() => 0);
 
 describe('EnergyTimeOfUse', () => {
   let loadProfile: LoadProfile;

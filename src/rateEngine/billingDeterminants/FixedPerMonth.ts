@@ -1,8 +1,5 @@
-import { times } from 'lodash-es';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
-
-const MONTHS_PER_YEAR = 12;
 
 class FixedPerMonth extends BillingDeterminants {
   rateElementType = ERateElementType.FixedPerMonth;
@@ -10,7 +7,7 @@ class FixedPerMonth extends BillingDeterminants {
   units = BillingDeterminantsUnits.MONTHS;
 
   calculate(): Array<number> {
-    return times(MONTHS_PER_YEAR, () => 1);
+    return MONTHS.map(() => 1);
   }
 }
 

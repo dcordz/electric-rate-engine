@@ -1,10 +1,8 @@
-import { mean as _mean, sum, times } from 'lodash-es';
+import { mean as _mean, sum } from 'lodash-es';
 import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
+import { MONTHS, RateElementClassification } from './constants/index.ts';
 import type { RateComponentArgs } from './types/index.ts';
 import { multiplyDecimals } from './utils/decimals.ts';
-import { RateElementClassification } from './constants/index.ts';
-
-const MONTHS_PER_YEAR = 12;
 
 class RateComponent {
   charge: Array<number>;
@@ -13,7 +11,7 @@ class RateComponent {
   private _classification: RateElementClassification;
 
   constructor({ charge, name, billingDeterminants }: RateComponentArgs) {
-    this.charge = typeof charge === 'number' ? times(MONTHS_PER_YEAR, () => charge) : charge;
+    this.charge = typeof charge === 'number' ? MONTHS.map(() => charge) : charge;
     this.name = name;
     this._billingDeterminants = billingDeterminants;
     this._classification = billingDeterminants.rateElementClassification;

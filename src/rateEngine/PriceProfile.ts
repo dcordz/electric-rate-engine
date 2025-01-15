@@ -1,4 +1,5 @@
-import { maxBy, times } from 'lodash-es';
+import { maxBy } from 'lodash-es';
+import { MONTHS } from './constants/time.ts';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import type { DetailedPriceProfileHour, LoadProfileFilterArgs, PriceProfileOptions } from './types/index.ts';
 import { addDecimals } from './utils/decimals.ts';
@@ -53,10 +54,9 @@ class PriceProfile {
   }
 
   maxByMonth(): Array<number> {
-    const months = times(12, (i) => i);
     const expanded = this.expanded();
 
-    return months.map((m) => {
+    return MONTHS.map((m) => {
       const monthPrices = expanded.filter(({ month }) => m === month).map(({ price }) => price);
       return Math.max(...monthPrices);
     });
