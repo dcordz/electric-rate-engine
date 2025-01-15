@@ -1,9 +1,8 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash-es';
+import { sum } from '../../utils/index.ts';
 import MonthlyEnergy from '../MonthlyEnergy.ts';
-import { sum } from 'lodash-es';
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 
 describe('MonthlyEnergy', () => {
   let loadProfile: LoadProfile;

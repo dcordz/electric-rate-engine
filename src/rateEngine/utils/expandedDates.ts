@@ -14,7 +14,7 @@ const generateDates = (year: number): Array<ExpandedDate> => {
   let profileTime = dayjs().year(year).month(0).date(1).hour(0).minute(0).second(0);
 
   return new Array(isLeapYear(profileTime.toDate()) ? 8784 : 8760).fill(0).map((_, hourOfYear) => {
-    const val = {
+    const val = { 
       month: profileTime.month(), // 0-based, January is 0
       dayOfWeek: profileTime.day(), // 0-based, Sunday is 0
       hourStart: profileTime.hour(),

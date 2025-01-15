@@ -1,5 +1,4 @@
 import { jest } from '@jest/globals';
-import { times } from 'lodash-es';
 import { MONTHS } from '../constants/time.ts';
 import LoadProfile from '../LoadProfile.ts';
 import LoadProfileScaler from '../LoadProfileScaler.ts';
@@ -7,8 +6,8 @@ import LoadProfileScaler from '../LoadProfileScaler.ts';
 // import e1 from '../__mocks__/rates/e-1.ts';
 // import goalSeek from 'goal-seek';
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
-const getLoadProfileOfTwos = () => times(8760, () => 2);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
+const getLoadProfileOfTwos = () => new Array(8760).fill(2);
 
 jest.unstable_mockModule('goal-seek', () => null);
 
@@ -32,7 +31,7 @@ describe('LoadProfileScaler', () => {
     it('returns a loadprofile whose sum totals the given kWh', () => {
       const totalKwh = 18705;
       const loadProfile = new LoadProfile(
-        times(8760, (i) => i % 10),
+        new Array(8760).fill(0).map((_, i) => i % 10),
         {year: 2019}
       );
       const newLoadProfileScaler = new LoadProfileScaler(loadProfile);

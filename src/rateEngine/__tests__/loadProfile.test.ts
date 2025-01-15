@@ -1,9 +1,8 @@
 import LoadProfile from '../LoadProfile.ts';
-import {times} from 'lodash-es';
 import LoadProfileScaler from '../LoadProfileScaler.ts';
 import { MONTHS } from '../constants/time.ts';
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 const options = {year: 2018};
 
 describe('Load Profile', () => {
@@ -63,7 +62,7 @@ describe('Load Profile', () => {
 
   describe('leap year', () => {
     it('handles leap year load profiles', () => {
-      const leapYearLoadProfile = new LoadProfile(times(8784, () => 1), {year: 2020});
+      const leapYearLoadProfile = new LoadProfile(new Array(8784).fill(1), {year: 2020});
 
       expect(leapYearLoadProfile.sum()).toEqual(8784);
       expect(leapYearLoadProfile.filterBy({months: [1]}).sum()).toEqual(29 * 24);
@@ -71,7 +70,7 @@ describe('Load Profile', () => {
 
     it('raises an error when the data and the expected year hours dont match up', () => {
       expect(() => new LoadProfile(getLoadProfileOfOnes(), {year: 2020})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
-      expect(() => new LoadProfile(times(8784, () => 1), {year: 2019})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
+      expect(() => new LoadProfile(new Array(8784).fill(1), {year: 2019})).toThrow("Load profile length didn't match annual hours length. It's likely a leap year is involved.");
     });
   });
 
@@ -147,12 +146,12 @@ describe('Load Profile', () => {
     });
 
     it('returns nearly 0 for a load profile with just one 1', () => {
-      loadProfile = new LoadProfile([1, ...times(8759, () => 0)], options);
+      loadProfile = new LoadProfile([1, ...new Array(8759).fill(0)], options);
       expect(loadProfile.loadFactor()).toBeCloseTo(0);
     });
 
     it('returns .5 for a half and half load profile', () => {
-      loadProfile = new LoadProfile([...times(4380, () => 10), ...times(4380, () => 0)], options);
+      loadProfile = new LoadProfile([...new Array(4380).fill(10), ...new Array(4380).fill(0)], options);
       expect(loadProfile.loadFactor()).toEqual(.5);
     });
 

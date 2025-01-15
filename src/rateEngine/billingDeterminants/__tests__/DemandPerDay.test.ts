@@ -1,10 +1,9 @@
+import { MONTHS } from '../../constants/time.ts';
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash-es';
+import type { DemandPerDayArgs } from '../../types/index.ts';
+import { daysPerMonth } from '../../utils/assumptions.ts';
 import DemandPerDay from '../DemandPerDay.ts';
 import data from './DemandPerDayData.ts';
-import { daysPerMonth } from '../../utils/assumptions.ts';
-import type { DemandPerDayArgs } from '../../types/index.ts';
-import { MONTHS } from '../../constants/time.ts';
 
 
 interface TestData {
@@ -14,7 +13,7 @@ interface TestData {
   billingDeterminantsByMonth: number[];
 }
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 
 const zerosByMonth = MONTHS.map(() => 0);
 

@@ -1,10 +1,11 @@
-import { groupBy, sumBy } from 'lodash-es';
+
 import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import { daysPerMonth } from '../utils/assumptions.ts';
 import convertInfinities from '../utils/convertInfinities.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
+import { groupBy, sumBy } from '../utils/index.ts';
 
 class BlockedTiersInDays extends BillingDeterminants {
   private _loadProfile: LoadProfile;

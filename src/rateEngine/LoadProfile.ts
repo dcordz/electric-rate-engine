@@ -1,4 +1,4 @@
-import { maxBy } from 'lodash-es';
+
 import { MONTHS } from './constants/time.ts';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import LoadProfileScaler from './LoadProfileScaler.ts';
@@ -10,6 +10,7 @@ import type {
 } from './types/index.ts';
 import { addDecimals } from './utils/decimals.ts';
 import expandedDates from './utils/expandedDates.ts';
+import { maxBy } from './utils/index.ts';
 
 const isLoadProfileObject = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is LoadProfile => {
   return 'expanded' in p && typeof p['expanded'] === 'function';
@@ -124,7 +125,7 @@ class LoadProfile {
     }
 
     // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
-    return maxBy(this.expanded(), 'load')?.load ?? 0;
+    return maxBy(this.expanded(), 'load') ?? 0;
   }
 
   loadFactor(): number {
