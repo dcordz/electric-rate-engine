@@ -4,6 +4,20 @@ import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { dts } from 'rollup-plugin-dts';
 import pkg from './package.json' with { type: "json" };
+import { statSync } from 'fs';
+
+const logBundleSize = () => {
+  return {
+    name: 'log-bundle-size',
+    writeBundle(options) {
+      const { file } = options;
+      if (file) {
+        const size = statSync(file).size / 1024; // Convert to KB
+        console.log(`${file} size ${size.toFixed(2)} KB`);
+      }
+    },
+  };
+};
 
 export default [
   {
@@ -17,6 +31,7 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.build.json", declaration: false }),
+      logBundleSize()
     ],
   },
 
