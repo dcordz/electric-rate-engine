@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "test:watch": "jest --config jestconfig.json --watch",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "analyze": "source-map-explorer 'lib/**/*.js' --no-border-checks",
     "lint": "npx eslint -c eslint.config.js src"

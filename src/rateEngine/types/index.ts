@@ -3,7 +3,7 @@ import LoadProfile from '../LoadProfile';
 import PriceProfile from '../PriceProfile';
 import RateElement from '../RateElement';
 import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
-import { BillingCategory, RateElementClassification } from '../constants';
+import { TBillingCategory, TRateElementClassification } from '../constants';
 
 /**
  * Here's an example rate definition, with the types of the
@@ -55,7 +55,7 @@ export interface RateInterface {
 interface BaseRateElementInterface {
   id?: string;
   name: string;
-  billingCategory?: BillingCategory;
+  billingCategory?: TBillingCategory;
 };
 
 interface BaseRateComponentInterface {
@@ -243,6 +243,6 @@ export interface MinMaxPair {
 
 export interface RateElementFilterArgs {
   ids?: Array<string>;
-  classifications?: Array<RateElementClassification>;
-  billingCategories?: Array<BillingCategory>;
+  classifications?: Array<TRateElementClassification>;
+  billingCategories?: Array<TBillingCategory>;
 }

@@ -1,10 +1,10 @@
 import lodashMean from 'lodash/mean';
-import { BillingDeterminantsUnits, RateElementClassification } from '../constants';
+import { TBillingDeterminantsUnits, TRateElementClassification } from '../constants';
 
 abstract class BillingDeterminants {
   abstract rateElementType: string;
-  abstract rateElementClassification: RateElementClassification;
-  abstract units: BillingDeterminantsUnits;
+  abstract rateElementClassification: TRateElementClassification;
+  abstract units: TBillingDeterminantsUnits;
   abstract calculate(): Array<number>;
 
   mean(): number {

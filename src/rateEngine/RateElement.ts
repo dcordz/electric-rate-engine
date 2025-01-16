@@ -1,19 +1,19 @@
-import RateComponent from './RateComponent';
-import RateCalculator from './RateCalculator';
 import sum from 'lodash/sum';
-import ValidatorFactory from './ValidatorFactory';
 import LoadProfile from './LoadProfile';
+import RateCalculator from './RateCalculator';
+import RateComponent from './RateComponent';
 import RateComponentsFactory from './RateComponentsFactory';
-import { BillingCategory, RateElementClassification } from './constants';
-import type { RateElementType, RateElementInterface, RateElementFilterArgs, ValidatorError } from './types';
+import ValidatorFactory from './ValidatorFactory';
+import { TBillingCategory, TRateElementClassification } from './constants';
+import type { RateElementFilterArgs, RateElementInterface, RateElementType, ValidatorError } from './types';
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;
   id?: string;
   name: string;
   type: RateElementType;
-  classification?: RateElementClassification;
-  billingCategory?: BillingCategory;
+  classification?: TRateElementClassification;
+  billingCategory?: TBillingCategory;
   errors: Array<ValidatorError> = [];
 
   constructor(

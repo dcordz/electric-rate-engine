@@ -1,20 +1,24 @@
-export enum RateElementClassification {
-  ENERGY = 'energy',
-  DEMAND = 'demand',
-  FIXED = 'fixed',
-  SURCHARGE = 'surcharge',
-};
+export const RateElementClassification = {
+  ENERGY: 'energy',
+  DEMAND: 'demand',
+  FIXED: 'fixed',
+  SURCHARGE: 'surcharge',
+} as const;
 
-export enum BillingCategory {
-  TAX = 'tax',
-  SUPPLY = 'supply',
-  DELIVERY = 'delivery',
-}
+export const BillingCategory = {
+  TAX: 'tax',
+  SUPPLY: 'supply',
+  DELIVERY: 'delivery',
+} as const;
 
-export enum BillingDeterminantsUnits {
-  KWH = 'kWh',
-  KW = 'kW',
-  DAYS = 'days',
-  MONTHS = 'months',
-  DOLLARS = 'dollars',
-}
+export const BillingDeterminantsUnits = {
+  KWH: 'kWh',
+  KW: 'kW',
+  DAYS: 'days',
+  MONTHS: 'months',
+  DOLLARS: 'dollars',
+} as const;
+
+export type TRateElementClassification = typeof RateElementClassification[keyof typeof RateElementClassification];
+export type TBillingCategory = typeof BillingCategory[keyof typeof BillingCategory];
+export type TBillingDeterminantsUnits = typeof BillingDeterminantsUnits[keyof typeof BillingDeterminantsUnits];
