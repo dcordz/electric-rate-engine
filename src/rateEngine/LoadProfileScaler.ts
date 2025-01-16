@@ -30,12 +30,16 @@ class LoadProfileScaler {
   }
 
   toAverageMonthlyBill(amount: number, rate: RateInterface, goalSeekParams: GoalSeekArgs = {}): LoadProfile {
+    // Ex. pass in 10_000 as amount
+    // Ex. magnitude === 4
     const magnitude = Math.max(Math.floor(Math.log10(Math.abs(amount))), 0);
 
+    // Ex. magnitudeScalar === 10_000
     const magnitudeScaler = 10 ** magnitude;
     const initialScalerGuess = magnitudeScaler;
     const fnParams = [initialScalerGuess, rate, this, magnitude];
 
+    // goal-seek -> you know the desired output of a function but not the input to yield such an output
     const finalScaler = gs({
       fn: this.scaledMonthlyCost,
       fnParams,
