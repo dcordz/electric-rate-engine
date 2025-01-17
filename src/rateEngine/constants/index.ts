@@ -1,20 +1,20 @@
-export const RateElementClassification = {
-  ENERGY: 'energy',
-  DEMAND: 'demand',
-  FIXED: 'fixed',
-  SURCHARGE: 'surcharge',
-} as const;
+export enum RateElementClassification {
+  ENERGY = 'energy',
+  DEMAND = 'demand',
+  FIXED = 'fixed',
+  SURCHARGE = 'surcharge',
+};
 
-export const BillingCategory = {
-  TAX: 'tax',
-  SUPPLY: 'supply',
-  DELIVERY: 'delivery',
-} as const;
+export enum BillingCategory {
+  TAX = 'tax',
+  SUPPLY = 'supply',
+  DELIVERY = 'delivery',
+};
 
-export const BillingDeterminantsUnits = {
-  KWH: 'kWh',
-  KW: 'kW',
-  DAYS: 'days',
-  MONTHS: 'months',
-  DOLLARS: 'dollars',
-} as const;
+export enum BillingDeterminantsUnits {
+  KWH = 'kWh',
+  KW = 'kW',
+  DAYS = 'days',
+  MONTHS = 'months',
+  DOLLARS = 'dollars',
+};

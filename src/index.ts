@@ -3,7 +3,4 @@ export { default as LoadProfile } from './rateEngine/LoadProfile';
 export { default as RateElement } from './rateEngine/RateElement';
 export { default as RateComponent } from './rateEngine/RateComponent';
 
-export * from './rateEngine/constants';
 export * from './rateEngine/types';
-
-export const RateEngineVersion = "2.0.3"
