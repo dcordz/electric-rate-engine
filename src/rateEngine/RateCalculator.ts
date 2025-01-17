@@ -36,7 +36,7 @@ class RateCalculator {
   rateElements({ ...filters }: RateElementFilterArgs = {}): Array<RateElement> {
     return this._rateElements
       .filter((element) => element.matches(filters))
-      .sort((a, b) => (RATE_ELEMENT_SORT_ORDER[a.type] ?? 0) - (RATE_ELEMENT_SORT_ORDER[b.type] ?? 0));
+      .toSorted((a, b) => (RATE_ELEMENT_SORT_ORDER[a.type] ?? 0) - (RATE_ELEMENT_SORT_ORDER[b.type] ?? 0));
   }
 
   annualCost({ ...filters }: RateElementFilterArgs = {}): number {
