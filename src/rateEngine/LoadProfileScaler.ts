@@ -39,8 +39,7 @@ class LoadProfileScaler {
     const initialScalerGuess = magnitudeScaler;
     const fnParams = [initialScalerGuess, rate, this, magnitude];
 
-    // goal-seek -> you know the desired output of a function but not the input to yield such an output
-    const finalScaler = gs({
+    const finalScaler = this.goalSeek({
       fn: this.scaledMonthlyCost,
       fnParams,
       percentTolerance: 0.1,
@@ -53,6 +52,10 @@ class LoadProfileScaler {
 
     const scalerAsDecimal = finalScaler / magnitudeScaler;
     return this.to(scalerAsDecimal);
+  }
+
+  goalSeek(goalSeekParams: GoalSeekArgs = {}) {
+    return gs(goalSeekParams)
   }
 
   toMonthlyKwh(monthlyKwh: Array<number>): LoadProfile {
