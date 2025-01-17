@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": "git://github.com/bellawatt/electric-rate-engine.git",
   "scripts": {
-    "test": "cross-env TZ=America/New_York NODE_OPTIONS=--experimental-vm-modules npx jest --config jest.config.ts",
+    "test": "npx jest --config jest.config.ts",
     "test:watch": "jest --config jest.config.ts --watch",
     "build": "rm -rf lib && rollup -c rollup.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
