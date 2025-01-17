@@ -1,6 +1,5 @@
-import { times } from 'lodash-es';
+import { ERateElementType, MONTHS } from '../../constants/index.ts';
 import type { RateInterface } from '../../types/index.ts';
-import { ERateElementType } from '../../constants/index.ts';
 
 const HOLIDAYS = [
   '2018-01-01',
@@ -114,14 +113,14 @@ const etoua: RateInterface = {
       rateComponents: [
         {
           charge: -0.08633,
-          min: times(12, (_) => 0),
-          max: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
+          min: MONTHS.map(_ => 0),
+          max: MONTHS.map((i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
           name: 'Discount',
         },
         {
           charge: 0,
-          min: times(12, (i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
-          max: times(12, () => Infinity),
+          min: MONTHS.map((i) => ([4, 5, 6, 7, 8, 9].includes(i) ? 14.2 : 12)),
+          max: MONTHS.map(_ => Infinity),
           name: 'Free Energy!',
         }
       ],

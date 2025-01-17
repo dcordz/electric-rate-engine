@@ -1,8 +1,8 @@
+import { MONTHS } from '../../constants/time.ts';
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash-es';
+import type { DemandTimeOfUseArgs } from '../../types/index.ts';
 import DemandTimeOfUse from '../DemandTimeOfUse.ts';
 import data from './DemandTimeOfUseData.ts';
-import type { DemandTimeOfUseArgs } from '../../types/index.ts';
 
 interface TestData {
   name: string;
@@ -11,10 +11,10 @@ interface TestData {
   billingDeterminantsByMonth: number[];
 }
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 
-const onesByMonth = times(12, () => 1);
-const zerosByMonth = times(12, () => 0);
+const onesByMonth = MONTHS.map(() => 1);
+const zerosByMonth = MONTHS.map(() => 0);
 
 describe('DemandTimeOfUse', () => {
   let loadProfile: LoadProfile;

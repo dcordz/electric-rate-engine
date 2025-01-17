@@ -6,5 +6,8 @@ node_modules
 tags
 .npmrc
 
+<<<<<<< HEAD
+=======
 # Rollup visualizer
+>>>>>>> rollup
 stats.html

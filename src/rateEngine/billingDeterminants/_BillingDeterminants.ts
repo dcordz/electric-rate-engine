@@ -1,5 +1,6 @@
-import {mean} from 'lodash-es';
+
 import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+import { mean } from '../utils/index.ts';
 
 abstract class BillingDeterminants {
   abstract rateElementType: ERateElementType;

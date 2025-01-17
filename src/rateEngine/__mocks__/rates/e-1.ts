@@ -1,10 +1,9 @@
-import { times } from 'lodash-es';
+import { ERateElementType, MONTHS } from '../../constants/index.ts';
 import type { RateInterface } from '../../types/index.ts';
-import { ERateElementType } from '../../constants/index.ts';
 
 const SUMMMER_MONTHS = [4, 5, 6, 7, 8, 9];
-const cutoff_1 = times(12, (i) => (SUMMMER_MONTHS.includes(i) ? 13 : 12.5));
-const cutoff_2 = times(12, (i) => (SUMMMER_MONTHS.includes(i) ? 52 : 50));
+const cutoff_1 = MONTHS.map((i) => (SUMMMER_MONTHS.includes(i) ? 13 : 12.5));
+const cutoff_2 = MONTHS.map((i) => (SUMMMER_MONTHS.includes(i) ? 52 : 50));
 
 const e1: RateInterface = {
   name: 'E-1',
@@ -36,7 +35,7 @@ const e1: RateInterface = {
       rateComponents: [
         {
           charge: 0.24373,
-          min: times(12, (_) => 0),
+          min: MONTHS.map(_ => 0),
           max: cutoff_1,
           name: 'Tier 1',
         },
@@ -49,7 +48,7 @@ const e1: RateInterface = {
         {
           charge: 0.53738,
           min: cutoff_2,
-          max: times(12, (_) => Infinity),
+          max: MONTHS.map(_ => Infinity),
           name: 'Tier 3',
         },
       ],

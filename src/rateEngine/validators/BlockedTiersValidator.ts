@@ -1,10 +1,10 @@
-import {times} from 'lodash-es';
-import Validator from './_Validator.ts';
-import expandedDates from '../utils/expandedDates.ts';
-import LoadProfileFilter from '../LoadProfileFilter.ts';
+import { MONTHS } from '../constants/time.ts';
 import LoadProfile from '../LoadProfile.ts';
-import type { MinMaxPair, BlockedTiersArgs } from '../types/index.ts';
+import LoadProfileFilter from '../LoadProfileFilter.ts';
+import type { BlockedTiersArgs, MinMaxPair } from '../types/index.ts';
 import convertInfinities from '../utils/convertInfinities.ts';
+import expandedDates from '../utils/expandedDates.ts';
+import Validator from './_Validator.ts';
 
 class BlockedTiersValidator extends Validator {
   private _args: Array<BlockedTiersArgs>;
@@ -71,7 +71,7 @@ class BlockedTiersValidator extends Validator {
   }
 
   protected getSortedPairs(minsAndMaxes: Array<{ min: Array<number>; max: Array<number>; }>): Array<Array<MinMaxPair>> {
-    return times(12, i => {
+    return MONTHS.map(i => {
       return minsAndMaxes.map(({min, max}) => ({min: min[i], max: max[i]})).sort((a, b) => a.min - b.min);
     });
   }

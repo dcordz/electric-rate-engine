@@ -1,4 +1,5 @@
-import { maxBy, times } from 'lodash-es';
+
+import { MONTHS } from './constants/time.ts';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import LoadProfileScaler from './LoadProfileScaler.ts';
 import type {
@@ -9,6 +10,7 @@ import type {
 } from './types/index.ts';
 import { addDecimals } from './utils/decimals.ts';
 import expandedDates from './utils/expandedDates.ts';
+import { maxBy } from './utils/index.ts';
 
 const isLoadProfileObject = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is LoadProfile => {
   return 'expanded' in p && typeof p['expanded'] === 'function';
@@ -69,7 +71,7 @@ class LoadProfile {
   }
 
   sumByMonth(): Array<number> {
-    const sums = times(12, () => 0);
+    const sums = MONTHS.map((_) => 0);
 
     this.expanded().forEach(({ load, month }) => {
       sums[month] = addDecimals(sums[month], load);
@@ -79,17 +81,16 @@ class LoadProfile {
   }
 
   maxByMonth(): Array<number> {
-    const months = times(12, (i) => i);
     const expanded = this.expanded();
 
-    return months.map((m) => {
+    return MONTHS.map((m) => {
       const monthLoads = expanded.filter(({ month }) => m === month).map(({ load }) => load);
       return Math.max(...monthLoads);
     });
   }
 
   byMonth(): Array<Array<number>> {
-    const months = times(12, () => []);
+    const months = MONTHS.map((_) => []);
 
     this.expanded().forEach(({ load, month }) => {
       (months[month] as Array<number>).push(load);
@@ -124,7 +125,7 @@ class LoadProfile {
     }
 
     // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
-    return maxBy(this.expanded(), 'load')?.load ?? 0;
+    return maxBy(this.expanded(), 'load') ?? 0;
   }
 
   loadFactor(): number {

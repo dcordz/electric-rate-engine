@@ -5,6 +5,7 @@ import typescript from '@rollup/plugin-typescript';
 import { dts } from 'rollup-plugin-dts';
 import pkg from './package.json' with { type: "json" };
 import { statSync } from 'fs';
+import { visualizer } from "rollup-plugin-visualizer";
 
 const logBundleSize = () => {
   return {
@@ -31,14 +32,15 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.build.json", declaration: false }),
-      logBundleSize()
+      logBundleSize(),
+      visualizer({ filename: "stats.html" })
     ],
   },
 
   {
     input: './src/index.ts',
     output: [
-      { file: "./lib/index.d.ts", format: "es" },
+      { file: "./lib/index.d.ts" },
     ],
     plugins: [
       dts({ tsconfig: "./tsconfig.build.json", emitDeclarationOnly: true }),

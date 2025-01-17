@@ -1,8 +1,9 @@
-import { groupBy, sum, times } from 'lodash-es';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+
+import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { DemandPerDayArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
+import { groupBy, sum } from '../utils/index.ts';
 
 class DemandPerDay extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;
@@ -24,10 +25,9 @@ class DemandPerDay extends BillingDeterminants {
   }
 
   calculate(): Array<number> {
-    const months = times(12, (i) => i);
     const expanded = this.filteredLoadProfile().expanded();
 
-    return months.map((m) => {
+    return MONTHS.map((m) => {
       const monthLoads = expanded.filter(({ month }) => m === month);
 
       // chunk monthly loads by day (31-element array for January, etc.)

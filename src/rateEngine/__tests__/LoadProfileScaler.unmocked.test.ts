@@ -1,5 +1,4 @@
 import LoadProfileScaler from '../LoadProfileScaler.ts';
-import { times } from 'lodash-es';
 import LoadProfile from '../LoadProfile.ts';
 import e1 from '../__mocks__/rates/e-1.ts';
 import RateCalculator from '../RateCalculator.ts';
@@ -7,7 +6,7 @@ import type { RateInterface } from '../types/index.ts';
 import { ERateElementType } from '../constants/index.ts';
 import { jest } from '@jest/globals';
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 
 const dummyRate: RateInterface = {
   name: 'some rate',

@@ -1,11 +1,10 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash-es';
 import BlockedTiersInMonths from '../BlockedTiersInMonths.ts';
 
 // For reference: the number of hours in each month:
 // [ 744, 672, 743, 720, 744, 720, 744, 744, 720, 744, 721, 744 ]
 
-const getLoadProfileOfOnes = () => times(8760, () => 1);
+const getLoadProfileOfOnes = () => new Array(8760).fill(1);
 
 describe('BlockedTiersInMonths', () => {
   let loadProfile: LoadProfile;

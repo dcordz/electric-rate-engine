@@ -1,10 +1,11 @@
-import { groupBy, sumBy, times } from 'lodash-es';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+
+import { BillingDeterminantsUnits, ERateElementType, MONTHS, RateElementClassification } from '../constants/index.ts';
 import LoadProfile from '../LoadProfile.ts';
 import type { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
 import { daysPerMonth } from '../utils/assumptions.ts';
 import convertInfinities from '../utils/convertInfinities.ts';
 import BillingDeterminants from './_BillingDeterminants.ts';
+import { groupBy, sumBy } from '../utils/index.ts';
 
 class BlockedTiersInDays extends BillingDeterminants {
   private _loadProfile: LoadProfile;
@@ -38,7 +39,7 @@ class BlockedTiersInDays extends BillingDeterminants {
     const monthlyExpandedLoadProfile = Object.values(groupBy(expandedLoadProfile, 'month'));
     const kwhByMonth = monthlyExpandedLoadProfile.map((loadProfiles) => sumBy(loadProfiles, 'load'));
 
-    return times(12, (i) => {
+    return MONTHS.map((i) => {
       const kwh = kwhByMonth[i] || 0;
       if (kwh < mins[i]) {
         return 0;

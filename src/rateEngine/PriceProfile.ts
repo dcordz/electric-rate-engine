@@ -1,8 +1,10 @@
-import { maxBy, times } from 'lodash-es';
+
+import { MONTHS } from './constants/time.ts';
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import type { DetailedPriceProfileHour, LoadProfileFilterArgs, PriceProfileOptions } from './types/index.ts';
 import { addDecimals } from './utils/decimals.ts';
 import expandedDates from './utils/expandedDates.ts';
+import { maxBy } from './utils/index.ts';
 
 const isPriceProfileObject = (p: Array<number> | Array<DetailedPriceProfileHour> | PriceProfile): p is PriceProfile => {
   return 'expanded' in p && typeof p['expanded'] === 'function';
@@ -53,10 +55,9 @@ class PriceProfile {
   }
 
   maxByMonth(): Array<number> {
-    const months = times(12, (i) => i);
     const expanded = this.expanded();
 
-    return months.map((m) => {
+    return MONTHS.map((m) => {
       const monthPrices = expanded.filter(({ month }) => m === month).map(({ price }) => price);
       return Math.max(...monthPrices);
     });
@@ -87,8 +88,7 @@ class PriceProfile {
       return 0;
     }
 
-    // lodash's maxBy interface returns T | undefined so we need the ?? 0 here although it should never be 0
-    return maxBy(this.expanded(), 'price')?.price ?? 0;
+    return maxBy(this.expanded(), 'price') ?? 0;
   }
 
   _buildFromNumberArray(priceProfile: Array<number>) {
