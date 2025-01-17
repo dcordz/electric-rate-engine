@@ -18,7 +18,3 @@ export const BillingDeterminantsUnits = {
   MONTHS: 'months',
   DOLLARS: 'dollars',
 } as const;
-
-export type TRateElementClassification = typeof RateElementClassification[keyof typeof RateElementClassification];
-export type TBillingCategory = typeof BillingCategory[keyof typeof BillingCategory];
-export type TBillingDeterminantsUnits = typeof BillingDeterminantsUnits[keyof typeof BillingDeterminantsUnits];

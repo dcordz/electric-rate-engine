@@ -4,8 +4,14 @@ import RateCalculator from './RateCalculator';
 import RateComponent from './RateComponent';
 import RateComponentsFactory from './RateComponentsFactory';
 import ValidatorFactory from './ValidatorFactory';
-import { TBillingCategory, TRateElementClassification } from './constants';
-import type { RateElementFilterArgs, RateElementInterface, RateElementType, ValidatorError } from './types';
+import type {
+  RateElementFilterArgs,
+  RateElementInterface,
+  RateElementType,
+  TBillingCategory,
+  TRateElementClassification,
+  ValidatorError,
+} from './types';
 
 class RateElement {
   private _rateComponents: Array<RateComponent>;

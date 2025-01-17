@@ -1,5 +1,6 @@
 import lodashMean from 'lodash/mean';
-import { TBillingDeterminantsUnits, TRateElementClassification } from '../constants';
+import { TBillingDeterminantsUnits, TRateElementClassification } from '../types';
+
 
 abstract class BillingDeterminants {
   abstract rateElementType: string;

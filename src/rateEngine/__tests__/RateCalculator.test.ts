@@ -1,7 +1,7 @@
+import { BillingCategory } from '../constants';
 import LoadProfile from '../LoadProfile';
 import RateCalculator from '../RateCalculator';
 import type { RateInterface } from '../types';
-import { BillingCategory, TBillingCategory } from '../constants';
 
 describe('RateCalculator', () => {
   describe('annualCost', () => {
@@ -12,7 +12,7 @@ describe('RateCalculator', () => {
         rateElements: [
           {
             name: 'One fixed charge',
-            billingCategory: BillingCategory.SUPPLY as TBillingCategory,
+            billingCategory: BillingCategory.SUPPLY,
             rateElementType: 'FixedPerMonth',
             rateComponents: [
               {

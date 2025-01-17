@@ -3,7 +3,7 @@ import LoadProfile from '../LoadProfile';
 import PriceProfile from '../PriceProfile';
 import RateElement from '../RateElement';
 import BillingDeterminants from '../billingDeterminants/_BillingDeterminants';
-import { TBillingCategory, TRateElementClassification } from '../constants';
+import { BillingCategory, BillingDeterminantsUnits, RateElementClassification } from '../constants';
 
 /**
  * Here's an example rate definition, with the types of the
@@ -56,12 +56,12 @@ interface BaseRateElementInterface {
   id?: string;
   name: string;
   billingCategory?: TBillingCategory;
-};
+}
 
 interface BaseRateComponentInterface {
   charge: number | Array<number>;
   name: string;
-};
+}
 
 type BaseRateElementType =
     | AnnualDemandRateElementInterface
@@ -92,42 +92,42 @@ export type RateElementType = RateElementInterface['rateElementType'];
 export interface EnergyTimeOfUseRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'EnergyTimeOfUse';
   rateComponents: Array<BaseRateComponentInterface & EnergyTimeOfUseArgs>;
-};
+}
 
 export interface BlockedTiersInDaysRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'BlockedTiersInDays';
   rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
-};
+}
 
 export interface BlockedTiersInMonthsRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'BlockedTiersInMonths';
   rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
-};
+}
 
 export interface FixedPerDayRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'FixedPerDay';
   rateComponents: Array<BaseRateComponentInterface>;
-};
+}
 
 export interface FixedPerMonthRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'FixedPerMonth';
   rateComponents: Array<BaseRateComponentInterface>;
-};
+}
 
 export interface MonthlyDemandRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'MonthlyDemand';
   rateComponents: Array<BaseRateComponentInterface>;
-};
+}
 
 export interface AnnualDemandRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'AnnualDemand';
   rateComponents: Array<BaseRateComponentInterface>;
-};
+}
 
 export interface MonthlyEnergyRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'MonthlyEnergy';
   rateComponents: Array<BaseRateComponentInterface>;
-};
+}
 
 // The interface that the user uses to definte the rate
 export interface UnprocessedSurchargeAsPercentRateElementInterface extends BaseRateElementInterface {
@@ -145,22 +145,22 @@ export interface HourlyEnergyRateElementInterface extends BaseRateElementInterfa
   rateElementType: 'HourlyEnergy';
   priceProfile: Array<number> | PriceProfile;
   rateComponents: Array<BaseRateComponentInterface & HourlyEnergyArgs>,
-};
+}
 
 export interface DemandTiersInMonthsRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'DemandTiersInMonths';
   rateComponents: Array<BaseRateComponentInterface & BlockedTiersArgs>;
-};
+}
 
 export interface DemandTimeOfUseRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'DemandTimeOfUse';
   rateComponents: Array<BaseRateComponentInterface & DemandTimeOfUseArgs>;
-};
+}
 
 export interface DemandPerDayRateElementInterface extends BaseRateElementInterface {
   rateElementType: 'DemandPerDay';
   rateComponents: Array<BaseRateComponentInterface & DemandPerDayArgs>;
-};
+}
 
 
 export interface RateComponentArgs {
@@ -223,7 +223,7 @@ export interface ExpandedDate {
   dayOfWeek: number;
   date: string;
   hourOfYear: number;
-};
+}
 
 export interface ValidatorError {
   english: string,
@@ -246,3 +246,8 @@ export interface RateElementFilterArgs {
   classifications?: Array<TRateElementClassification>;
   billingCategories?: Array<TBillingCategory>;
 }
+
+
+export type TRateElementClassification = typeof RateElementClassification[keyof typeof RateElementClassification];
+export type TBillingCategory = typeof BillingCategory[keyof typeof BillingCategory];
+export type TBillingDeterminantsUnits = typeof BillingDeterminantsUnits[keyof typeof BillingDeterminantsUnits];
