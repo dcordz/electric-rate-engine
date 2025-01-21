@@ -1,7 +1,7 @@
-import BillingDeterminants from './_BillingDeterminants';
-import LoadProfile from '../LoadProfile';
-import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
-import type { EnergyTimeOfUseArgs, LoadProfileFilterArgs } from '../types';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants/index.ts';
+import type { EnergyTimeOfUseArgs, LoadProfileFilterArgs } from '../types/index.ts';
 
 class EnergyTimeOfUse extends BillingDeterminants {
   private _filters: LoadProfileFilterArgs;

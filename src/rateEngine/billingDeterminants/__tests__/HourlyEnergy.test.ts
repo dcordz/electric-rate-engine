@@ -1,5 +1,5 @@
-import HourlyEnergy from '../HourlyEnergy';
-import LoadProfile from '../../LoadProfile';
+import HourlyEnergy from '../HourlyEnergy.ts';
+import LoadProfile from '../../LoadProfile.ts';
 
 describe('HourlyEnergy', () => {
   describe('with a February hour', () => {

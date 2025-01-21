@@ -1,4 +1,4 @@
-import { daysPerMonth } from '../assumptions';
+import { daysPerMonth } from '../assumptions.ts';
 
 const leapYearDays = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const nonLeapYearDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];

@@ -1,10 +1,10 @@
-import Validator from './_Validator';
-import times from 'lodash/times';
-import expandedDates from '../utils/expandedDates';
-import LoadProfileFilter from '../LoadProfileFilter';
-import LoadProfile from '../LoadProfile';
-import type { MinMaxPair, BlockedTiersArgs } from '../types';
-import convertInfinities from '../utils/convertInfinities';
+import {times} from 'lodash-es';
+import Validator from './_Validator.ts';
+import expandedDates from '../utils/expandedDates.ts';
+import LoadProfileFilter from '../LoadProfileFilter.ts';
+import LoadProfile from '../LoadProfile.ts';
+import type { MinMaxPair, BlockedTiersArgs } from '../types/index.ts';
+import convertInfinities from '../utils/convertInfinities.ts';
 
 class BlockedTiersValidator extends Validator {
   private _args: Array<BlockedTiersArgs>;

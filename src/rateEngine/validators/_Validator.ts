@@ -1,4 +1,4 @@
-import { ValidatorError, LabeledError } from '../types';
+import { ValidatorError, LabeledError } from '../types/index.ts';
 
 abstract class Validator {
   protected _errors: Array<LabeledError> = [];

@@ -1,15 +1,14 @@
-import maxBy from 'lodash/maxBy';
-import times from 'lodash/times';
-import LoadProfileFilter from './LoadProfileFilter';
-import LoadProfileScaler from './LoadProfileScaler';
+import { maxBy, times } from 'lodash-es';
+import LoadProfileFilter from './LoadProfileFilter.ts';
+import LoadProfileScaler from './LoadProfileScaler.ts';
 import type {
   DetailedLoadProfileHour,
   LoadProfileFilterArgs,
   LoadProfileOptions,
   LoadProfileScalerOptions,
-} from './types';
-import { addDecimals } from './utils/decimals';
-import expandedDates from './utils/expandedDates';
+} from './types/index.ts';
+import { addDecimals } from './utils/decimals.ts';
+import expandedDates from './utils/expandedDates.ts';
 
 const isLoadProfileObject = (p: Array<number> | Array<DetailedLoadProfileHour> | LoadProfile): p is LoadProfile => {
   return 'expanded' in p && typeof p['expanded'] === 'function';

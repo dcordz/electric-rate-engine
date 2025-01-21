@@ -1,9 +1,9 @@
-import times from 'lodash/times';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants';
-import LoadProfile from '../LoadProfile';
-import { BlockedTiersArgs, LoadProfileFilterArgs } from '../types';
-import convertInfinities from '../utils/convertInfinities';
-import BillingDeterminants from './_BillingDeterminants';
+import {times} from 'lodash-es';
+import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+import { BlockedTiersArgs, LoadProfileFilterArgs } from '../types/index.ts';
+import LoadProfile from '../LoadProfile.ts';
+import convertInfinities from '../utils/convertInfinities.ts';
+import BillingDeterminants from './_BillingDeterminants.ts';
 
 class DemandTiersInMonths extends BillingDeterminants {
   private _loadProfile: LoadProfile;

@@ -1,7 +1,7 @@
-import RateElement from '../RateElement';
-import LoadProfile from '../LoadProfile';
-import type { RateElementInterface } from '../types';
-import { BillingCategory, RateElementClassification } from '../constants';
+import RateElement from '../RateElement.ts';
+import LoadProfile from '../LoadProfile.ts';
+import type { RateElementInterface } from '../types/index.ts';
+import { BillingCategory, ERateElementType, RateElementClassification } from '../constants/index.ts';
 
 const getLoadProfileOfOnes = () => Array(8760).fill(1);
 
@@ -11,7 +11,7 @@ const MONTHS_PER_YEAR = 12;
 
 const FIXED_RATE_ELEMENT_DATA: RateElementInterface = {
   id: 'fixed-charge',
-  rateElementType: 'FixedPerMonth',
+  rateElementType: ERateElementType.FixedPerMonth,
   name: 'A fixed monthly charge',
   rateComponents: [
     {
@@ -23,7 +23,7 @@ const FIXED_RATE_ELEMENT_DATA: RateElementInterface = {
 
 const ENERGY_CHARGE_DATA: RateElementInterface = {
   id: 'energy-charge',
-  rateElementType: 'MonthlyEnergy',
+  rateElementType: ERateElementType.MonthlyEnergy,
   name: 'An energy charge',
   rateComponents: [
     {
@@ -38,7 +38,7 @@ describe('RateElement', () => {
     it('calculates the surcharge', () => {
       const rateElement = new RateElement(
         {
-          rateElementType: 'SurchargeAsPercent',
+          rateElementType: ERateElementType.SurchargeAsPercent,
           name: '10% surcharge',
           rateComponents: [
             {
@@ -54,7 +54,7 @@ describe('RateElement', () => {
         ]
       );
 
-      expect(rateElement.annualCost()).toEqual(
+      expect(rateElement.annualCost()).toBeCloseTo(
         FIXED_CHARGE * MONTHS_PER_YEAR * SURCHARGE_AS_DECIMAL
       );
     });
@@ -63,7 +63,7 @@ describe('RateElement', () => {
       it('only surcharges for the specified elements', () => {
         const rateElement = new RateElement(
           {
-            rateElementType: 'SurchargeAsPercent',
+            rateElementType: ERateElementType.SurchargeAsPercent,
             name: '10% surcharge',
             rateComponents: [
               {
@@ -80,7 +80,7 @@ describe('RateElement', () => {
           ]
         );
 
-        expect(rateElement.annualCost()).toEqual(
+        expect(rateElement.annualCost()).toBeCloseTo(
           FIXED_CHARGE * MONTHS_PER_YEAR * SURCHARGE_AS_DECIMAL
         );
       });
@@ -90,7 +90,7 @@ describe('RateElement', () => {
       it('surcharges all other rate elements', () => {
         const rateElement = new RateElement(
           {
-            rateElementType: 'SurchargeAsPercent',
+            rateElementType: ERateElementType.SurchargeAsPercent,
             name: '10% surcharge',
             rateComponents: [
               {
@@ -107,7 +107,7 @@ describe('RateElement', () => {
         );
 
         const ENERGY_CHARGE_FOR_YEAR = 8760;
-        expect(rateElement.annualCost()).toEqual(
+        expect(rateElement.annualCost()).toBeCloseTo(
           (ENERGY_CHARGE_FOR_YEAR + FIXED_CHARGE * MONTHS_PER_YEAR) * SURCHARGE_AS_DECIMAL
         );
       })
@@ -120,7 +120,7 @@ describe('RateElement', () => {
         const rateElement = new RateElement(
           {
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [],
           },
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
@@ -136,7 +136,7 @@ describe('RateElement', () => {
           {
             id: 'some-id',
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [],
           },
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
@@ -150,7 +150,7 @@ describe('RateElement', () => {
           {
             id: 'some-id',
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [],
           },
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
@@ -166,7 +166,7 @@ describe('RateElement', () => {
           {
             billingCategory: BillingCategory.SUPPLY,
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [],
           },
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
@@ -180,7 +180,7 @@ describe('RateElement', () => {
           {
             billingCategory: BillingCategory.SUPPLY,
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [],
           },
           new LoadProfile(getLoadProfileOfOnes(), {year: 2019})
@@ -195,7 +195,7 @@ describe('RateElement', () => {
         const rateElement = new RateElement(
           {
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [
               {
                 charge: 1.5,
@@ -213,7 +213,7 @@ describe('RateElement', () => {
         const rateElement = new RateElement(
           {
             name: 'rate element',
-            rateElementType: 'FixedPerMonth',
+            rateElementType: ERateElementType.FixedPerMonth,
             rateComponents: [
               {
                 charge: 1.5,

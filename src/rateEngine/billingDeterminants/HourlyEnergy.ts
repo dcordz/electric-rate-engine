@@ -1,8 +1,8 @@
-import BillingDeterminants from './_BillingDeterminants';
-import expandedDates from '../utils/expandedDates';
-import LoadProfile from '../LoadProfile';
-import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants';
-import type { HourlyEnergyArgs, ExpandedDate } from '../types';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import expandedDates from '../utils/expandedDates.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { BillingDeterminantsUnits, ERateElementType, RateElementClassification } from '../constants/index.ts';
+import type { HourlyEnergyArgs, ExpandedDate } from '../types/index.ts';
 
 class HourlyEnergy extends BillingDeterminants {
   private _load: number;

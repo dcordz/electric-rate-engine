@@ -1,7 +1,7 @@
-import BillingDeterminants from './_BillingDeterminants';
-import LoadProfile from '../LoadProfile';
-import times from 'lodash/times';
-import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
+import { times } from 'lodash-es';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants/index.ts';
 
 class AnnualDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;

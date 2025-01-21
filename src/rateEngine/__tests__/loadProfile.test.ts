@@ -1,6 +1,6 @@
-import LoadProfile from '../LoadProfile';
-import times from 'lodash/times';
-import LoadProfileScaler from '../LoadProfileScaler';
+import LoadProfile from '../LoadProfile.ts';
+import {times} from 'lodash-es';
+import LoadProfileScaler from '../LoadProfileScaler.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 const options = {year: 2018};

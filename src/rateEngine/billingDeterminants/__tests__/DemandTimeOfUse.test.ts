@@ -1,8 +1,8 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import DemandTimeOfUse from '../DemandTimeOfUse';
-import data from './DemandTimeOfUseData';
-import type { DemandTimeOfUseArgs } from '../../types';
+import LoadProfile from '../../LoadProfile.ts';
+import {times} from 'lodash-es';
+import DemandTimeOfUse from '../DemandTimeOfUse.ts';
+import data from './DemandTimeOfUseData.ts';
+import type { DemandTimeOfUseArgs } from '../../types/index.ts';
 
 interface TestData {
   name: string;

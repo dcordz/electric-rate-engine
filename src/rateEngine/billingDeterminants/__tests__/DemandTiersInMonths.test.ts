@@ -1,5 +1,5 @@
-import LoadProfile from '../../LoadProfile';
-import DemandTiersInMonths from '../DemandTiersInMonths';
+import LoadProfile from '../../LoadProfile.ts';
+import DemandTiersInMonths from '../DemandTiersInMonths.ts';
 
 const KWS_GREATER_THAN_ONE = [2,5,20,15,12,17,4,8,30,10,4,15];
 

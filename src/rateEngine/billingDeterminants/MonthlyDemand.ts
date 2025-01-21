@@ -1,6 +1,6 @@
-import BillingDeterminants from './_BillingDeterminants';
-import LoadProfile from '../LoadProfile';
-import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants';
+import BillingDeterminants from './_BillingDeterminants.ts';
+import LoadProfile from '../LoadProfile.ts';
+import { RateElementClassification, BillingDeterminantsUnits, ERateElementType } from '../constants/index.ts';
 
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;

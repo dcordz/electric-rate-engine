@@ -1,9 +1,9 @@
-import LoadProfile from '../../LoadProfile';
-import times from 'lodash/times';
-import DemandPerDay from '../DemandPerDay';
-import data from './DemandPerDayData';
-import { daysPerMonth } from '../../utils/assumptions';
-import type { DemandPerDayArgs } from '../../types';
+import LoadProfile from '../../LoadProfile.ts';
+import {times} from 'lodash-es';
+import DemandPerDay from '../DemandPerDay.ts';
+import data from './DemandPerDayData.ts';
+import { daysPerMonth } from '../../utils/assumptions.ts';
+import type { DemandPerDayArgs } from '../../types/index.ts';
 
 
 interface TestData {

@@ -1,7 +1,7 @@
-import sum from 'lodash/sum';
-import RateElement from './RateElement';
-import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
-import { RATE_ELEMENT_SORT_ORDER } from './constants';
+import { sum } from "lodash-es"
+import RateElement from './RateElement.ts';
+import type { RateCalculatorInterface, RateElementFilterArgs } from './types/index.ts';
+import { RATE_ELEMENT_SORT_ORDER } from "./constants/index.ts";
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
