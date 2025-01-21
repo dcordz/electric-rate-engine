@@ -9,7 +9,7 @@ class HourlyEnergy extends BillingDeterminants {
   private _hourOfYear: number;
   private _year: number;
 
-  rateElementType = 'Hourly Energy.ts';
+  rateElementType = 'Hourly Energy';
   rateElementClassification = RateElementClassification.ENERGY;
   units = BillingDeterminantsUnits.KWH;
 

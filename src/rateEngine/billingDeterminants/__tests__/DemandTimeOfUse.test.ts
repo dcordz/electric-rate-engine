@@ -1,5 +1,5 @@
 import LoadProfile from '../../LoadProfile.ts';
-import {times} from 'lodash';
+import {times} from "lodash-es";
 import DemandTimeOfUse from '../DemandTimeOfUse.ts';
 import data from './DemandTimeOfUseData.ts';
 import type { DemandTimeOfUseArgs } from '../../types/index.ts';

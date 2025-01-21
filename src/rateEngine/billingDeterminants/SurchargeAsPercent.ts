@@ -6,7 +6,7 @@ import type { SurchargeAsPercentArgs } from '../types/index.ts';
 class SurchargeAsPercent extends BillingDeterminants {
   private _rateElement: RateElement;
 
-  rateElementType = 'Surcharge.ts';
+  rateElementType = 'Surcharge';
   rateElementClassification = RateElementClassification.SURCHARGE;
   units = BillingDeterminantsUnits.DOLLARS;
 

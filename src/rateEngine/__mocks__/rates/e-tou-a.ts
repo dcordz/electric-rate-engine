@@ -1,4 +1,4 @@
-import { times } from 'lodash';
+import { times } from "lodash-es";
 import type { RateInterface } from '../../types/index.ts';
 
 const HOLIDAYS = [

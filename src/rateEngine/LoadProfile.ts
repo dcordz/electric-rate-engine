@@ -1,4 +1,4 @@
-import { maxBy, times } from 'lodash';
+import { maxBy, times } from "lodash-es";
 import LoadProfileFilter from './LoadProfileFilter.ts';
 import LoadProfileScaler from './LoadProfileScaler.ts';
 import type {

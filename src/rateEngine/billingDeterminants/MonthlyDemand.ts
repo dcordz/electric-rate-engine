@@ -5,7 +5,7 @@ import { RateElementClassification, BillingDeterminantsUnits } from '../constant
 class MonthlyDemand extends BillingDeterminants {
   private _loadProfile: LoadProfile;
 
-  rateElementType = 'Monthly Demand.ts';
+  rateElementType = 'Monthly Demand';
   rateElementClassification = RateElementClassification.DEMAND;
   units = BillingDeterminantsUnits.KW;
 

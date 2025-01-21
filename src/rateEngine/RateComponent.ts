@@ -1,4 +1,4 @@
-import { mean, sum, times } from 'lodash';
+import { mean, sum, times } from "lodash-es";
 import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
 import type { RateComponentArgs } from './types/index.ts';
 import { multiplyDecimals } from './utils/decimals.ts';

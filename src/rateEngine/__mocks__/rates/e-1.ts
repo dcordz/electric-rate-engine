@@ -1,4 +1,4 @@
-import { times } from 'lodash';
+import { times } from "lodash-es";
 import type { RateInterface } from '../../types/index.ts';
 
 const SUMMMER_MONTHS = [4, 5, 6, 7, 8, 9];

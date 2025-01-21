@@ -1,4 +1,4 @@
-import { sum } from 'lodash';
+import { sum } from "lodash-es";
 import RateComponent from './RateComponent.ts';
 import RateCalculator from './RateCalculator.ts';
 import ValidatorFactory from './ValidatorFactory.ts';
