@@ -3,3 +3,5 @@ export { default as LoadProfile } from './rateEngine/LoadProfile.ts';
 
 export * from './rateEngine/constants/index.ts';
 export * from './rateEngine/types/index.ts';
+
+export const RateEngineVersion = "2.0.2"
