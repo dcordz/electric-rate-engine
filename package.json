@@ -11,8 +11,8 @@
   "license": "MIT",
   "repository": "git://github.com/bellawatt/electric-rate-engine.git",
   "scripts": {
-    "test": "jest --config jestconfig.json",
-    "test:watch": "jest --config jestconfig.json --watch",
+    "test": "TZ=America/New_York NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.ts",
+    "test:watch": "jest --config jest.config.ts --watch",
     "build": "rm -rf lib && rollup -c rollup.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "analyze": "source-map-explorer 'lib/**/*.js' --no-border-checks",
@@ -38,7 +38,6 @@
     "@types/lodash-es": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
-    "cross-env": "^7.0.3",
     "eslint": "^9.18.0",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
