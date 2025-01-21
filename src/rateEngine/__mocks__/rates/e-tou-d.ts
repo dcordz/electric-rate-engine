@@ -1,3 +1,4 @@
+import { RateElementTypeEnum } from '../../constants/index.ts';
 import type { RateInterface } from '../../types/index.ts';
 
 const HOLIDAYS = [
@@ -21,7 +22,7 @@ const etoud: RateInterface = {
   title: 'Residential Time-Of-Use Service (Peak Pricing 5-8pm Weekdays)',
   rateElements: [
     {
-      rateElementType: 'FixedPerDay',
+      rateElementType: RateElementTypeEnum.FixedPerDay,
       name: 'Delivery Charge',
       rateComponents: [
         {
@@ -32,7 +33,7 @@ const etoud: RateInterface = {
     },
     {
       name: 'California Clean Climate Credit',
-      rateElementType: 'FixedPerMonth',
+      rateElementType: RateElementTypeEnum.FixedPerMonth,
       rateComponents: [
         {
           charge: [0, 0, 0, -35.73, 0, 0, 0, 0, 0, -35.73, 0, 0],
@@ -42,7 +43,7 @@ const etoud: RateInterface = {
     },
     {
       name: 'Energy Charges',
-      rateElementType: 'EnergyTimeOfUse',
+      rateElementType: RateElementTypeEnum.EnergyTimeOfUse,
       rateComponents: [
         {
           charge: summerPeakCharge,
