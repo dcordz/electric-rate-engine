@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
-    "target": "ES6",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "outDir": "./lib",
-    
     /* Module Resolution */
+    "target": "ES6",
+    "module": "NodeNext", // ES Modules
+    "moduleResolution": "nodenext", // ES Modules
+    
+    /* Polyfill up-to */
+    "lib": ["es2019"],
+    
+    "outDir": "./lib",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "declaration": true,
