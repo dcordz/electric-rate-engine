@@ -1,5 +1,8 @@
-export {default as RateCalculator} from './rateEngine/RateCalculator';
-export {default as LoadProfile} from './rateEngine/LoadProfile';
+export { default as RateCalculator } from './rateEngine/RateCalculator.ts';
+export { default as LoadProfile } from './rateEngine/LoadProfile.ts';
+export { default as RateElement } from './rateEngine/RateElement.ts';
+export { default as RateComponent } from './rateEngine/RateComponent.ts';
 
-export * from "./rateEngine/constants"
-export * from './rateEngine/types';
+export * from './rateEngine/constants/index.ts';
+export * from './rateEngine/types/index.ts';
+

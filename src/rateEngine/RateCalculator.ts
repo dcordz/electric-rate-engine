@@ -1,7 +1,7 @@
-import sum from 'lodash/sum';
-import RateElement from './RateElement';
-import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
-import { RATE_ELEMENT_SORT_ORDER } from './constants';
+import { sum } from 'lodash-es';
+import RateElement from './RateElement.ts';
+import type { RateCalculatorInterface, RateElementFilterArgs } from './types/index.ts';
+import { RATE_ELEMENT_SORT_ORDER } from './constants/index.ts';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
@@ -34,9 +34,11 @@ class RateCalculator {
   }
 
   rateElements({ ...filters }: RateElementFilterArgs = {}): Array<RateElement> {
-    return this._rateElements
-      .filter((element) => element.matches(filters))
-      .toSorted((a, b) => (RATE_ELEMENT_SORT_ORDER[a.type] ?? 0) - (RATE_ELEMENT_SORT_ORDER[b.type] ?? 0));
+    return [
+      ...this._rateElements
+        .filter((element) => element.matches(filters))
+        .sort((a, b) => (RATE_ELEMENT_SORT_ORDER[a.type] ?? 0) - (RATE_ELEMENT_SORT_ORDER[b.type] ?? 0)),
+    ];
   }
 
   annualCost({ ...filters }: RateElementFilterArgs = {}): number {

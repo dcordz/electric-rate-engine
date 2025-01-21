@@ -1,7 +1,10 @@
+.vscode/
+
 node_modules
 /lib
 .DS_Store
 tags
 .npmrc
 
-.vscode/
+# Rollup visualizer
+stats.html

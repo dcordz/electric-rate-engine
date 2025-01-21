@@ -19,7 +19,7 @@ export enum BillingDeterminantsUnits {
   DOLLARS = 'dollars',
 }
 
-export enum ERateElementType {
+export enum RateElementTypeEnum {
   EnergyTimeOfUse = 'EnergyTimeOfUse',
   BlockedTiersInDays = 'BlockedTiersInDays',
   BlockedTiersInMonths = 'BlockedTiersInMonths',
@@ -36,33 +36,33 @@ export enum ERateElementType {
 }
 
 export const RATE_ELEMENT_SORT_ORDER = {
-  [ERateElementType.FixedPerMonth]: 1,
-  [ERateElementType.FixedPerDay]: 2,
-  [ERateElementType.AnnualDemand]: 3,
-  [ERateElementType.MonthlyDemand]: 4,
-  [ERateElementType.DemandTiersInMonths]: 5,
-  [ERateElementType.DemandTimeOfUse]: 6,
-  [ERateElementType.DemandPerDay]: 7,
-  [ERateElementType.MonthlyEnergy]: 8,
-  [ERateElementType.HourlyEnergy]: 9,
-  [ERateElementType.EnergyTimeOfUse]: 10,
-  [ERateElementType.BlockedTiersInDays]: 100,
-  [ERateElementType.BlockedTiersInMonths]: 100,
-  [ERateElementType.SurchargeAsPercent]: 100,
+  [RateElementTypeEnum.FixedPerMonth]: 1,
+  [RateElementTypeEnum.FixedPerDay]: 2,
+  [RateElementTypeEnum.AnnualDemand]: 3,
+  [RateElementTypeEnum.MonthlyDemand]: 4,
+  [RateElementTypeEnum.DemandTiersInMonths]: 5,
+  [RateElementTypeEnum.DemandTimeOfUse]: 6,
+  [RateElementTypeEnum.DemandPerDay]: 7,
+  [RateElementTypeEnum.MonthlyEnergy]: 8,
+  [RateElementTypeEnum.HourlyEnergy]: 9,
+  [RateElementTypeEnum.EnergyTimeOfUse]: 10,
+  [RateElementTypeEnum.BlockedTiersInDays]: 100,
+  [RateElementTypeEnum.BlockedTiersInMonths]: 100,
+  [RateElementTypeEnum.SurchargeAsPercent]: 100,
 };
 
 export const RATE_ELEMENT_CLASSIFICATION_BY_RATE_ELEMENT_TYPE = {
-  [ERateElementType.FixedPerMonth]: RateElementClassification.FIXED,
-  [ERateElementType.FixedPerDay]: RateElementClassification.FIXED,
-  [ERateElementType.AnnualDemand]: RateElementClassification.DEMAND,
-  [ERateElementType.MonthlyDemand]: RateElementClassification.DEMAND,
-  [ERateElementType.DemandTiersInMonths]: RateElementClassification.DEMAND,
-  [ERateElementType.DemandTimeOfUse]: RateElementClassification.DEMAND,
-  [ERateElementType.DemandPerDay]: RateElementClassification.DEMAND,
-  [ERateElementType.MonthlyEnergy]: RateElementClassification.ENERGY,
-  [ERateElementType.HourlyEnergy]: RateElementClassification.ENERGY,
-  [ERateElementType.EnergyTimeOfUse]: RateElementClassification.ENERGY,
-  [ERateElementType.BlockedTiersInDays]: RateElementClassification.SURCHARGE,
-  [ERateElementType.BlockedTiersInMonths]: RateElementClassification.SURCHARGE,
-  [ERateElementType.SurchargeAsPercent]: RateElementClassification.SURCHARGE,
+  [RateElementTypeEnum.FixedPerMonth]: RateElementClassification.FIXED,
+  [RateElementTypeEnum.FixedPerDay]: RateElementClassification.FIXED,
+  [RateElementTypeEnum.AnnualDemand]: RateElementClassification.DEMAND,
+  [RateElementTypeEnum.MonthlyDemand]: RateElementClassification.DEMAND,
+  [RateElementTypeEnum.DemandTiersInMonths]: RateElementClassification.DEMAND,
+  [RateElementTypeEnum.DemandTimeOfUse]: RateElementClassification.DEMAND,
+  [RateElementTypeEnum.DemandPerDay]: RateElementClassification.DEMAND,
+  [RateElementTypeEnum.MonthlyEnergy]: RateElementClassification.ENERGY,
+  [RateElementTypeEnum.HourlyEnergy]: RateElementClassification.ENERGY,
+  [RateElementTypeEnum.EnergyTimeOfUse]: RateElementClassification.ENERGY,
+  [RateElementTypeEnum.BlockedTiersInDays]: RateElementClassification.SURCHARGE,
+  [RateElementTypeEnum.BlockedTiersInMonths]: RateElementClassification.SURCHARGE,
+  [RateElementTypeEnum.SurchargeAsPercent]: RateElementClassification.SURCHARGE,
 }

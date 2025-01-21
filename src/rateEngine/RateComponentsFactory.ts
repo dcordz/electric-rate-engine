@@ -1,10 +1,10 @@
-import BillingDeterminantsFactory from './BillingDeterminantsFactory';
-import { ERateElementType } from './constants';
-import LoadProfile from './LoadProfile';
-import PriceProfile from './PriceProfile';
-import RateComponent from './RateComponent';
-import RateElement from './RateElement';
-import type { RateElementInterface, ProcessedRateElementInterface } from './types';
+import BillingDeterminantsFactory from './BillingDeterminantsFactory.ts';
+import { RateElementTypeEnum } from './constants/index.ts';
+import LoadProfile from './LoadProfile.ts';
+import PriceProfile from './PriceProfile.ts';
+import RateComponent from './RateComponent.ts';
+import RateElement from './RateElement.ts';
+import type { RateElementInterface, ProcessedRateElementInterface } from './types/index.ts';
 
 export default class RateComponentsFactory {
   static make(
@@ -25,7 +25,7 @@ export default class RateComponentsFactory {
     otherRateElements: Array<RateElementInterface>,
   ): ProcessedRateElementInterface {
     switch (rateElement.rateElementType) {
-      case ERateElementType.SurchargeAsPercent: {
+      case RateElementTypeEnum.SurchargeAsPercent: {
         const rateComponents = rateElement.rateComponents.flatMap(
           ({ name: rateComponentName, charge, ...filterArgs }) => {
             return otherRateElements
@@ -45,7 +45,7 @@ export default class RateComponentsFactory {
           rateComponents,
         };
       }
-      case ERateElementType.HourlyEnergy: {
+      case RateElementTypeEnum.HourlyEnergy: {
         const priceProfile = new PriceProfile(rateElement.priceProfile, { year: loadProfile.year });
         return {
           ...rateElement,

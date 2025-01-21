@@ -1,4 +1,4 @@
-import type { LoadProfileFilterArgs, ExpandedDate } from './types';
+import type { LoadProfileFilterArgs, ExpandedDate } from './types/index.ts';
 
 class LoadProfileFilter {
   months?: Array<number>;

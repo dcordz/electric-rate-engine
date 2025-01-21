@@ -1,8 +1,8 @@
-import { mean as _mean, sum, times } from 'lodash';
-import BillingDeterminants from './billingDeterminants/_BillingDeterminants';
-import { RateElementClassification } from './constants';
-import type { RateComponentArgs } from './types';
-import { multiplyDecimals } from './utils/decimals';
+import { mean, sum, times } from "lodash-es";
+import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
+import type { RateComponentArgs } from './types/index.ts';
+import { multiplyDecimals } from './utils/decimals.ts';
+import { RateElementClassification } from "./constants/index.ts";
 
 const MONTHS_PER_YEAR = 12;
 
@@ -32,7 +32,7 @@ class RateComponent {
   }
 
   typicalMonthlyCost(): number {
-    return _mean(this.costs());
+    return mean(this.costs());
   }
 
   costForMonth(month: number): number {
@@ -58,10 +58,10 @@ class RateComponent {
   formatCharge(): string {
     switch (this._classification) {
       case RateElementClassification.ENERGY: {
-        return _mean(this.charge).toFixed(5);
+        return mean(this.charge).toFixed(5);
       }
       default: {
-        return _mean(this.charge).toFixed(2);
+        return mean(this.charge).toFixed(2);
       }
     }
   }
