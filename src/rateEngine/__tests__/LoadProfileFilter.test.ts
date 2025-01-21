@@ -1,5 +1,5 @@
-import LoadProfileFilter from '../LoadProfileFilter';
-import { ExpandedDate, LoadProfileFilterArgs } from '../types';
+import LoadProfileFilter from '../LoadProfileFilter.ts';
+import { ExpandedDate, LoadProfileFilterArgs } from '../types/index.ts';
 
 const baseFilter: LoadProfileFilterArgs = {
   months: [],

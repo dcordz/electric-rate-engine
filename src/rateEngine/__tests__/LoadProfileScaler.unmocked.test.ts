@@ -1,9 +1,11 @@
-import LoadProfileScaler from '../LoadProfileScaler';
-import times from 'lodash/times';
-import LoadProfile from '../LoadProfile';
-import e1 from '../__mocks__/rates/e-1';
-import RateCalculator from '../RateCalculator';
-import type { RateInterface } from '../types';
+import LoadProfileScaler from '../LoadProfileScaler.ts';
+import {times} from "lodash-es";
+import LoadProfile from '../LoadProfile.ts';
+import e1 from '../__mocks__/rates/e-1.ts';
+import RateCalculator from '../RateCalculator.ts';
+import type { RateInterface } from '../types/index.ts';
+import { jest } from '@jest/globals';
+import { RateElementTypeEnum } from '../constants/index.ts';
 
 const getLoadProfileOfOnes = () => times(8760, () => 1);
 
@@ -12,7 +14,7 @@ const dummyRate: RateInterface = {
   title: 'that will not converge',
   rateElements: [
     {
-      rateElementType: 'FixedPerMonth',
+      rateElementType: RateElementTypeEnum.FixedPerMonth,
       name: 'Customer Charge',
       rateComponents: [
         {
@@ -22,7 +24,7 @@ const dummyRate: RateInterface = {
       ],
     },
     {
-      rateElementType: 'MonthlyDemand',
+      rateElementType: RateElementTypeEnum.MonthlyDemand,
       name: 'Demand Charge',
       rateComponents: [
         {
@@ -32,7 +34,7 @@ const dummyRate: RateInterface = {
       ],
     },
     {
-      rateElementType: 'MonthlyEnergy',
+      rateElementType: RateElementTypeEnum.MonthlyEnergy,
       name: 'Energy Charge',
       rateComponents: [
         {

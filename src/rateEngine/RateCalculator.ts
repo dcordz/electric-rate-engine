@@ -1,6 +1,7 @@
-import sum from 'lodash/sum';
-import RateElement from './RateElement';
-import type { RateCalculatorInterface, RateElementFilterArgs } from './types';
+import { sum } from 'lodash-es';
+import RateElement from './RateElement.ts';
+import type { RateCalculatorInterface, RateElementFilterArgs } from './types/index.ts';
+import { RATE_ELEMENT_SORT_ORDER } from './constants/index.ts';
 
 class RateCalculator {
   private _rateElements: Array<RateElement>;
@@ -11,7 +12,14 @@ class RateCalculator {
   static shouldValidate = true;
   static shouldLogValidationErrors = true;
 
-  constructor({ name, utilityName, applicability, minimumBillAmount, rateElements, loadProfile }: RateCalculatorInterface) {
+  constructor({
+    name,
+    utilityName,
+    applicability,
+    minimumBillAmount,
+    rateElements,
+    loadProfile,
+  }: RateCalculatorInterface) {
     this.name = name;
     this.utilityName = utilityName;
     this.applicability = applicability;
@@ -20,16 +28,20 @@ class RateCalculator {
       return new RateElement(
         element,
         loadProfile,
-        rateElements.filter((_, i) => i !== idx)
+        rateElements.filter((_, i) => i !== idx),
       );
     });
   }
 
-  rateElements({...filters}: RateElementFilterArgs = {}): Array<RateElement> {
-    return this._rateElements.filter((element) => element.matches(filters));
+  rateElements({ ...filters }: RateElementFilterArgs = {}): Array<RateElement> {
+    return [
+      ...this._rateElements
+        .filter((element) => element.matches(filters))
+        .sort((a, b) => (RATE_ELEMENT_SORT_ORDER[a.type] ?? 0) - (RATE_ELEMENT_SORT_ORDER[b.type] ?? 0)),
+    ];
   }
 
-  annualCost({...filters}: RateElementFilterArgs = {}): number {
+  annualCost({ ...filters }: RateElementFilterArgs = {}): number {
     return sum(this.rateElements(filters).map((element) => element.annualCost()));
   }
 }

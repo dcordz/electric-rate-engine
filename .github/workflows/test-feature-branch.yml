@@ -1,0 +1,19 @@
+name: Test Feature Branch
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - "*"
+      - "!main" # main branch tests are launched from the deploy-meta.yml meta-workflow
+    tags:
+      - "v*.*.*"
+
+jobs:
+  test:
+    uses: ./.github/workflows/jest.yml
+    secrets: inherit
+  typescript:
+    uses: "./.github/workflows/typescript.yml"
+    secrets: inherit

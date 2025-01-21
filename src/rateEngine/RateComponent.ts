@@ -1,9 +1,8 @@
-import times from 'lodash/times';
-import mean from 'lodash/mean';
-import sum from 'lodash/sum';
-import BillingDeterminants from './billingDeterminants/_BillingDeterminants';
-import { multiplyDecimals } from './utils/decimals';
-import type { RateComponentArgs } from './types';
+import { mean, sum, times } from "lodash-es";
+import BillingDeterminants from './billingDeterminants/_BillingDeterminants.ts';
+import type { RateComponentArgs } from './types/index.ts';
+import { multiplyDecimals } from './utils/decimals.ts';
+import { RateElementClassification } from "./constants/index.ts";
 
 const MONTHS_PER_YEAR = 12;
 
@@ -11,15 +10,21 @@ class RateComponent {
   charge: Array<number>;
   name: string;
   private _billingDeterminants: BillingDeterminants;
+  private _classification: RateElementClassification;
 
   constructor({ charge, name, billingDeterminants }: RateComponentArgs) {
     this.charge = typeof charge === 'number' ? times(MONTHS_PER_YEAR, () => charge) : charge;
     this.name = name;
     this._billingDeterminants = billingDeterminants;
+    this._classification = billingDeterminants.rateElementClassification;
   }
 
   costs(): Array<number> {
     return this._billingDeterminants.map((determinant, idx) => multiplyDecimals(determinant, this.charge[idx]));
+  }
+
+  getDeterminants(): BillingDeterminants {
+    return this._billingDeterminants;
   }
 
   billingDeterminants(): Array<number> {
@@ -48,6 +53,17 @@ class RateComponent {
 
   rateElementClassification() {
     return this._billingDeterminants.rateElementClassification;
+  }
+
+  formatCharge(): string {
+    switch (this._classification) {
+      case RateElementClassification.ENERGY: {
+        return mean(this.charge).toFixed(5);
+      }
+      default: {
+        return mean(this.charge).toFixed(2);
+      }
+    }
   }
 }
 

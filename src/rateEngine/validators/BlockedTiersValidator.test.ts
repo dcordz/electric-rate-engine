@@ -1,11 +1,11 @@
-import LoadProfile from '../LoadProfile';
-import BlockedTiersValidator from "./BlockedTiersValidator";
+import LoadProfile from '../LoadProfile.ts';
+import BlockedTiersValidator from './BlockedTiersValidator.ts';
 
 describe('BlockedTiersValidator', () => {
   let loadProfile: LoadProfile;
 
   beforeEach(() => {
-    loadProfile = new LoadProfile(new Array(8760).fill(1), {year: 2018})
+    loadProfile = new LoadProfile(new Array(8760).fill(1), { year: 2018 });
   });
 
   describe('a non filtered blocked tier definition', () => {
@@ -13,7 +13,7 @@ describe('BlockedTiersValidator', () => {
       const blockedTiers = [
         {
           min: new Array(12).fill(0),
-          max: new Array(12).fill(Infinity)
+          max: new Array(12).fill(Infinity),
         },
       ];
 
@@ -29,12 +29,12 @@ describe('BlockedTiersValidator', () => {
         {
           min: new Array(12).fill(0),
           max: new Array(12).fill(Infinity),
-          daysOfWeek: [1,2,3,4,5],
+          daysOfWeek: [1, 2, 3, 4, 5],
         },
         {
           min: new Array(12).fill(0),
           max: new Array(12).fill(Infinity),
-          daysOfWeek: [6,0],
+          daysOfWeek: [6, 0],
         },
       ];
 
@@ -49,7 +49,7 @@ describe('BlockedTiersValidator', () => {
           {
             min: new Array(12).fill(0),
             max: new Array(12).fill(Infinity),
-            daysOfWeek: [1,2,3,4,5],
+            daysOfWeek: [1, 2, 3, 4, 5],
           },
           {
             min: new Array(12).fill(0),
@@ -73,12 +73,12 @@ describe('BlockedTiersValidator', () => {
           {
             min: new Array(12).fill(0),
             max: new Array(12).fill(Infinity),
-            daysOfWeek: [1,2,3,4,5,0],
+            daysOfWeek: [1, 2, 3, 4, 5, 0],
           },
           {
             min: new Array(12).fill(0),
             max: new Array(12).fill(Infinity),
-            daysOfWeek: [6,0],
+            daysOfWeek: [6, 0],
           },
         ];
 
@@ -92,5 +92,5 @@ describe('BlockedTiersValidator', () => {
         expect(validator.allErrors().length).toBe(SUNDAYS_IN_2018 * HOURS_IN_DAY * (MONTHS_IN_YEAR * 2));
       });
     });
-  })
+  });
 });

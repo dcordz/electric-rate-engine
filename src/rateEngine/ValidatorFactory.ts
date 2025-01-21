@@ -1,9 +1,9 @@
-import Validator from './validators/_Validator';
-import EnergyTimeOfUseValidator from './validators/EnergyTimeOfUseValidator';
-import GenericValidator from './validators/GenericValidator';
-import BlockedTiersValidator from './validators/BlockedTiersValidator';
-import LoadProfile from './LoadProfile';
-import { RateComponentInterface, EnergyTimeOfUseArgs, BlockedTiersArgs, RateElementType } from './types';
+import Validator from './validators/_Validator.ts';
+import EnergyTimeOfUseValidator from './validators/EnergyTimeOfUseValidator.ts';
+import GenericValidator from './validators/GenericValidator.ts';
+import BlockedTiersValidator from './validators/BlockedTiersValidator.ts';
+import LoadProfile from './LoadProfile.ts';
+import { RateComponentInterface, EnergyTimeOfUseArgs, BlockedTiersArgs, RateElementType } from './types/index.ts';
 
 class ValidatorFactory {
   static make(
