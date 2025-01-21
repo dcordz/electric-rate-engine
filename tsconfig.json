@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ESNext",
+    "target": "ES5",
+    "module": "commonjs",
     "declaration": true,
-    "lib": ["ESNext"],
+    "lib": ["es2019"],
     "outDir": "./lib",
-    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
 
