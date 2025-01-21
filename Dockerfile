@@ -1,11 +1,15 @@
 FROM node:22-slim
 
-RUN mkdir electric-rate-engine
-WORKDIR /electric-rate-engine
+RUN useradd --user-group --system --create-home --home-dir /home/bellawatt --shell /bin/bash --no-log-init --uid 1001 bellawatt
 
-COPY package.json package-lock.json .
+USER bellawatt
 
-RUN npm i
+WORKDIR /home/bellawatt/electric-rate-engine
+
+COPY --chown=bellawatt package.json ./
+COPY --chown=bellawatt package-lock.json ./
+
+RUN npm install
 
 COPY ./ ./
 
