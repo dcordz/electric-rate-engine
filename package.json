@@ -13,6 +13,7 @@
   "repository": "git://github.com/bellawatt/electric-rate-engine.git",
   "scripts": {
     "test": "TZ=America/New_York NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.ts",
+    "test:docker": "docker build . -t electric-rate-engine-tests && docker run -it --rm electric-rate-engine-tests",
     "test:watch": "jest --config jest.config.ts --watch",
     "build": "rm -rf lib && rollup -c rollup.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
