@@ -1,7 +1,7 @@
 import LoadProfile from '../../LoadProfile';
 import RateCalculator from '../../RateCalculator';
 import { RateCalculatorInterface } from '../../types/index';
-import { RATES } from './data/RATES';
+import { RATES } from './data';
 
 const dailyLoadProfile = [
   42.0, 42.0, 42.0, 42.0, 42.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 118.0, 118.0, 118.0, 0.0, 0.0, 20.0,
@@ -19,8 +19,7 @@ describe('RateCalculator', () => {
 
     const loadProfile = new LoadProfile(annualLoadProfile, { year });
 
-    const rate = RATES.TOU_EV_8(year);
-    const rateCalculator = new RateCalculator({ ...rate, loadProfile } as RateCalculatorInterface);
+    const rateCalculator = new RateCalculator({ ...RATES.TOU_EV_8, loadProfile } as RateCalculatorInterface);
 
     const annualEnergyCost = rateCalculator.annualCost();
 
