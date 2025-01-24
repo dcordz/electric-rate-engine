@@ -19,7 +19,7 @@ describe('RateCalculator', () => {
 
     const loadProfile = new LoadProfile(annualLoadProfile, { year });
 
-    const rateCalculator = new RateCalculator({ ...RATES.TOU_EV_8, loadProfile } as RateCalculatorInterface);
+    const rateCalculator = new RateCalculator({ ...RATES.TOU_EV_8(year), loadProfile } as RateCalculatorInterface);
 
     const annualEnergyCost = rateCalculator.annualCost();
 
