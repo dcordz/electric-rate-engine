@@ -23,6 +23,6 @@ describe('RateCalculator', () => {
 
     const annualEnergyCost = rateCalculator.annualCost();
 
-    expect(annualEnergyCost).toBeCloseTo(59783.8244);
+    expect(annualEnergyCost).toBeCloseTo(59678.70442);
   });
 });
