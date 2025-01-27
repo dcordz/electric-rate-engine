@@ -241,3 +241,9 @@ export interface RateElementFilterArgs {
   classifications?: Array<RateElementClassification>;
   billingCategories?: Array<BillingCategory>;
 }
+
+/**
+ * Export type definitions of classes so they can be referenced by clients of this package
+ */
+export type {default as RateElement} from '../RateElement';
+export type {default as RateComponent} from '../RateComponent';
