@@ -1,4 +1,4 @@
-import { times } from "lodash-es";
+import { times } from "lodash";
 import type { RateInterface } from '../../types/index';
 import { RateElementTypeEnum } from "../../constants/index.ts";
 
