@@ -1,6 +1,6 @@
 import touEV8RateElements from '../../../__mocks__/rates/tou-ev-8.json';
 
-const touEV8 = (year: number) =>  ({
+const touEV8 = {
   name: 'TOU-EV-8',
   code: 'TOU_EV_8',
   helpText:
@@ -10,7 +10,7 @@ const touEV8 = (year: number) =>  ({
   minKw: 20,
   maxKw: 500,
 
-  rateElements: touEV8RateElements[year.toString() as keyof typeof touEV8RateElements],
-});
+  rateElements: touEV8RateElements,
+}
 
 export default touEV8;

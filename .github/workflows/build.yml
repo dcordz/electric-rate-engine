@@ -1,4 +1,4 @@
-name: Typescript
+name: Build
 
 on:
   workflow_call:

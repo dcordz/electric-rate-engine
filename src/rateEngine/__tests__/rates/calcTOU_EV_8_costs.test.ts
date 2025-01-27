@@ -8,8 +8,6 @@ const dailyLoadProfile = [
   0.0, 0.0, 42.0, 42.0, 42.0,
 ];
 
-const year = 2025;
-
 describe('RateCalculator', () => {
   it('.annualCost', () => {
     expect(dailyLoadProfile.length).toEqual(24);
@@ -17,9 +15,9 @@ describe('RateCalculator', () => {
     const annualLoadProfile = new Array(365).fill(dailyLoadProfile).flat();
     expect(annualLoadProfile.length).toEqual(8760);
 
-    const loadProfile = new LoadProfile(annualLoadProfile, { year });
+    const loadProfile = new LoadProfile(annualLoadProfile, { year: 2025 });
 
-    const rateCalculator = new RateCalculator({ ...RATES.TOU_EV_8(year), loadProfile } as RateCalculatorInterface);
+    const rateCalculator = new RateCalculator({ ...RATES.TOU_EV_8, loadProfile } as RateCalculatorInterface);
 
     const annualEnergyCost = rateCalculator.annualCost();
 
